@@ -280,3 +280,101 @@ body,header,.card,.feature{transition:background .3s ease,color .3s ease}
   padding:6px 14px;margin-left:10px;transition:color .2s,border-color .2s;
 }
 .lang-link:hover{color:var(--gold);border-color:var(--gold)}
+
+
+/* ========================================
+   RWD
+   ======================================== */
+
+/* ---------- 漢堡按鈕 ---------- */
+.nav-toggle{
+  display:none;
+  background:none;border:none;cursor:pointer;
+  flex-direction:column;justify-content:center;gap:5px;
+  padding:6px;margin-left:auto;
+}
+.nav-toggle span{
+  display:block;width:22px;height:2px;
+  background:var(--haze);
+  transition:transform .25s,opacity .25s,background .25s;
+}
+.nav-toggle:hover span{background:var(--gold)}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+@media(max-width:640px){
+  /* 顯示漢堡，隱藏原本 ul */
+  .nav-toggle{display:flex}
+  .nav{flex-wrap:wrap;padding:12px 20px;row-gap:0}
+  .nav ul{
+    display:none;
+    width:100%;flex-direction:column;gap:0;
+    order:10;
+    border-top:1px solid var(--line);
+    margin-top:12px;padding-top:4px;
+  }
+  .nav ul.open{display:flex}
+  .nav ul li{border-bottom:1px solid var(--line)}
+  .nav ul li:last-child{border-bottom:none}
+  .nav ul a{
+    display:block;padding:11px 4px;
+    font-size:.78rem;letter-spacing:.16em;
+    color:var(--haze);
+  }
+  .nav ul a.active{border-bottom:none;color:var(--gold)}
+  /* 主題與語言按鈕縮小 */
+  .theme-toggle,.lang-link{padding:5px 10px;font-size:.66rem;margin-left:8px}
+}
+
+/* ---------- 全域垂直間距 ---------- */
+@media(max-width:768px){
+  section{padding:64px 0}
+  .page-head{padding:56px 0 0}
+  .cs-head{padding:56px 0 24px}
+  .more-row{margin-top:40px}
+  .sec-head{margin-bottom:36px;gap:12px}
+  .contact{padding:80px 0 64px}
+}
+@media(max-width:480px){
+  section{padding:48px 0}
+  .wrap{padding:0 16px}
+  .cs{padding:0 16px}
+}
+
+/* ---------- Hero ---------- */
+@media(max-width:480px){
+  .hero .cta-row{flex-direction:column}
+  .hero .cta-row .btn{text-align:center}
+  .hero .file-no{margin-bottom:16px}
+}
+
+/* ---------- feature 標籤在小螢幕不重疊 ---------- */
+@media(max-width:560px){
+  .feature::before{
+    position:static;transform:none;
+    display:inline-block;margin-bottom:18px;
+  }
+}
+
+/* ---------- 卡片格線最小寬收窄 ---------- */
+@media(max-width:480px){
+  .grid{grid-template-columns:1fr}
+  .mini-grid{grid-template-columns:1fr}
+}
+
+/* ---------- 聯絡按鈕堆疊 ---------- */
+@media(max-width:480px){
+  .contact .links{flex-direction:column;align-items:center}
+  .contact .links .btn{width:100%;max-width:340px;text-align:center}
+}
+
+/* ---------- Case Study specs ---------- */
+@media(max-width:480px){
+  .cs .specs{grid-template-columns:1fr 1fr}
+}
+
+/* ---------- About fact 卡 ---------- */
+@media(max-width:480px){
+  .about .fact{padding:20px}
+}
