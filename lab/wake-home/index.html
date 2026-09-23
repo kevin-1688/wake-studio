@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>WAKE 首頁原型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="intro" aria-hidden="true" hidden>
+  <div id="introMark">
+    <svg viewBox="0 0 600 120"><path id="sig" d="M0 60 H236 L250 60 L260 22 L274 104 L286 36 L296 60 H600"/></svg>
+    <div id="introWord"><span>W</span><span>A</span><span>K</span><span>E</span><span class="ast">*</span></div>
+  </div>
+</div>
+<button id="skip" type="button" hidden>略過開場</button>
+<div id="cur"></div>
+<div id="peek"><div class="art"></div><div class="lbl"></div></div>
+
+<header class="nav">
+  <a class="logo" href="#top" id="navLogo" aria-label="WAKE Studio 首頁">WAKE<span class="ast">*.*</span></a>
+  <ul>
+    <li><a href="#work">作品</a></li>
+    <li><a href="#services">服務</a></li>
+    <li><a href="#about">關於</a></li>
+  </ul>
+  <div class="nav-r"><button class="theme-btn" type="button" id="themeBtn" aria-label="切換亮暗色">亮／暗</button><a class="btn magnet" href="#contact"><span class="dot"></span>開始合作</a></div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="主視覺">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="hint mono">撥動島嶼／點擊喚醒</div>
+    <div class="hero-copy">
+      <div>
+        <p class="kicker">WAKE Studio — 3D 產品視覺化・互動網頁・遊戲</p>
+        <h1>讓畫面<br><em>醒</em>過來。</h1>
+      </div>
+      <div class="readout" aria-hidden="true">
+        <span class="mono">Signal</span>
+        <b id="sigVal">0.00 · DORMANT</b>
+        <div class="meter"><i id="sigBar"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="sec-head"><h2>Studio</h2><span class="mono">台灣・2026 成立</span></div>
+    <div class="statement">
+      <p class="big">把台灣的記憶，做成<span class="g">身體經歷得到</span>的系統；也把你的產品，做成客戶<span class="g">看一眼就懂</span>的畫面。</p>
+      <div class="side">
+        <p>WAKE 是張凱翔的獨立工作室。一邊開發以白色恐怖為背景的敘事冒險遊戲《BÔ BÂNG》，一邊為品牌承接 3D 產品視覺化與網頁設計。</p>
+        <p>做遊戲練出來的即時渲染、鏡頭語言與互動設計，直接用在你的產品頁上。</p>
+        <div class="tools"><span>Unreal Engine 5</span><span>Blender</span><span>MetaHuman</span><span>Three.js</span><span>UI/UX</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="work" style="padding-top:0">
+    <div class="sec-head"><h2>Selected Work</h2><span class="mono">05 件</span></div>
+    <ul class="works">
+      <li><a href="#work" data-peek="無" data-bg="linear-gradient(160deg,#2B3D57,#0E1520 70%)" data-lbl="UE5 · NARRATIVE ADVENTURE">
+        <span class="t">BÔ BÂNG 無望<small>第三人稱敘事冒險。1947 年起，監視、沉默與恐懼的決策系統。</small></span>
+        <span class="cat">遊戲／UE5</span><span class="yr">2027</span></a></li>
+      <li><a href="#work" data-peek="偶" data-bg="linear-gradient(160deg,#C2652F,#1D2A3C 75%)" data-lbl="CIVIC GAME · MEDIA LITERACY">
+        <span class="t">操偶師背後<small>媒體識讀遊戲：拆解假訊息的操作手法。</small></span>
+        <span class="cat">公民遊戲</span><span class="yr">2026</span></a></li>
+      <li><a href="#work" data-peek="$" data-bg="linear-gradient(160deg,#3A4E6A,#141D2B 70%)" data-lbl="CIVIC GAME · CASHFLOW">
+        <span class="t">跳出老鼠賽跑<small>財務識讀：現金流模擬。</small></span>
+        <span class="cat">公民遊戲</span><span class="yr">2026</span></a></li>
+      <li><a href="#work" data-peek="盾" data-bg="linear-gradient(160deg,#5D6C7B,#0E1520 70%)" data-lbl="CIVIC GAME · SIMULATION">
+        <span class="t">國防預算分配模擬器<small>在有限資源下做戰略取捨。</small></span>
+        <span class="cat">公民遊戲</span><span class="yr">2026</span></a></li>
+      <li><a href="#work" data-peek="◎" data-bg="linear-gradient(160deg,#E5A33D,#C2652F 55%,#141D2B)" data-lbl="B2B · PRODUCT VISUALIZATION">
+        <span class="t">產品視覺化委託<small>渲染、爆炸圖、產品動畫。案例整理中。</small></span>
+        <span class="cat">3D／B2B</span><span class="yr">接案中</span></a></li>
+    </ul>
+  </section>
+
+  <section class="block" id="services" style="padding-top:0">
+    <div class="sec-head"><h2>Services</h2><span class="mono">三條服務線</span></div>
+    <div class="services">
+      <article class="svc">
+        <canvas data-anim="explode" aria-hidden="true"></canvas>
+        <h3>3D 產品視覺化</h3>
+        <ul><li>寫實渲染，取代棚拍</li><li>爆炸圖、剖面動畫</li><li>展覽與發表會影片</li></ul>
+        <p class="for">適合：設備、電子、消費產品品牌</p>
+      </article>
+      <article class="svc">
+        <canvas data-anim="scroll" aria-hidden="true"></canvas>
+        <h3>互動網頁設計</h3>
+        <ul><li>產品上市頁、捲動敘事</li><li>WebGL 即時 3D 展示</li><li>UI/UX 與品牌識別</li></ul>
+        <p class="for">適合：需要一頁說清楚產品的團隊</p>
+      </article>
+      <article class="svc">
+        <canvas data-anim="signal" aria-hidden="true"></canvas>
+        <h3>遊戲與互動體驗</h3>
+        <ul><li>教育與公民議題遊戲</li><li>展場互動裝置</li><li>UE5 即時敘事原型</li></ul>
+        <p class="for">適合：文化、教育、公部門專案</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="block contact" id="contact">
+    <div class="sec-head"><h2>Let's Wake It</h2><span class="mono">通常 48 小時內回覆</span></div>
+    <span class="mono">把產品規格、時程與預算範圍寄給我</span>
+    <span class="mail" id="mail">kevin<span class="at">@</span>wake.com.tw</span>
+    <div class="contact-row">
+      <button class="btn magnet" type="button" id="copyBtn"><span class="dot"></span>複製信箱</button>
+      <a class="btn ghost magnet" href="mailto:kevin@wake.com.tw">開啟郵件</a>
+      <span id="copied" aria-live="polite"></span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="mono">© 2026 WAKE Studio</span>
+  <span class="mono">台北 <b id="clock">--:--</b> GMT+8</span>
+  <button class="btn ghost" type="button" id="replay" style="padding:6px 12px;font-size:12px">重播開場</button>
+</footer>
+
+<script src="three.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
