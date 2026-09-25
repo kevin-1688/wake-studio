@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>WAKE Homepage Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap">
+<link rel="alternate" hreflang="zh-TW" href="https://wake.com.tw/lab/wake-home/">
+<link rel="alternate" hreflang="en" href="https://wake.com.tw/lab/wake-home/en/">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div id="intro" aria-hidden="true" hidden>
+  <div id="introMark">
+    <svg viewBox="0 0 600 120"><path id="sig" d="M0 60 H236 L250 60 L260 22 L274 104 L286 36 L296 60 H600"/></svg>
+    <div id="introWord"><span>W</span><span>A</span><span>K</span><span>E</span><span class="ast">*</span></div>
+  </div>
+</div>
+<button id="skip" type="button" hidden>Skip intro</button>
+<div id="cur"></div>
+<div id="peek"><div class="art"></div><div class="lbl"></div></div>
+
+<header class="nav">
+  <a class="logo" href="#top" id="navLogo" aria-label="WAKE Studio home">WAKE<span class="ast">*.*</span></a>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <div class="nav-r"><a class="lang" href="../" hreflang="zh-TW" lang="zh-Hant-TW">中文</a><button class="theme-btn" type="button" id="themeBtn" aria-label="Toggle light and dark"><span class="tl">Light / Dark</span></button><a class="btn magnet" href="#contact"><span class="dot"></span>Start a project</a></div>
+</header>
+
+<main id="top" data-lang="en">
+  <section class="hero" aria-label="Hero">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="hint mono">Nudge the islands · click to wake</div>
+    <div class="hero-copy">
+      <div>
+        <p class="kicker">WAKE Studio — 3D product visualization · interactive web · games</p>
+        <h1>Make it<br><em>wake</em> up.</h1>
+      </div>
+      <div class="readout" aria-hidden="true">
+        <span class="mono">Signal</span>
+        <b id="sigVal">0.00 · DORMANT</b>
+        <div class="meter"><i id="sigBar"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="sec-head"><h2>Studio</h2><span class="mono">Taiwan · Est. 2026</span></div>
+    <div class="statement">
+      <p class="big">We turn Taiwan's memory into systems <span class="g">you live through</span> — and your product into images clients <span class="g">get at a glance</span>.</p>
+      <div class="side">
+        <p>WAKE is the independent studio of Kevin Chang (張凱翔). Alongside <i>BÔ BÂNG</i>, a narrative adventure set during Taiwan's White Terror, the studio takes on 3D product visualization and web design for brands.</p>
+        <p>The real-time rendering, camera language and interaction design honed in game development go straight into your product pages.</p>
+        <div class="tools"><span>Unreal Engine 5</span><span>Blender</span><span>MetaHuman</span><span>Three.js</span><span>UI/UX</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="work" style="padding-top:0">
+    <div class="sec-head"><h2>Selected Work</h2><span class="mono">5 projects</span></div>
+    <ul class="works">
+      <li><a href="#work" data-peek="無" data-bg="linear-gradient(160deg,#2B3D57,#0E1520 70%)" data-lbl="UE5 · NARRATIVE ADVENTURE">
+        <span class="t">BÔ BÂNG<small>Third-person narrative adventure. From 1947: a decision system of surveillance, silence and fear.</small></span>
+        <span class="cat">Game · UE5</span><span class="yr">2027</span></a></li>
+      <li><a href="#work" data-peek="偶" data-bg="linear-gradient(160deg,#C2652F,#1D2A3C 75%)" data-lbl="CIVIC GAME · MEDIA LITERACY">
+        <span class="t">Click Behind the Puppeteer<small>Media-literacy game that takes apart how disinformation works.</small></span>
+        <span class="cat">Civic game</span><span class="yr">2026</span></a></li>
+      <li><a href="#work" data-peek="$" data-bg="linear-gradient(160deg,#3A4E6A,#141D2B 70%)" data-lbl="CIVIC GAME · CASHFLOW">
+        <span class="t">Break Free from the Rat Race<small>Financial literacy: a cash-flow simulation.</small></span>
+        <span class="cat">Civic game</span><span class="yr">2026</span></a></li>
+      <li><a href="#work" data-peek="盾" data-bg="linear-gradient(160deg,#5D6C7B,#0E1520 70%)" data-lbl="CIVIC GAME · SIMULATION">
+        <span class="t">Defense Budget Allocation Simulator<small>Strategic trade-offs under limited resources.</small></span>
+        <span class="cat">Civic game</span><span class="yr">2026</span></a></li>
+      <li><a href="#work" data-peek="◎" data-bg="linear-gradient(160deg,#E5A33D,#C2652F 55%,#141D2B)" data-lbl="B2B · PRODUCT VISUALIZATION">
+        <span class="t">Product Visualization<small>Renders, exploded views, product animation. Case studies in progress.</small></span>
+        <span class="cat">3D · B2B</span><span class="yr">Open</span></a></li>
+    </ul>
+  </section>
+
+  <section class="block" id="services" style="padding-top:0">
+    <div class="sec-head"><h2>Services</h2><span class="mono">Three service lines</span></div>
+    <div class="services">
+      <article class="svc">
+        <canvas data-anim="explode" aria-hidden="true"></canvas>
+        <h3>3D Product Visualization</h3>
+        <ul><li>Photoreal renders instead of studio shoots</li><li>Exploded and cutaway animation</li><li>Trade-show and launch films</li></ul>
+        <p class="for">For equipment, electronics and consumer brands</p>
+      </article>
+      <article class="svc">
+        <canvas data-anim="scroll" aria-hidden="true"></canvas>
+        <h3>Interactive Web Design</h3>
+        <ul><li>Launch pages and scroll-driven stories</li><li>Real-time WebGL 3D showcases</li><li>UI/UX and brand identity</li></ul>
+        <p class="for">For teams that need one page to explain the product</p>
+      </article>
+      <article class="svc">
+        <canvas data-anim="signal" aria-hidden="true"></canvas>
+        <h3>Games &amp; Interactive Experiences</h3>
+        <ul><li>Educational and civic games</li><li>Exhibition installations</li><li>UE5 real-time narrative prototypes</li></ul>
+        <p class="for">For culture, education and public-sector projects</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="block contact" id="contact">
+    <div class="sec-head"><h2>Let's Wake It</h2><span class="mono">Usually replies within 48 hours</span></div>
+    <span class="mono">Send product specs, timeline and budget range</span>
+    <span class="mail" id="mail">kevin<span class="at">@</span>wake.com.tw</span>
+    <div class="contact-row">
+      <button class="btn magnet" type="button" id="copyBtn"><span class="dot"></span>Copy email</button>
+      <a class="btn ghost magnet" href="mailto:kevin@wake.com.tw">Open mail app</a>
+      <span id="copied" aria-live="polite"></span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="mono">© 2026 WAKE Studio</span>
+  <span class="mono">Taipei <b id="clock">--:--</b> GMT+8</span>
+  <button class="btn ghost" type="button" id="replay" style="padding:6px 12px;font-size:12px">Replay intro</button>
+</footer>
+
+<script src="../three.min.js"></script>
+<script src="../main.js"></script>
+</body>
+</html>

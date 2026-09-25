@@ -145,3 +145,13 @@ footer .mono b{color:var(--paper);font-weight:500;font-variant-numeric:tabular-n
 #cur{position:fixed;left:0;top:0;z-index:60;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;transition:width .25s,height .25s,margin .25s,background .25s;mix-blend-mode:difference;display:none}
 #cur.big{width:72px;height:72px;margin:-36px 0 0 -36px;background:rgba(229,163,61,.18)}
 @media (hover:hover) and (pointer:fine){#cur{display:block}}
+
+/* English display: Latin headline in Archivo */
+main[data-lang="en"] .hero h1{font-family:var(--f-display);font-stretch:125%;font-weight:900;letter-spacing:-.035em;line-height:.92}
+main[data-lang="en"] .statement p.big{font-weight:700;letter-spacing:-.01em}
+.lang{font:500 12px var(--f-mono);letter-spacing:.06em;color:var(--paper);opacity:.8;padding:8px 4px}
+.lang:hover{opacity:1;color:var(--gold)}
+
+/* narrow nav: keep one row */
+.btn,.theme-btn,.lang{white-space:nowrap}
+@media (max-width:560px){.nav-r{gap:6px}.nav .btn{padding:9px 13px;font-size:13px}.nav .btn .dot{display:none}.theme-btn{padding:6px 10px}.theme-btn .tl{display:none}.theme-btn::before{content:"◐";font-size:14px}}

@@ -1,4 +1,5 @@
 (() => {
+const EN = document.querySelector('main')?.dataset.lang === 'en';
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FINE = matchMedia('(hover:hover) and (pointer:fine)').matches;
 const $ = s => document.querySelector(s);
@@ -261,8 +262,8 @@ if (FINE && !RM){
 /* ================= copy email + Taipei clock ================= */
 $('#copyBtn').addEventListener('click', ()=>{
   const out = $('#copied');
-  navigator.clipboard.writeText('kevin@wake.com.tw').then(()=>out.textContent='已複製 kevin@wake.com.tw').catch(()=>{
-    const r=document.createRange(); r.selectNodeContents($('#mail')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); out.textContent='已選取，按 ⌘C／Ctrl+C 複製';
+  navigator.clipboard.writeText('kevin@wake.com.tw').then(()=>out.textContent=EN?'Copied kevin@wake.com.tw':'已複製 kevin@wake.com.tw').catch(()=>{
+    const r=document.createRange(); r.selectNodeContents($('#mail')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); out.textContent=EN?'Selected — press ⌘C / Ctrl+C to copy':'已選取，按 ⌘C／Ctrl+C 複製';
   });
 });
 const clock = $('#clock');
