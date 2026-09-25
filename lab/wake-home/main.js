@@ -20,16 +20,25 @@ function endIntro(){
 }
 function runIntro(){
   if (RM){ endIntro(); return; }
+  introAnims.forEach(a=>a.cancel()); introAnims=[]; clearTimeout(runIntro.fly);
   intro.hidden = false; skip.hidden = false; intro.style.opacity = 1;
   mark.style.transform = ''; navLogo.style.opacity = 0;
   const L = sig.getTotalLength();
   sig.style.strokeDasharray = L;
   const A = (el,k,o) => { const a = el.animate(k,o); introAnims.push(a); return a; };
-  A(sig,[{strokeDashoffset:L,opacity:1},{strokeDashoffset:0,opacity:1}],{duration:900,easing:'cubic-bezier(.6,0,.2,1)',fill:'forwards'});
-  A(sig,[{opacity:1},{opacity:0}],{duration:300,delay:1050,fill:'forwards'});
-  letters.forEach((s,i)=>A(s,[{opacity:0,transform:'translateY(.35em)'},{opacity:1,transform:'translateY(0)'}],{duration:420,delay:980+i*60,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'}));
+  A(sig,[{strokeDashoffset:L,opacity:1},{strokeDashoffset:0,opacity:1}],{duration:1000,easing:'cubic-bezier(.6,0,.2,1)',fill:'forwards'});
+  // Yushan: the R-peak of the heartbeat is the 3,952 m summit
+  const fillEl = $('#ridgeFill'), dot = $('#summit'), lbl = $('#summitLbl'), back = $('#ridgeBack');
+  const LB = back.getTotalLength(); back.style.strokeDasharray = LB;
+  A(back,[{strokeDashoffset:LB,opacity:.35},{strokeDashoffset:0,opacity:.35}],{duration:1200,easing:'cubic-bezier(.5,0,.2,1)',fill:'forwards'});
+  A(fillEl,[{opacity:0},{opacity:1}],{duration:500,delay:750,fill:'forwards'});
+  A(dot,[{opacity:0,transform:'scale(0)'},{opacity:1,transform:'scale(1)'}],{duration:260,delay:620,easing:'cubic-bezier(.2,1.6,.4,1)',fill:'forwards'});
+  A(lbl,[{opacity:0,transform:'translateX(-4px)'},{opacity:1,transform:'translateX(0)'}],{duration:360,delay:780,fill:'forwards'});
+  [sig,fillEl,dot,lbl].forEach(el=>A(el,[{opacity:1},{opacity:0}],{duration:360,delay:1750,fill:'forwards'}));
+  A(back,[{opacity:.35},{opacity:0}],{duration:360,delay:1750,fill:'forwards'});
+  letters.forEach((s,i)=>A(s,[{opacity:0,transform:'translateY(.35em)'},{opacity:1,transform:'translateY(0)'}],{duration:420,delay:1700+i*60,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'}));
   // fly to nav logo (FLIP)
-  setTimeout(()=>{
+  runIntro.fly = setTimeout(()=>{
     if (intro.hidden) return;
     const word = $('#introWord');
     const a = word.getBoundingClientRect(), b = navLogo.getBoundingClientRect();
@@ -38,8 +47,8 @@ function runIntro(){
     A(mark,[{transform:'translate(0,0) scale(1)'},{transform:`translate(${dx}px,${dy}px) scale(${s})`}],{duration:750,easing:'cubic-bezier(.7,0,.2,1)',fill:'forwards'});
     const f = A(intro,[{backgroundColor:getComputedStyle(intro).backgroundColor},{backgroundColor:'transparent'}],{duration:650,delay:250,easing:'ease-out',fill:'forwards'});
     f.onfinish = endIntro;
-  },1650);
-  clearTimeout(runIntro.safe); runIntro.safe = setTimeout(endIntro, 3000);
+  },2400);
+  clearTimeout(runIntro.safe); runIntro.safe = setTimeout(endIntro, 3900);
 }
 skip.addEventListener('click', endIntro);
 $('#replay').addEventListener('click', ()=>{ scrollTo({top:0}); runIntro(); });

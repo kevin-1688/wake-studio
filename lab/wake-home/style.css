@@ -155,3 +155,11 @@ main[data-lang="en"] .statement p.big{font-weight:700;letter-spacing:-.01em}
 /* narrow nav: keep one row */
 .btn,.theme-btn,.lang{white-space:nowrap}
 @media (max-width:560px){.nav-r{gap:6px}.nav .btn{padding:9px 13px;font-size:13px}.nav .btn .dot{display:none}.theme-btn{padding:6px 10px}.theme-btn .tl{display:none}.theme-btn::before{content:"◐";font-size:14px}}
+
+/* Yushan ridge woven into the ECG */
+#introMark svg{color:var(--gold)}
+#ridgeFill{opacity:0}
+#summit{fill:var(--gold);opacity:0}
+#summitLbl{font:500 9px var(--f-mono);letter-spacing:.08em;fill:var(--steel);opacity:0}
+#summit,#summitLbl{transform-box:fill-box;transform-origin:center}
+#ridgeBack{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;opacity:0}
