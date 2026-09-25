@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>WAKE 首頁原型</title>
+<link rel="alternate" hreflang="zh-TW" href="https://wake.com.tw/lab/wake-home/">
+<link rel="alternate" hreflang="en" href="https://wake.com.tw/lab/wake-home/en/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap">
-<link rel="alternate" hreflang="zh-TW" href="https://wake.com.tw/lab/wake-home/">
-<link rel="alternate" hreflang="en" href="https://wake.com.tw/lab/wake-home/en/">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,6 +20,7 @@
   </div>
 </div>
 <button id="skip" type="button" hidden>略過開場</button>
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
 <div id="cur"></div>
 <div id="peek"><div class="art"></div><div class="lbl"></div></div>
 
@@ -28,22 +29,23 @@
   <ul>
     <li><a href="#work">作品</a></li>
     <li><a href="#services">服務</a></li>
+    <li><a href="#process">流程</a></li>
     <li><a href="#about">關於</a></li>
   </ul>
   <div class="nav-r"><a class="lang" href="en/" hreflang="en" lang="en">EN</a><button class="theme-btn" type="button" id="themeBtn" aria-label="切換亮暗色"><span class="tl">亮／暗</span></button><a class="btn magnet" href="#contact"><span class="dot"></span>開始合作</a></div>
 </header>
 
-<main id="top">
+<main id="top" data-lang="zh">
   <section class="hero" aria-label="主視覺">
     <canvas id="gl" aria-hidden="true"></canvas>
     <div class="hint mono">撥動島嶼／點擊喚醒</div>
-    <div class="hero-copy">
+    <div class="hero-copy" id="heroCopy">
       <div>
         <p class="kicker">WAKE Studio — 3D 產品視覺化・互動網頁・遊戲</p>
         <h1>讓畫面<br><em>醒</em>過來。</h1>
       </div>
       <div class="readout" aria-hidden="true">
-        <span class="mono">Signal</span>
+        <span class="mono">Signal · 最高點 玉山 3,952 m</span>
         <b id="sigVal">0.00 · DORMANT</b>
         <div class="meter"><i id="sigBar"></i></div>
       </div>
@@ -51,10 +53,10 @@
   </section>
 
   <section class="block" id="about">
-    <div class="sec-head"><h2>Studio</h2><span class="mono">台灣・2026 成立</span></div>
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>Studio</span></span></h2><span class="mono">台灣・2026 成立</span></div>
     <div class="statement">
-      <p class="big">把台灣的記憶，做成<span class="g">身體經歷得到</span>的系統；也把你的產品，做成客戶<span class="g">看一眼就懂</span>的畫面。</p>
-      <div class="side">
+      <p class="big fx">把台灣的記憶，做成<span class="g">身體經歷得到</span>的系統；也把你的產品，做成客戶<span class="g">看一眼就懂</span>的畫面。</p>
+      <div class="side fx">
         <p>WAKE 是張凱翔的獨立工作室。一邊開發以白色恐怖為背景的敘事冒險遊戲《BÔ BÂNG》，一邊為品牌承接 3D 產品視覺化與網頁設計。</p>
         <p>做遊戲練出來的即時渲染、鏡頭語言與互動設計，直接用在你的產品頁上。</p>
         <div class="tools"><span>Unreal Engine 5</span><span>Blender</span><span>MetaHuman</span><span>Three.js</span><span>UI/UX</span></div>
@@ -63,29 +65,29 @@
   </section>
 
   <section class="block" id="work" style="padding-top:0">
-    <div class="sec-head"><h2>Selected Work</h2><span class="mono">05 件</span></div>
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>Selected Work</span></span></h2><span class="mono">05 件・點開看案例</span></div>
     <ul class="works">
-      <li><a href="#work" data-peek="無" data-bg="linear-gradient(160deg,#2B3D57,#0E1520 70%)" data-lbl="UE5 · NARRATIVE ADVENTURE">
-        <span class="t">BÔ BÂNG 無望<small>第三人稱敘事冒險。1947 年起，監視、沉默與恐懼的決策系統。</small></span>
+      <li class="fx"><a href="#case-bobang" data-case="case-bobang" data-peek="無" data-bg="linear-gradient(160deg,#2B3D57,#0E1520 70%)" data-lbl="UE5 · NARRATIVE ADVENTURE">
+        <span class="t">BÔ BÂNG 無望<small>第三人稱敘事冒險。1947 年起，監視、沉默與恐懼的決策系統。</small><span class="go">看案例 →</span></span>
         <span class="cat">遊戲／UE5</span><span class="yr">2027</span></a></li>
-      <li><a href="#work" data-peek="偶" data-bg="linear-gradient(160deg,#C2652F,#1D2A3C 75%)" data-lbl="CIVIC GAME · MEDIA LITERACY">
-        <span class="t">操偶師背後<small>媒體識讀遊戲：拆解假訊息的操作手法。</small></span>
+      <li class="fx"><a href="#case-puppet" data-case="case-puppet" data-peek="偶" data-bg="linear-gradient(160deg,#C2652F,#1D2A3C 75%)" data-lbl="CIVIC GAME · MEDIA LITERACY">
+        <span class="t">操偶師背後<small>媒體識讀遊戲：拆解假訊息的操作手法。</small><span class="go">看案例 →</span></span>
         <span class="cat">公民遊戲</span><span class="yr">2026</span></a></li>
-      <li><a href="#work" data-peek="$" data-bg="linear-gradient(160deg,#3A4E6A,#141D2B 70%)" data-lbl="CIVIC GAME · CASHFLOW">
-        <span class="t">跳出老鼠賽跑<small>財務識讀：現金流模擬。</small></span>
+      <li class="fx"><a href="#case-ratrace" data-case="case-ratrace" data-peek="$" data-bg="linear-gradient(160deg,#3A4E6A,#141D2B 70%)" data-lbl="CIVIC GAME · CASHFLOW">
+        <span class="t">跳出老鼠賽跑<small>財務識讀：現金流模擬。</small><span class="go">看案例 →</span></span>
         <span class="cat">公民遊戲</span><span class="yr">2026</span></a></li>
-      <li><a href="#work" data-peek="盾" data-bg="linear-gradient(160deg,#5D6C7B,#0E1520 70%)" data-lbl="CIVIC GAME · SIMULATION">
-        <span class="t">國防預算分配模擬器<small>在有限資源下做戰略取捨。</small></span>
+      <li class="fx"><a href="#case-defense" data-case="case-defense" data-peek="盾" data-bg="linear-gradient(160deg,#5D6C7B,#0E1520 70%)" data-lbl="CIVIC GAME · SIMULATION">
+        <span class="t">國防預算分配模擬器<small>在有限資源下做戰略取捨。</small><span class="go">看案例 →</span></span>
         <span class="cat">公民遊戲</span><span class="yr">2026</span></a></li>
-      <li><a href="#work" data-peek="◎" data-bg="linear-gradient(160deg,#E5A33D,#C2652F 55%,#141D2B)" data-lbl="B2B · PRODUCT VISUALIZATION">
-        <span class="t">產品視覺化委託<small>渲染、爆炸圖、產品動畫。案例整理中。</small></span>
+      <li class="fx"><a href="#case-viz" data-case="case-viz" data-peek="◎" data-bg="linear-gradient(160deg,#E5A33D,#C2652F 55%,#141D2B)" data-lbl="B2B · PRODUCT VISUALIZATION">
+        <span class="t">產品視覺化委託<small>渲染、爆炸圖、產品動畫。第一批案例徵件中。</small><span class="go">看怎麼合作 →</span></span>
         <span class="cat">3D／B2B</span><span class="yr">接案中</span></a></li>
     </ul>
   </section>
 
   <section class="block" id="services" style="padding-top:0">
-    <div class="sec-head"><h2>Services</h2><span class="mono">三條服務線</span></div>
-    <div class="services">
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>Services</span></span></h2><span class="mono">三條服務線</span></div>
+    <div class="services fx">
       <article class="svc">
         <canvas data-anim="explode" aria-hidden="true"></canvas>
         <h3>3D 產品視覺化</h3>
@@ -107,17 +109,121 @@
     </div>
   </section>
 
+  <section class="block" id="process" style="padding-top:0">
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>Process</span></span></h2><span class="mono">從規格到交付</span></div>
+    <div class="process">
+      <div class="proc-stick">
+        <div class="proc-now" aria-hidden="true"><span id="procNum">01</span><small> / 04</small></div>
+        <svg class="proc-line" viewBox="0 0 420 60" aria-hidden="true"><path class="base" d="M0 40 H420"/><path id="procPath" d="M0 40 H70 L80 40 L88 22 L96 52 L104 40 H170 L180 40 L188 16 L196 54 L204 40 H270 L280 40 L288 10 L296 56 L304 40 H370 L380 40 L388 4 L396 58 L404 40 H420"/></svg>
+        <p class="mono" style="margin:0">每一步都有明確產出，範圍先談清楚再開工</p>
+      </div>
+      <ol class="steps">
+        <li class="step on"><span class="n">01 · 需求對齊</span><h3>先把範圍講清楚</h3><p>你提供產品規格、CAD 或照片、使用場合（官網、展覽、電商）與期望交期。我回覆可行做法與報價。</p><p class="out"><b>產出</b>範圍確認書：交付項目、修改次數、時程</p></li>
+        <li class="step"><span class="n">02 · 分鏡與樣稿</span><h3>先看方向，再花算圖時間</h3><p>鏡頭腳本、材質與打光方向，先做一張樣稿或動態分鏡讓你確認，避免做完才發現方向不對。</p><p class="out"><b>產出</b>樣稿一張或分鏡預覽</p></li>
+        <li class="step"><span class="n">03 · 製作</span><h3>渲染、動畫、網頁一起推進</h3><p>依確認的方向製作。每個階段都有固定的修改次數，超出範圍的新需求另外報價，雙方都不會被拖住。</p><p class="out"><b>產出</b>階段成品與修改紀錄</p></li>
+        <li class="step"><span class="n">04 · 交付</span><h3>交你真的用得到的格式</h3><p>依用途交付：4K 靜態圖、MP4／WebM 影片、網頁用 GLB 模型或整頁程式碼，並附使用說明。</p><p class="out"><b>產出</b>最終檔案與交付清單</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="faq" style="padding-top:0">
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>FAQ</span></span></h2><span class="mono">合作前常被問的事</span></div>
+    <div class="faq fx">
+      <details><summary>怎麼報價？</summary><p>依範圍報價：張數、動畫秒數、鏡頭數與是否需要網頁整合。填下方表單或來信附上規格，會在確認需求後給正式報價。</p></details>
+      <details><summary>可以修改幾次？</summary><p>每個階段含固定修改次數，寫在範圍確認書裡。超出範圍的新需求會另外報價，讓專案能如期收尾。</p></details>
+      <details><summary>我需要準備什麼？</summary><p>有 CAD／3D 檔最好（STEP、OBJ、FBX 都可以）；只有實體或照片也能做，會多一段建模時間。再加上品牌色、使用場合與參考範例。</p></details>
+      <details><summary>多久可以交件？</summary><p>差異很大：單張渲染和一支完整產品動畫不是同一個量級。需求確認後會給明確時程，趕件也請先說。</p></details>
+      <details><summary>可以只做 3D，或只做網頁嗎？</summary><p>可以。三條服務線都能單獨委託；若同時需要 3D 與網頁，由同一人處理，素材和頁面會對得最準。</p></details>
+    </div>
+  </section>
+
   <section class="block contact" id="contact">
-    <div class="sec-head"><h2>Let's Wake It</h2><span class="mono">通常 48 小時內回覆</span></div>
-    <span class="mono">把產品規格、時程與預算範圍寄給我</span>
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>Let's Wake It</span></span></h2><span class="mono">通常 48 小時內回覆</span></div>
+    <span class="mono">填完會整理成一封詢價信，或直接寄到</span>
     <span class="mail" id="mail">kevin<span class="at">@</span>wake.com.tw</span>
-    <div class="contact-row">
-      <button class="btn magnet" type="button" id="copyBtn"><span class="dot"></span>複製信箱</button>
-      <a class="btn ghost magnet" href="mailto:kevin@wake.com.tw">開啟郵件</a>
-      <span id="copied" aria-live="polite"></span>
+    <form class="inq" id="inq" novalidate>
+      <div><label for="f-name">姓名</label><input type="text" id="f-name" name="name" autocomplete="name" required></div>
+      <div><label for="f-co">公司／品牌</label><input type="text" id="f-co" name="company" autocomplete="organization"></div>
+      <div><label for="f-mail">Email</label><input type="email" id="f-mail" name="email" autocomplete="email" required></div>
+      <div><label for="f-date">希望交期</label><input type="date" id="f-date" name="date"></div>
+      <fieldset class="full"><legend>需求類型</legend><div class="chips">
+        <input type="radio" name="type" id="t1" value="3D 產品視覺化"><label for="t1">3D 產品視覺化</label>
+        <input type="radio" name="type" id="t2" value="互動網頁"><label for="t2">互動網頁</label>
+        <input type="radio" name="type" id="t3" value="遊戲與互動體驗"><label for="t3">遊戲與互動體驗</label>
+        <input type="radio" name="type" id="t4" value="還不確定"><label for="t4">還不確定</label></div></fieldset>
+      <fieldset class="full"><legend>預算範圍（新台幣）</legend><div class="chips">
+        <input type="radio" name="budget" id="b1" value="5 萬以下"><label for="b1">5 萬以下</label>
+        <input type="radio" name="budget" id="b2" value="5–15 萬"><label for="b2">5–15 萬</label>
+        <input type="radio" name="budget" id="b3" value="15–30 萬"><label for="b3">15–30 萬</label>
+        <input type="radio" name="budget" id="b4" value="30 萬以上"><label for="b4">30 萬以上</label>
+        <input type="radio" name="budget" id="b5" value="還不確定"><label for="b5">還不確定</label></div></fieldset>
+      <fieldset class="full"><legend>手上有什麼素材</legend><div class="chips">
+        <input type="radio" name="assets" id="a1" value="有 CAD／3D 檔"><label for="a1">有 CAD／3D 檔</label>
+        <input type="radio" name="assets" id="a2" value="只有實體或照片"><label for="a2">只有實體或照片</label>
+        <input type="radio" name="assets" id="a3" value="還在開發中"><label for="a3">還在開發中</label></div></fieldset>
+      <div class="full"><label for="f-msg">產品與需求</label><textarea id="f-msg" name="msg" required placeholder="例如：工業用幫浦，要一支 30 秒爆炸圖動畫放展覽，外加官網主視覺三張。"></textarea></div>
+      <p class="err" id="inqErr" aria-live="polite"></p>
+      <div class="inq-actions"><button class="btn magnet" type="submit"><span class="dot"></span>整理成詢價信</button><button class="btn ghost" type="button" id="copyBtn">只複製信箱</button><span id="copied" class="inq-note" aria-live="polite"></span></div>
+    </form>
+    <div id="inqOut" hidden>
+      <span class="mono">詢價內容已整理好</span>
+      <pre id="inqText"></pre>
+      <div class="contact-row"><a class="btn" id="inqMail" href="mailto:kevin@wake.com.tw"><span class="dot"></span>用郵件 App 寄出</a><button class="btn ghost" type="button" id="inqCopy">複製內容</button><span class="inq-note" id="inqCopied" aria-live="polite"></span></div>
+      <span class="inq-note">郵件 App 沒有開啟的話，複製內容後寄到 kevin@wake.com.tw 即可。</span>
     </div>
   </section>
 </main>
+
+<div class="mcta" id="mcta"><a href="#contact"><span>開始合作</span><span aria-hidden="true">→</span></a></div>
+
+<div id="caseLayer" hidden role="dialog" aria-modal="true" aria-label="案例" data-lenis-prevent>
+  <button id="caseClose" type="button">關閉 ✕</button>
+  <div class="case-in">
+    <article class="case" id="case-bobang" hidden>
+      <div><span class="eyebrow">Game · Unreal Engine 5</span><h2>BÔ BÂNG 無望</h2></div>
+      <div class="art" style="background:linear-gradient(160deg,#2B3D57,#0E1520 70%)">無</div>
+      <p class="lede">一款以 1947 年為起點的白色恐怖敘事冒險。玩家在監視與資訊不對等之下做決定，沉默與恐懼是兩條互相牽制的數值。</p>
+      <dl class="meta"><div><dt>類型</dt><dd>第三人稱敘事冒險</dd></div><div><dt>引擎</dt><dd>Unreal Engine 5</dd></div><div><dt>團隊</dt><dd>WAKE Studio 獨立開發</dd></div><div><dt>Demo</dt><dd>2027.02.28</dd></div></dl>
+      <div class="cols">
+        <div><h3>技術重點</h3><ul><li>Lumen 即時光照與 Niagara 粒子，做出街道塵土與氛圍</li><li>MetaHuman 全身綁定，搭配 MetaSounds 音景</li><li>以 MediaPipe 攝影機偵測身體緊繃：審訊時「動」會被懲罰</li><li>Blender Python 參數化生成大稻埕街屋</li></ul></div>
+        <div><h3>對你的專案代表什麼</h3><p>即時渲染、鏡頭語言與互動設計都是每天在用的工具。做產品頁時，同一套能力讓你的產品在網頁上被「操作」，而不只是被觀看。</p></div>
+      </div>
+      <div class="cta-row"><a class="btn magnet" href="#contact" data-close><span class="dot"></span>談你的專案</a></div>
+    </article>
+    <article class="case" id="case-puppet" hidden>
+      <div><span class="eyebrow">Civic game · Media literacy</span><h2>操偶師背後</h2></div>
+      <div class="art" style="background:linear-gradient(160deg,#C2652F,#1D2A3C 75%)">偶</div>
+      <p class="lede">讓玩家站到假訊息操作者的位置，看懂一則訊息是怎麼被設計、放大與擴散的。</p>
+      <dl class="meta"><div><dt>類型</dt><dd>公民遊戲</dd></div><div><dt>主題</dt><dd>媒體識讀</dd></div><div><dt>系列</dt><dd>公民遊戲三部曲 1/3</dd></div></dl>
+      <div class="cols"><div><h3>設計重點</h3><ul><li>用「做一次」取代「讀一遍」</li><li>把操作手法拆成可辨認的步驟</li></ul></div><div><h3>適合的委託</h3><p>教育單位、公部門、NGO 需要把抽象議題變成可以玩、可以討論的體驗。</p></div></div>
+      <div class="cta-row"><a class="btn magnet" href="#contact" data-close><span class="dot"></span>談你的專案</a></div>
+    </article>
+    <article class="case" id="case-ratrace" hidden>
+      <div><span class="eyebrow">Civic game · Financial literacy</span><h2>跳出老鼠賽跑</h2></div>
+      <div class="art" style="background:linear-gradient(160deg,#3A4E6A,#141D2B 70%)">$</div>
+      <p class="lede">現金流模擬：收入、支出、資產與負債怎麼一步步決定你能不能停下來。</p>
+      <dl class="meta"><div><dt>類型</dt><dd>公民遊戲</dd></div><div><dt>主題</dt><dd>財務識讀</dd></div><div><dt>系列</dt><dd>公民遊戲三部曲 2/3</dd></div></dl>
+      <div class="cols"><div><h3>設計重點</h3><ul><li>用模擬取代說教</li><li>每個選擇都在數字上留下痕跡</li></ul></div><div><h3>適合的委託</h3><p>金融教育、校園推廣、需要把規則講清楚的品牌活動。</p></div></div>
+      <div class="cta-row"><a class="btn magnet" href="#contact" data-close><span class="dot"></span>談你的專案</a></div>
+    </article>
+    <article class="case" id="case-defense" hidden>
+      <div><span class="eyebrow">Civic game · Simulation</span><h2>國防預算分配模擬器</h2></div>
+      <div class="art" style="background:linear-gradient(160deg,#5D6C7B,#0E1520 70%)">盾</div>
+      <p class="lede">在有限預算下分配資源，體會每一個戰略取捨背後的代價。</p>
+      <dl class="meta"><div><dt>類型</dt><dd>公民遊戲</dd></div><div><dt>主題</dt><dd>公共預算</dd></div><div><dt>系列</dt><dd>公民遊戲三部曲 3/3</dd></div></dl>
+      <div class="cols"><div><h3>設計重點</h3><ul><li>把複雜的政策取捨做成可操作的介面</li><li>結果即時回饋，方便課堂討論</li></ul></div><div><h3>適合的委託</h3><p>公共議題溝通、智庫與教育單位的互動專案。</p></div></div>
+      <div class="cta-row"><a class="btn magnet" href="#contact" data-close><span class="dot"></span>談你的專案</a></div>
+    </article>
+    <article class="case" id="case-viz" hidden>
+      <div><span class="eyebrow">B2B · Product visualization</span><h2>產品視覺化</h2></div>
+      <div class="art" style="background:linear-gradient(160deg,#E5A33D,#C2652F 55%,#141D2B)">◎</div>
+      <p class="lede">案例整理中。第一批合作的品牌，會和我一起把專案寫成完整案例放在這裡。</p>
+      <dl class="meta"><div><dt>服務</dt><dd>渲染・爆炸圖・產品動畫</dd></div><div><dt>交付</dt><dd>4K 圖・MP4／WebM・GLB</dd></div><div><dt>可整合</dt><dd>產品上市頁、捲動敘事</dd></div></dl>
+      <div class="cols"><div><h3>每個案例會包含</h3><ul><li>產品與挑戰：要讓誰看懂什麼</li><li>分鏡與材質決策</li><li>最終畫面與使用場合</li><li>成效：詢價、展覽、上架轉換</li></ul></div><div><h3>現在合作的好處</h3><p>早期合作會投入更多打磨時間，換取把專案寫成公開案例的權利（可事先審稿）。</p></div></div>
+      <div class="cta-row"><a class="btn magnet" href="#contact" data-close data-type="t1"><span class="dot"></span>用你的產品當第一個案例</a></div>
+    </article>
+  </div>
+</div>
 
 <footer>
   <span class="mono">© 2026 WAKE Studio</span>
@@ -126,6 +232,7 @@
 </footer>
 
 <script src="three.min.js"></script>
+<script src="lenis.min.js"></script>
 <script src="main.js"></script>
 </body>
 </html>

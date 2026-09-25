@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>WAKE Homepage Prototype</title>
+<link rel="alternate" hreflang="zh-TW" href="https://wake.com.tw/lab/wake-home/">
+<link rel="alternate" hreflang="en" href="https://wake.com.tw/lab/wake-home/en/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap">
-<link rel="alternate" hreflang="zh-TW" href="https://wake.com.tw/lab/wake-home/">
-<link rel="alternate" hreflang="en" href="https://wake.com.tw/lab/wake-home/en/">
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -20,6 +20,7 @@
   </div>
 </div>
 <button id="skip" type="button" hidden>Skip intro</button>
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
 <div id="cur"></div>
 <div id="peek"><div class="art"></div><div class="lbl"></div></div>
 
@@ -28,6 +29,7 @@
   <ul>
     <li><a href="#work">Work</a></li>
     <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
     <li><a href="#about">About</a></li>
   </ul>
   <div class="nav-r"><a class="lang" href="../" hreflang="zh-TW" lang="zh-Hant-TW">中文</a><button class="theme-btn" type="button" id="themeBtn" aria-label="Toggle light and dark"><span class="tl">Light / Dark</span></button><a class="btn magnet" href="#contact"><span class="dot"></span>Start a project</a></div>
@@ -37,13 +39,13 @@
   <section class="hero" aria-label="Hero">
     <canvas id="gl" aria-hidden="true"></canvas>
     <div class="hint mono">Nudge the islands · click to wake</div>
-    <div class="hero-copy">
+    <div class="hero-copy" id="heroCopy">
       <div>
         <p class="kicker">WAKE Studio — 3D product visualization · interactive web · games</p>
         <h1>Make it<br><em>wake</em> up.</h1>
       </div>
       <div class="readout" aria-hidden="true">
-        <span class="mono">Signal</span>
+        <span class="mono">Signal · summit Yushan 3,952 m</span>
         <b id="sigVal">0.00 · DORMANT</b>
         <div class="meter"><i id="sigBar"></i></div>
       </div>
@@ -51,10 +53,10 @@
   </section>
 
   <section class="block" id="about">
-    <div class="sec-head"><h2>Studio</h2><span class="mono">Taiwan · Est. 2026</span></div>
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>Studio</span></span></h2><span class="mono">Taiwan · Est. 2026</span></div>
     <div class="statement">
-      <p class="big">We turn Taiwan's memory into systems <span class="g">you live through</span> — and your product into images clients <span class="g">get at a glance</span>.</p>
-      <div class="side">
+      <p class="big fx">We turn Taiwan's memory into systems <span class="g">you live through</span> — and your product into images clients <span class="g">get at a glance</span>.</p>
+      <div class="side fx">
         <p>WAKE is the independent studio of Kevin Chang (張凱翔). Alongside <i>BÔ BÂNG</i>, a narrative adventure set during Taiwan's White Terror, the studio takes on 3D product visualization and web design for brands.</p>
         <p>The real-time rendering, camera language and interaction design honed in game development go straight into your product pages.</p>
         <div class="tools"><span>Unreal Engine 5</span><span>Blender</span><span>MetaHuman</span><span>Three.js</span><span>UI/UX</span></div>
@@ -63,29 +65,29 @@
   </section>
 
   <section class="block" id="work" style="padding-top:0">
-    <div class="sec-head"><h2>Selected Work</h2><span class="mono">5 projects</span></div>
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>Selected Work</span></span></h2><span class="mono">5 projects · open a case</span></div>
     <ul class="works">
-      <li><a href="#work" data-peek="無" data-bg="linear-gradient(160deg,#2B3D57,#0E1520 70%)" data-lbl="UE5 · NARRATIVE ADVENTURE">
-        <span class="t">BÔ BÂNG<small>Third-person narrative adventure. From 1947: a decision system of surveillance, silence and fear.</small></span>
+      <li class="fx"><a href="#case-bobang" data-case="case-bobang" data-peek="無" data-bg="linear-gradient(160deg,#2B3D57,#0E1520 70%)" data-lbl="UE5 · NARRATIVE ADVENTURE">
+        <span class="t">BÔ BÂNG<small>Third-person narrative adventure. From 1947: a decision system of surveillance, silence and fear.</small><span class="go">View case →</span></span>
         <span class="cat">Game · UE5</span><span class="yr">2027</span></a></li>
-      <li><a href="#work" data-peek="偶" data-bg="linear-gradient(160deg,#C2652F,#1D2A3C 75%)" data-lbl="CIVIC GAME · MEDIA LITERACY">
-        <span class="t">Click Behind the Puppeteer<small>Media-literacy game that takes apart how disinformation works.</small></span>
+      <li class="fx"><a href="#case-puppet" data-case="case-puppet" data-peek="偶" data-bg="linear-gradient(160deg,#C2652F,#1D2A3C 75%)" data-lbl="CIVIC GAME · MEDIA LITERACY">
+        <span class="t">Click Behind the Puppeteer<small>Media-literacy game that takes apart how disinformation works.</small><span class="go">View case →</span></span>
         <span class="cat">Civic game</span><span class="yr">2026</span></a></li>
-      <li><a href="#work" data-peek="$" data-bg="linear-gradient(160deg,#3A4E6A,#141D2B 70%)" data-lbl="CIVIC GAME · CASHFLOW">
-        <span class="t">Break Free from the Rat Race<small>Financial literacy: a cash-flow simulation.</small></span>
+      <li class="fx"><a href="#case-ratrace" data-case="case-ratrace" data-peek="$" data-bg="linear-gradient(160deg,#3A4E6A,#141D2B 70%)" data-lbl="CIVIC GAME · CASHFLOW">
+        <span class="t">Break Free from the Rat Race<small>Financial literacy: a cash-flow simulation.</small><span class="go">View case →</span></span>
         <span class="cat">Civic game</span><span class="yr">2026</span></a></li>
-      <li><a href="#work" data-peek="盾" data-bg="linear-gradient(160deg,#5D6C7B,#0E1520 70%)" data-lbl="CIVIC GAME · SIMULATION">
-        <span class="t">Defense Budget Allocation Simulator<small>Strategic trade-offs under limited resources.</small></span>
+      <li class="fx"><a href="#case-defense" data-case="case-defense" data-peek="盾" data-bg="linear-gradient(160deg,#5D6C7B,#0E1520 70%)" data-lbl="CIVIC GAME · SIMULATION">
+        <span class="t">Defense Budget Allocation Simulator<small>Strategic trade-offs under limited resources.</small><span class="go">View case →</span></span>
         <span class="cat">Civic game</span><span class="yr">2026</span></a></li>
-      <li><a href="#work" data-peek="◎" data-bg="linear-gradient(160deg,#E5A33D,#C2652F 55%,#141D2B)" data-lbl="B2B · PRODUCT VISUALIZATION">
-        <span class="t">Product Visualization<small>Renders, exploded views, product animation. Case studies in progress.</small></span>
+      <li class="fx"><a href="#case-viz" data-case="case-viz" data-peek="◎" data-bg="linear-gradient(160deg,#E5A33D,#C2652F 55%,#141D2B)" data-lbl="B2B · PRODUCT VISUALIZATION">
+        <span class="t">Product Visualization<small>Renders, exploded views, product animation. Now taking first case-study clients.</small><span class="go">How we'd work →</span></span>
         <span class="cat">3D · B2B</span><span class="yr">Open</span></a></li>
     </ul>
   </section>
 
   <section class="block" id="services" style="padding-top:0">
-    <div class="sec-head"><h2>Services</h2><span class="mono">Three service lines</span></div>
-    <div class="services">
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>Services</span></span></h2><span class="mono">Three service lines</span></div>
+    <div class="services fx">
       <article class="svc">
         <canvas data-anim="explode" aria-hidden="true"></canvas>
         <h3>3D Product Visualization</h3>
@@ -107,17 +109,121 @@
     </div>
   </section>
 
+  <section class="block" id="process" style="padding-top:0">
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>Process</span></span></h2><span class="mono">From spec to delivery</span></div>
+    <div class="process">
+      <div class="proc-stick">
+        <div class="proc-now" aria-hidden="true"><span id="procNum">01</span><small> / 04</small></div>
+        <svg class="proc-line" viewBox="0 0 420 60" aria-hidden="true"><path class="base" d="M0 40 H420"/><path id="procPath" d="M0 40 H70 L80 40 L88 22 L96 52 L104 40 H170 L180 40 L188 16 L196 54 L204 40 H270 L280 40 L288 10 L296 56 L304 40 H370 L380 40 L388 4 L396 58 L404 40 H420"/></svg>
+        <p class="mono" style="margin:0">Every step has a clear output. Scope is agreed before work starts.</p>
+      </div>
+      <ol class="steps">
+        <li class="step on"><span class="n">01 · Alignment</span><h3>Pin down the scope first</h3><p>You share specs, CAD or photos, where it will be used (website, trade show, e-commerce) and your deadline. I come back with an approach and a quote.</p><p class="out"><b>Output</b>Scope sheet: deliverables, revision rounds, timeline</p></li>
+        <li class="step"><span class="n">02 · Storyboard &amp; look</span><h3>Agree on direction before render time</h3><p>Shot list, materials and lighting direction, proven with one look-frame or an animatic, so nobody discovers the wrong direction at the end.</p><p class="out"><b>Output</b>One look-frame or animatic</p></li>
+        <li class="step"><span class="n">03 · Production</span><h3>Renders, animation and web in step</h3><p>Built to the agreed direction. Each stage includes a fixed number of revision rounds; new requests outside scope are quoted separately, so the project keeps moving.</p><p class="out"><b>Output</b>Stage deliverables and revision log</p></li>
+        <li class="step"><span class="n">04 · Delivery</span><h3>Formats you can actually use</h3><p>Delivered for the job: 4K stills, MP4 / WebM video, GLB models for the web or the full page code, with usage notes.</p><p class="out"><b>Output</b>Final files and delivery checklist</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="faq" style="padding-top:0">
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>FAQ</span></span></h2><span class="mono">Before we work together</span></div>
+    <div class="faq fx">
+      <details><summary>How is pricing set?</summary><p>By scope: number of stills, seconds of animation, shots, and whether web integration is needed. Fill in the form below or email your specs; a formal quote follows once the brief is clear.</p></details>
+      <details><summary>How many revisions are included?</summary><p>Each stage includes a fixed number of rounds, written into the scope sheet. New requests outside scope are quoted separately so the project can close on time.</p></details>
+      <details><summary>What do I need to provide?</summary><p>CAD or 3D files are ideal (STEP, OBJ, FBX all work). A physical product or photos also work, with extra modelling time. Add brand colours, where it will be used and any references.</p></details>
+      <details><summary>How long does it take?</summary><p>It varies a lot — a single still and a full product film are different orders of magnitude. You get a concrete timeline once the brief is confirmed; mention rush deadlines up front.</p></details>
+      <details><summary>Can I hire just 3D, or just web?</summary><p>Yes. Each service line can be commissioned on its own. When you need both, one person handles assets and page together, so they fit exactly.</p></details>
+    </div>
+  </section>
+
   <section class="block contact" id="contact">
-    <div class="sec-head"><h2>Let's Wake It</h2><span class="mono">Usually replies within 48 hours</span></div>
-    <span class="mono">Send product specs, timeline and budget range</span>
+    <div class="sec-head"><h2 class="rvh"><span class="rv"><span>Let's Wake It</span></span></h2><span class="mono">Usually replies within 48 hours</span></div>
+    <span class="mono">Fill this in to draft a quote request, or write directly to</span>
     <span class="mail" id="mail">kevin<span class="at">@</span>wake.com.tw</span>
-    <div class="contact-row">
-      <button class="btn magnet" type="button" id="copyBtn"><span class="dot"></span>Copy email</button>
-      <a class="btn ghost magnet" href="mailto:kevin@wake.com.tw">Open mail app</a>
-      <span id="copied" aria-live="polite"></span>
+    <form class="inq" id="inq" novalidate>
+      <div><label for="f-name">Name</label><input type="text" id="f-name" name="name" autocomplete="name" required></div>
+      <div><label for="f-co">Company / brand</label><input type="text" id="f-co" name="company" autocomplete="organization"></div>
+      <div><label for="f-mail">Email</label><input type="email" id="f-mail" name="email" autocomplete="email" required></div>
+      <div><label for="f-date">Target date</label><input type="date" id="f-date" name="date"></div>
+      <fieldset class="full"><legend>What do you need</legend><div class="chips">
+        <input type="radio" name="type" id="t1" value="3D product visualization"><label for="t1">3D product visualization</label>
+        <input type="radio" name="type" id="t2" value="Interactive web"><label for="t2">Interactive web</label>
+        <input type="radio" name="type" id="t3" value="Games & interactive"><label for="t3">Games &amp; interactive</label>
+        <input type="radio" name="type" id="t4" value="Not sure yet"><label for="t4">Not sure yet</label></div></fieldset>
+      <fieldset class="full"><legend>Budget (NT$)</legend><div class="chips">
+        <input type="radio" name="budget" id="b1" value="Under NT$50k"><label for="b1">Under 50k</label>
+        <input type="radio" name="budget" id="b2" value="NT$50k–150k"><label for="b2">50k–150k</label>
+        <input type="radio" name="budget" id="b3" value="NT$150k–300k"><label for="b3">150k–300k</label>
+        <input type="radio" name="budget" id="b4" value="Over NT$300k"><label for="b4">300k+</label>
+        <input type="radio" name="budget" id="b5" value="Not sure yet"><label for="b5">Not sure yet</label></div></fieldset>
+      <fieldset class="full"><legend>What you have</legend><div class="chips">
+        <input type="radio" name="assets" id="a1" value="CAD / 3D files"><label for="a1">CAD / 3D files</label>
+        <input type="radio" name="assets" id="a2" value="Physical product or photos"><label for="a2">Product or photos only</label>
+        <input type="radio" name="assets" id="a3" value="Still in development"><label for="a3">Still in development</label></div></fieldset>
+      <div class="full"><label for="f-msg">Product and brief</label><textarea id="f-msg" name="msg" required placeholder="e.g. Industrial pump — a 30-second exploded-view film for a trade show, plus three hero stills for the website."></textarea></div>
+      <p class="err" id="inqErr" aria-live="polite"></p>
+      <div class="inq-actions"><button class="btn magnet" type="submit"><span class="dot"></span>Draft my request</button><button class="btn ghost" type="button" id="copyBtn">Copy email only</button><span id="copied" class="inq-note" aria-live="polite"></span></div>
+    </form>
+    <div id="inqOut" hidden>
+      <span class="mono">Your request is ready</span>
+      <pre id="inqText"></pre>
+      <div class="contact-row"><a class="btn" id="inqMail" href="mailto:kevin@wake.com.tw"><span class="dot"></span>Send with mail app</a><button class="btn ghost" type="button" id="inqCopy">Copy text</button><span class="inq-note" id="inqCopied" aria-live="polite"></span></div>
+      <span class="inq-note">If no mail app opens, copy the text and send it to kevin@wake.com.tw.</span>
     </div>
   </section>
 </main>
+
+<div class="mcta" id="mcta"><a href="#contact"><span>Start a project</span><span aria-hidden="true">→</span></a></div>
+
+<div id="caseLayer" hidden role="dialog" aria-modal="true" aria-label="Case study" data-lenis-prevent>
+  <button id="caseClose" type="button">Close ✕</button>
+  <div class="case-in">
+    <article class="case" id="case-bobang" hidden>
+      <div><span class="eyebrow">Game · Unreal Engine 5</span><h2>BÔ BÂNG</h2></div>
+      <div class="art" style="background:linear-gradient(160deg,#2B3D57,#0E1520 70%)">無</div>
+      <p class="lede">A narrative adventure through Taiwan's White Terror, starting in 1947. You make decisions under surveillance and missing information; silence and fear are two stats that pull against each other.</p>
+      <dl class="meta"><div><dt>Genre</dt><dd>Third-person narrative adventure</dd></div><div><dt>Engine</dt><dd>Unreal Engine 5</dd></div><div><dt>Team</dt><dd>WAKE Studio, independent</dd></div><div><dt>Demo</dt><dd>2027.02.28</dd></div></dl>
+      <div class="cols">
+        <div><h3>Technical highlights</h3><ul><li>Lumen lighting and Niagara particles for street dust and atmosphere</li><li>MetaHuman full rigs with a MetaSounds soundscape</li><li>MediaPipe webcam tension detection: moving during interrogation is penalised</li><li>Procedural Dadaocheng shophouses generated with Blender Python</li></ul></div>
+        <div><h3>What it means for your project</h3><p>Real-time rendering, camera language and interaction design are daily tools here. On a product page, the same skills let people operate your product, not just look at it.</p></div>
+      </div>
+      <div class="cta-row"><a class="btn magnet" href="#contact" data-close><span class="dot"></span>Talk about your project</a></div>
+    </article>
+    <article class="case" id="case-puppet" hidden>
+      <div><span class="eyebrow">Civic game · Media literacy</span><h2>Click Behind the Puppeteer</h2></div>
+      <div class="art" style="background:linear-gradient(160deg,#C2652F,#1D2A3C 75%)">偶</div>
+      <p class="lede">Players step into the disinformation operator's seat to see how a message is designed, amplified and spread.</p>
+      <dl class="meta"><div><dt>Type</dt><dd>Civic game</dd></div><div><dt>Topic</dt><dd>Media literacy</dd></div><div><dt>Series</dt><dd>Civic trilogy 1/3</dd></div></dl>
+      <div class="cols"><div><h3>Design focus</h3><ul><li>Doing it once beats reading about it</li><li>Tactics broken into recognisable steps</li></ul></div><div><h3>Good fit for</h3><p>Schools, public agencies and NGOs that need abstract issues turned into something people can play and discuss.</p></div></div>
+      <div class="cta-row"><a class="btn magnet" href="#contact" data-close><span class="dot"></span>Talk about your project</a></div>
+    </article>
+    <article class="case" id="case-ratrace" hidden>
+      <div><span class="eyebrow">Civic game · Financial literacy</span><h2>Break Free from the Rat Race</h2></div>
+      <div class="art" style="background:linear-gradient(160deg,#3A4E6A,#141D2B 70%)">$</div>
+      <p class="lede">A cash-flow simulation: how income, spending, assets and debt decide, step by step, whether you can ever stop running.</p>
+      <dl class="meta"><div><dt>Type</dt><dd>Civic game</dd></div><div><dt>Topic</dt><dd>Financial literacy</dd></div><div><dt>Series</dt><dd>Civic trilogy 2/3</dd></div></dl>
+      <div class="cols"><div><h3>Design focus</h3><ul><li>Simulation instead of lecture</li><li>Every choice leaves a mark in the numbers</li></ul></div><div><h3>Good fit for</h3><p>Financial education, campus outreach and brand campaigns that need rules explained clearly.</p></div></div>
+      <div class="cta-row"><a class="btn magnet" href="#contact" data-close><span class="dot"></span>Talk about your project</a></div>
+    </article>
+    <article class="case" id="case-defense" hidden>
+      <div><span class="eyebrow">Civic game · Simulation</span><h2>Defense Budget Allocation Simulator</h2></div>
+      <div class="art" style="background:linear-gradient(160deg,#5D6C7B,#0E1520 70%)">盾</div>
+      <p class="lede">Allocate a limited budget and feel the cost behind every strategic trade-off.</p>
+      <dl class="meta"><div><dt>Type</dt><dd>Civic game</dd></div><div><dt>Topic</dt><dd>Public budgets</dd></div><div><dt>Series</dt><dd>Civic trilogy 3/3</dd></div></dl>
+      <div class="cols"><div><h3>Design focus</h3><ul><li>Complex policy trade-offs as an operable interface</li><li>Instant feedback that fuels classroom discussion</li></ul></div><div><h3>Good fit for</h3><p>Public-issue communication, think tanks and educational interactive projects.</p></div></div>
+      <div class="cta-row"><a class="btn magnet" href="#contact" data-close><span class="dot"></span>Talk about your project</a></div>
+    </article>
+    <article class="case" id="case-viz" hidden>
+      <div><span class="eyebrow">B2B · Product visualization</span><h2>Product Visualization</h2></div>
+      <div class="art" style="background:linear-gradient(160deg,#E5A33D,#C2652F 55%,#141D2B)">◎</div>
+      <p class="lede">Case studies in progress. The first brands to work with WAKE will co-write their project into a full case study here.</p>
+      <dl class="meta"><div><dt>Services</dt><dd>Renders · exploded views · product films</dd></div><div><dt>Delivery</dt><dd>4K stills · MP4 / WebM · GLB</dd></div><div><dt>Integrates with</dt><dd>Launch pages, scroll stories</dd></div></dl>
+      <div class="cols"><div><h3>Every case study covers</h3><ul><li>Product and challenge: who needs to understand what</li><li>Storyboard and material decisions</li><li>Final frames and where they were used</li><li>Results: enquiries, trade shows, listings</li></ul></div><div><h3>Why work together now</h3><p>Early projects get extra polishing time in exchange for the right to publish them as case studies (you review before anything goes live).</p></div></div>
+      <div class="cta-row"><a class="btn magnet" href="#contact" data-close data-type="t1"><span class="dot"></span>Make your product the first case</a></div>
+    </article>
+  </div>
+</div>
 
 <footer>
   <span class="mono">© 2026 WAKE Studio</span>
@@ -126,6 +232,7 @@
 </footer>
 
 <script src="../three.min.js"></script>
+<script src="../lenis.min.js"></script>
 <script src="../main.js"></script>
 </body>
 </html>
