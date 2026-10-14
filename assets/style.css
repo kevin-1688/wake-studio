@@ -183,7 +183,21 @@ header{
 .about .fact dt{font-family:var(--mono);font-size:.64rem;letter-spacing:.26em;color:var(--haze);margin-top:18px}
 .about .fact dt:first-child{margin-top:0}
 .about .fact dd{font-family:var(--serif);font-weight:500;font-size:1rem;margin-top:4px}
-@media(max-width:820px){.about{grid-template-columns:1fr}}
+.about>*{min-width:0}
+.about .portrait{margin-bottom:28px;transform:rotate(-1.2deg)}
+.about .portrait .frame{
+  border:1px solid rgba(229,163,61,.55);
+  outline:1px solid var(--line);outline-offset:7px;
+  box-shadow:0 24px 56px rgba(0,0,0,.45);
+  overflow:hidden;
+}
+.about .portrait img{display:block;width:100%;height:auto}
+.about .portrait figcaption{
+  margin-top:16px;display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.24em;color:var(--haze);
+}
+.about .portrait figcaption b{color:var(--gold);font-weight:500}
+@media(max-width:820px){.about{grid-template-columns:1fr}.about .portrait{max-width:420px}}
 
 /* ---------- 聯絡 / 頁尾 ---------- */
 .contact{text-align:center;padding:130px 0 100px;position:relative}
