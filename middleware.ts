@@ -23,7 +23,7 @@ export const config = {
   // Run on page navigations only. Skip /assets, robots, sitemap and any
   // static file extension so we don't burn API lookups on sub-resources.
   matcher: [
-    '/((?!assets/|favicon\\.ico|robots\\.txt|sitemap\\.xml|.*\\.(?:css|js|mjs|map|png|jpe?g|gif|svg|webp|avif|ico|woff2?|ttf|otf)$).*)',
+    '/((?!assets/|favicon\\.ico|robots\\.txt|sitemap\\.xml|.*\\.(?:css|js|mjs|map|png|jpe?g|gif|svg|webp|avif|ico|woff2?|ttf|otf|wav)$).*)',
   ],
 };
 

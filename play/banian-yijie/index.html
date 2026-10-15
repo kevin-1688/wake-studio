@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-Hant" data-audio-base="audio/">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>八年一節</title>
+<meta property="og:title" content="八年一節｜台中市政諷刺模擬遊戲｜WAKE">
+<meta property="og:description" content="八年預算，你會把錢花在購物節，還是垃圾山、廚餘湖與捷運藍線？">
+<meta property="og:image" content="https://wake.com.tw/assets/og-image.jpg">
+<meta property="og:url" content="https://wake.com.tw/play/banian-yijie/">
+<meta name="description" content="台中市政諷刺模擬遊戲：八年預算，你會把錢花在購物節，還是垃圾山、廚餘湖與捷運藍線？">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4efe6; --card:#fffaf1; --ink:#2a2420; --muted:#7a6e63; --line:#e2d7c6;
+  --accent:#d9480f; --accent-ink:#fff; --good:#2b8a3e; --bad:#c92a2a; --blue:#1c7ed6;
+  --sky1:#9fd3f5; --sky2:#f7e3c3; --hill:#a7c48b; --ground:#c9b48f; --bldg:#8d99ae; --bldg2:#6c7a91;
+  --trash1:#3b3b3b; --trash2:#e9ecef; --trash3:#74a9cf; --trash4:#a0855b;
+  --lake:#7a6a2e; --lake2:#958440;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1b1815; --card:#25211d; --ink:#f1e9dd; --muted:#a89c8e; --line:#3a332c;
+    --accent:#ff7a3d; --accent-ink:#1b1815; --good:#69db7c; --bad:#ff8787; --blue:#4dabf7;
+    --sky1:#1e3350; --sky2:#4a3a4f; --hill:#3e5236; --ground:#5a4c38; --bldg:#4a5468; --bldg2:#384055;
+    --trash1:#151515; --trash2:#c9c9c9; --trash3:#4f7fa3; --trash4:#7d6745;
+    --lake:#5a4f22; --lake2:#6f6230;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1b1815; --card:#25211d; --ink:#f1e9dd; --muted:#a89c8e; --line:#3a332c;
+  --accent:#ff7a3d; --accent-ink:#1b1815; --good:#69db7c; --bad:#ff8787; --blue:#4dabf7;
+  --sky1:#1e3350; --sky2:#4a3a4f; --hill:#3e5236; --ground:#5a4c38; --bldg:#4a5468; --bldg2:#384055;
+  --trash1:#151515; --trash2:#c9c9c9; --trash3:#4f7fa3; --trash4:#7d6745;
+  --lake:#5a4f22; --lake2:#6f6230;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;line-height:1.6}
+#app{max-width:880px;margin:0 auto;padding:16px}
+header.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-bottom:12px}
+h1{font-size:1.6rem;font-weight:900;margin:0;letter-spacing:.05em}
+h1 small{font-size:.85rem;font-weight:400;color:var(--muted);margin-left:8px;letter-spacing:0}
+.meters{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.9rem}
+.meter b{font-weight:900}
+.bar{display:inline-block;width:90px;height:8px;border-radius:4px;background:var(--line);vertical-align:middle;margin-left:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);transition:width .6s}
+.scene{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--sky1)}
+.scene svg{display:block;width:100%;height:auto}
+.ticker{background:var(--ink);color:var(--bg);font-size:.85rem;padding:6px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ticker span{color:var(--accent);font-weight:700;margin-right:6px}
+#panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:12px;min-height:200px}
+#panel h2{margin:0 0 6px;font-size:1.25rem}
+#panel .kicker{color:var(--accent);font-weight:700;font-size:.85rem;letter-spacing:.08em}
+#panel p{margin:.4em 0}
+.choices{display:grid;gap:10px;margin-top:14px}
+.choice{text-align:left;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:12px 14px;font:inherit;cursor:pointer;transition:border-color .15s,transform .1s}
+.choice:hover{border-color:var(--accent)}
+.choice:active{transform:scale(.99)}
+.choice b{display:block}
+.choice small{color:var(--muted)}
+.btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:11px 22px;font:inherit;font-weight:700;cursor:pointer;margin-top:14px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.alloc{display:grid;gap:10px;margin-top:10px}
+.row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 12px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.row .name{font-weight:700}
+.row .hint{grid-column:1/-1;font-size:.8rem;color:var(--muted)}
+.stepper{display:flex;align-items:center;gap:6px}
+.stepper button{width:36px;height:36px;border-radius:8px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-size:1.2rem;cursor:pointer}
+.stepper button:disabled{opacity:.3;cursor:not-allowed}
+.pips{display:flex;gap:3px;min-width:84px;flex-wrap:wrap;justify-content:flex-end}
+.pips i{width:8px;height:14px;border-radius:2px;background:var(--line)}
+.pips i.on{background:var(--accent)}
+.left{font-size:.95rem;margin-top:6px}
+.left b{color:var(--accent);font-size:1.2rem}
+ul.notes{padding-left:1.2em;margin:.5em 0}
+ul.notes li{margin:.2em 0}
+.up{color:var(--good);font-weight:700}.down{color:var(--bad);font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:10px}
+th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+td:first-child{white-space:nowrap;font-weight:700}
+th{color:var(--muted);font-weight:700;font-size:.8rem}
+.verdict{font-size:1.5rem;font-weight:900;margin:.2em 0}
+.scores{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.score{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg)}
+.score .num{font-size:2rem;font-weight:900;line-height:1.1}
+details{margin-top:14px}
+summary{cursor:pointer;font-weight:700}
+.src a{color:var(--blue);word-break:break-all}
+.src li{margin:.3em 0;font-size:.85rem}
+footer{color:var(--muted);font-size:.78rem;margin-top:14px}
+.mute{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit;font-size:.85rem;cursor:pointer}
+.mute:hover{border-color:var(--accent)}
+@keyframes burst{0%{transform:scale(.1);opacity:0}15%{opacity:1}70%{opacity:.9}100%{transform:scale(1);opacity:0}}
+.fw{transform-box:fill-box;transform-origin:center;animation:burst 1.8s ease-out infinite}
+@keyframes fly{from{transform:translateX(-60px)}to{transform:translateX(860px)}}
+.swallow{animation:fly 14s linear infinite}
+@keyframes puff{0%{transform:translateY(0) scale(.6);opacity:.8}100%{transform:translateY(-40px) scale(1.4);opacity:0}}
+.puff{transform-box:fill-box;transform-origin:center;animation:puff 3s ease-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.bubble{animation:bob 2s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){.fw,.swallow,.puff,.bubble{animation:none}}
+@media (max-width:560px){
+  h1{font-size:1.3rem}
+  .bar{width:60px}
+  #panel{padding:14px}
+  .scores{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <h1>八年一節<small>台中市政模擬・諷刺遊戲</small></h1>
+    <div class="meters" id="meters"></div>
+    <button class="mute" id="mute" hidden>音樂：開</button>
+  </header>
+  <section class="scene">
+    <svg id="scene" viewBox="0 0 800 360" role="img" aria-label="台中市景：垃圾山、焚化爐、廚餘湖、捷運藍線與購物節"></svg>
+    <div class="ticker" id="ticker"></div>
+  </section>
+  <section id="panel" aria-live="polite"></section>
+  <footer>本作為政治諷刺遊戲。數值與因果是遊戲化設計，不代表實際預算；「現實中」的段落依新聞報導整理，結局頁附來源與市府說法。 <a href="../../projects/civic-games.html" style="color:inherit">← WAKE 公民議題遊戲</a></footer>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
