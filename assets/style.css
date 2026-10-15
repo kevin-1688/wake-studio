@@ -281,11 +281,18 @@ html.has-backdrop main{flex:1 0 auto}
 html.has-backdrop[data-theme="light"] body{background:#E9E6E0}
 html.has-backdrop footer{background:#0E1520;color:#93A2B5;border-top-color:transparent;margin-top:-1px}
 html.has-backdrop footer a{color:#93A2B5}
+/* 文字易讀性：字壓在會動的背景上 */
+html.has-backdrop{--haze:#A9B5C5}
+html.has-backdrop[data-theme="light"]{--haze:#465463}
+html.has-backdrop main p,html.has-backdrop main li,html.has-backdrop main dd{font-weight:400}
+html.has-backdrop main{text-shadow:0 1px 2px rgba(7,11,19,.55),0 0 16px rgba(7,11,19,.4)}
+html.has-backdrop[data-theme="light"] main{text-shadow:0 0 2px rgba(248,245,239,.9),0 0 14px rgba(248,245,239,.7)}
+html.has-backdrop .btn,html.has-backdrop .tags span,html.has-backdrop .scene-copy,html.has-backdrop .slide{text-shadow:none}
 
 /* ---------- 作品檔案：文字格半透明，透出整頁背景 ---------- */
 .works .grid{background:none;border:none}
 .works .card{background:rgba(20,29,43,.5);outline:1px solid var(--line)}
-.works .card,.works .feature{-webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2)}
+.works .card,.works .feature{-webkit-backdrop-filter:blur(16px) saturate(1.1);backdrop-filter:blur(16px) saturate(1.1)}
 .works .card:hover{background:rgba(29,42,60,.5)}
 .works .feature{background:
   radial-gradient(ellipse 70% 90% at 90% 10%,rgba(194,101,47,.12),transparent 60%),

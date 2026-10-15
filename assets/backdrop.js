@@ -93,6 +93,12 @@
       for(const [x,y] of pts)ctx.lineTo(x,base+y);
       ctx.lineTo(w,h);ctx.closePath();ctx.fill();
     });
+    // 內容欄後面壓暗（亮色模式則提亮）一點，讓字不會直接落在最亮的天空上
+    const light=document.documentElement.dataset.theme==='light';
+    ctx.save();ctx.translate(w/2,h/2);ctx.scale(Math.max(1,w/h)*.9,1);
+    const sc=ctx.createRadialGradient(0,0,0,0,0,h*.75);
+    sc.addColorStop(0,light?'rgba(248,245,239,.5)':'rgba(7,11,19,.42)');sc.addColorStop(1,light?'rgba(248,245,239,0)':'rgba(7,11,19,0)');
+    ctx.fillStyle=sc;ctx.fillRect(-w,-h,w*2,h*2);ctx.restore();
     if(c.flies>.02&&!reduce){ // 火金姑，天亮就散了
       for(const f of flies){
         f.a+=(Math.random()-.5)*.2;f.x+=Math.cos(f.a)*.35;f.y+=Math.sin(f.a)*.22-.03;
