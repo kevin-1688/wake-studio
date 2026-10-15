@@ -12,10 +12,7 @@
 body.home header{position:fixed;left:0;right:0;transition:background .4s,border-color .4s,backdrop-filter .4s}
 body.home:not(.past-hero) header{background:transparent;border-bottom-color:transparent;backdrop-filter:none}
 
-/* ---------- 整頁背景：夜到天亮（home.js 依捲動畫在 canvas 上） ---------- */
-body.home{background:#070B13}
-html[data-theme="light"] body.home{background:#E9E6E0}
-.backdrop{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;display:block}
+/* ---------- 整頁背景上的文字（背景本身在 style.css／backdrop.js） ---------- */
 .closing-copy h2,.closing-copy p{text-shadow:0 2px 22px rgba(7,11,19,.55)}
 html[data-theme="light"] .closing-copy h2,html[data-theme="light"] .closing-copy p{text-shadow:0 2px 22px rgba(255,248,236,.7)}
 .chapters-foot,.chapters-head{text-shadow:0 1px 14px rgba(7,11,19,.6)}
@@ -174,8 +171,6 @@ html[data-theme="light"] .pillar:nth-child(-n+4){color:var(--cream)}
 .closing-copy p:not(.kicker){color:var(--haze);margin-top:18px;max-width:30em}
 .closing-copy .kicker{color:var(--cream)}
 .closing-copy .cta-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:34px}
-body.home footer{background:#0E1520;color:#93A2B5;border-top-color:transparent;margin-top:-1px}
-body.home footer a{color:#93A2B5}
 
 /* ---------- RWD ---------- */
 @media(max-width:900px){
