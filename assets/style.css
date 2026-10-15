@@ -282,6 +282,19 @@ html.has-backdrop[data-theme="light"] body{background:#E9E6E0}
 html.has-backdrop footer{background:#0E1520;color:#93A2B5;border-top-color:transparent;margin-top:-1px}
 html.has-backdrop footer a{color:#93A2B5}
 
+/* ---------- 作品檔案：文字格半透明，透出整頁背景 ---------- */
+.works .grid{background:none;border:none}
+.works .card{background:rgba(20,29,43,.5);outline:1px solid var(--line)}
+.works .card:hover{background:rgba(29,42,60,.5)}
+.works .feature{background:
+  radial-gradient(ellipse 70% 90% at 90% 10%,rgba(194,101,47,.12),transparent 60%),
+  rgba(29,42,60,.5)}
+html[data-theme="light"] .works .card{background:rgba(248,245,239,.5)}
+html[data-theme="light"] .works .card:hover{background:rgba(255,255,255,.5)}
+html[data-theme="light"] .works .feature{background:
+  radial-gradient(ellipse 70% 90% at 90% 10%,rgba(180,84,30,.06),transparent 60%),
+  rgba(255,255,255,.5)}
+
 /* ---------- 主題系統：亮色模式 ---------- */
 html[data-theme="light"]{
   --night:#F8F5EF; --dusk:#FFFFFF; --gold:#A8731B; --ember:#B4541E;
