@@ -1,5 +1,7 @@
 const YEARS=[2019,2020,2021,2022,2023,2024,2025,2026];
 const BUDGET=10;
+// 能管的事變多，預算也跟著變多：2019 年 6 點、2020 年 8 點、之後 10 點
+const budget=()=>({2019:6,2020:8}[year()]||BUDGET);
 const FURNACE_NEED=24;
 const FOOD_NEED=6;
 const CATS=[
@@ -11,6 +13,32 @@ const CATS=[
 const STAGES=[
   [0,'紙上談兵'],[5,'綜合規劃送審'],[11,'中央核定'],[17,'機電開工'],[23,'土建動工'],[30,'高架段架設'],[40,'通車']
 ];
+// ---------- 關卡設計 ----------
+// 八年＝八關，兩關一章。機制逐年解鎖（先教兩件事，再加藍線、廚餘），
+// 每關一個目標拿星，2022 選舉與 2025 豬瘟是 Boss 關；幕僚提醒負責埋伏筆。
+const UNLOCK={fest:2019,inc:2019,blue:2020,food:2021};
+const CHAPTERS={1:'第一章・新官上任',2:'第二章・第一次大考',3:'第三章・連任之後',4:'第四章・危機與卸任'};
+const LEVELS={
+  2019:{ch:1,name:'新官上任',goal:'聲量維持 50 以上',check:s=>s.approval>=50,
+    tip:()=>'先學兩件事：購物節馬上換到聲量；焚化爐要很多年才蓋得好，越早開始越好。'},
+  2020:{ch:1,name:'疫情振興',goal:'藍線進度達到 3',check:s=>s.blue>=3,
+    tip:()=>'新解鎖：捷運藍線。工程每年最多推進 4 點，現在不開始，任期內就看不到成果。'},
+  2021:{ch:2,name:'規劃送審',goal:'藍線進入「綜合規劃送審」',check:s=>s.blue>=5,
+    tip:()=>'新解鎖：廚餘・防疫整備。幕僚提醒：鄰近國家的豬瘟一直沒停，萬一傳進台灣，每天幾百噸廚餘要往哪裡送？'},
+  2022:{ch:2,name:'選舉',boss:true,goal:'聲量 50 以上才能連任',check:s=>s.approval>=ELECTION_BAR,
+    tip:()=>'Boss 關：年底開票。聲量低於 50，遊戲直接結束。'},
+  2023:{ch:3,name:'大里壓力',goal:'大里垃圾壓在 20 萬噸以下',check:s=>s.garbage<=20,
+    tip:()=>'大里每年都在長。新爐完工前，垃圾只會越來越多。'},
+  2024:{ch:3,name:'中央核定',goal:'藍線進入「中央核定」',check:s=>s.blue>=11,
+    tip:s=>`廚餘整備目前 ${Math.min(s.food,FOOD_NEED)}/${FOOD_NEED}。明年會發生什麼，你可能已經猜到了。`},
+  2025:{ch:4,name:'非洲豬瘟',boss:true,goal:'危機爆發前，廚餘整備已達 6',check:s=>!!s.crisisReady,
+    tip:()=>'Boss 關：危機在年初就爆發了，只有之前的整備算數。'},
+  2026:{ch:4,name:'卸任',goal:'文山新爐完工',check:s=>s.furnace,
+    tip:()=>'最後一關。結局會把你的台中和現實並排。'},
+};
+const unlocked=k=>year()>=UNLOCK[k];
+const ELECTION_BAR=50;
+
 const HEADLINES={
   2019:'盧秀燕就任台中市長｜首屆台中購物節登場',
   2020:'第二屆台中購物節舉辦',
@@ -43,7 +71,7 @@ const EVENTS={
     :({title:'藍線審查順利',body:'財源寫得清楚，中央審查沒有卡關。',choices:[
     {t:'繼續推進',d:'藍線進度 +2',f:s=>{s.blue+=2}}]}),
   2025:s=>s.food>=FOOD_NEED?({title:'非洲豬瘟爆發',body:'梧棲養豬場驗出全台首例非洲豬瘟，中央禁止廚餘養豬，每天幾百噸廚餘突然沒地方去。還好你早就備好了去化路線。',choices:[
-    {t:'廚餘照計畫直送處理設施',d:'沒有廚餘湖',f:s=>{s.approval+=2}}]})
+    {t:'廚餘照計畫直送處理設施',d:'沒有廚餘湖',f:s=>{s.approval+=2;s.crisisReady=true}}]})
     :({title:'非洲豬瘟爆發',body:'梧棲養豬場驗出全台首例非洲豬瘟，中央禁止廚餘養豬，每天幾百噸廚餘突然沒地方去。你沒有備案。',choices:[
     {t:'先倒進掩埋場的坑裡，蓋土',d:'出現「廚餘湖」｜網友命名：聲量 −8',f:s=>{s.lake=true;s.approval-=8}},
     {t:'全部塞進焚化爐',d:'一般垃圾被擠出來：垃圾 +4 萬噸｜聲量 −3',f:s=>{s.garbage+=4;s.approval-=3}}]}),
@@ -56,7 +84,7 @@ const EVENTS={
 
 let S,phase,yi,alloc,lastFest,result,lostElection;
 function newGame(){
-  S={approval:55,garbage:3,inc:0,blue:0,food:0,furnace:false,furnaceYear:null,lake:false,lowball:false,festTotal:0,history:[]};
+  S={approval:55,garbage:3,inc:0,blue:0,food:0,furnace:false,furnaceYear:null,lake:false,lowball:false,festTotal:0,history:[],stars:{}};
   yi=0;phase='intro';alloc=blankAlloc();lastFest=0;result=null;lostElection=false;
   render();
 }
@@ -99,8 +127,9 @@ function runYear(){
   S.approval=clamp(S.approval,0,100);
   lastFest=a.fest;
   S.history.push({year:year(),...a});
-  result={notes,d:{approval:S.approval-b4.approval,garbage:S.garbage-b4.garbage,blue:S.blue-b4.blue}};
-  if(year()===2022&&S.approval<45)lostElection=true;
+  S.stars[year()]=LEVELS[year()].check(S);
+  result={notes,star:S.stars[year()],d:{approval:S.approval-b4.approval,garbage:S.garbage-b4.garbage,blue:S.blue-b4.blue}};
+  if(year()===2022&&S.approval<ELECTION_BAR)lostElection=true;
   phase='result';render();
 }
 
@@ -117,6 +146,20 @@ function renderMeters(){
   <span class="meter">📣 聲量 <b>${Math.round(S.approval)}</b><span class="bar"><i style="width:${S.approval}%"></i></span></span>
   <span class="meter">🗑️ 大里 <b>${fmt(S.garbage)}</b> 萬噸</span>
   <span class="meter">🚇 <b>${stageName(S.blue)}</b></span>`;
+}
+function renderMap(){
+  const el=document.getElementById('map');
+  if(phase==='intro'){el.innerHTML='';return}
+  const cur=phase==='end'?-1:yi;
+  el.innerHTML=Object.entries(CHAPTERS).map(([ch,name])=>`<div class="chapter"><div class="ch-name">${name}</div><div class="nodes">${
+    YEARS.filter(y=>LEVELS[y].ch==+ch).map(y=>{const i=YEARS.indexOf(y),lv=LEVELS[y],done=y in S.stars;
+      const cls=['node',lv.boss?'boss':'',i===cur?'cur':'',done?(S.stars[y]?'star':'miss'):'',!done&&i!==cur?'future':''].join(' ');
+      return `<div class="${cls}" title="${y}・${lv.name}：${lv.goal}"><b>${done?(S.stars[y]?'★':'☆'):(lv.boss?'BOSS':i+1)}</b><span>${y}</span></div>`}).join('')
+  }</div></div>`).join('');
+}
+function goalBox(){
+  const lv=LEVELS[year()];
+  return `<div class="goal${lv.boss?' boss':''}">${lv.boss?'<span class="tag">BOSS</span>':''}本關目標：<b>${lv.goal}</b></div>`;
 }
 function renderTicker(){
   const el=document.getElementById('ticker');
@@ -203,28 +246,34 @@ function renderPanel(){
   const el=document.getElementById('panel');
   if(phase==='intro'){
     el.innerHTML=`<div class="kicker">2018 年 12 月 25 日</div><h2>你宣誓就任台中市長。</h2>
-    <p>接下來八年，每年有 <b>${BUDGET} 點</b>預算讓你分配。</p>
+    <p>接下來八年，每年都有預算讓你分配。第一年 <b>6 點</b>，能管的事變多後，最多到 <b>${BUDGET} 點</b>。</p>
     <p>有些事，花了錢明天就上新聞；有些事，花了錢要好幾年才看得到；還有些事，要等出事了，大家才發現你沒做。</p>
-    <p>2022 年底要選舉。<b>聲量低於 45</b>，你就沒有下一個四年。</p>
+    <p>每一年是一關，有一個目標，達成就拿一顆星。一開始只能管兩件事，其他的會一年一年解鎖。</p>
+    <p>2022 年底的選舉和 2025 年是 <b>Boss 關</b>。選舉時<b>聲量低於 ${ELECTION_BAR}</b>，你就沒有下一個四年。</p>
     <button class="btn" data-action="start">開始執政</button>`;
     return;
   }
   if(phase==='event'){
     const ev=EVENTS[year()](S);
-    el.innerHTML=`<div class="kicker">${year()} 年・市政事件</div><h2>${ev.title}</h2><p>${ev.body}</p>
+    const lv=LEVELS[year()];
+    el.innerHTML=`<div class="kicker">第 ${yi+1} 關・${year()}・${lv.name}${lv.boss?'・BOSS':''}</div>${goalBox()}<h2>${ev.title}</h2><p>${ev.body}</p>
     <div class="choices">${ev.choices.map((c,i)=>`<button class="choice" data-i="${i}"><b>${c.t}</b><small>${c.d}</small></button>`).join('')}</div>`;
     el.querySelectorAll('.choice').forEach(b=>b.onclick=()=>chooseEvent(ev.choices[+b.dataset.i]));
     return;
   }
   if(phase==='budget'){
-    const left=BUDGET-used();
-    el.innerHTML=`<div class="kicker">${year()} 年・年度預算</div><h2>這一年的錢要花在哪？</h2>
-    <div class="left">剩餘 <b>${left}</b> / ${BUDGET} 點</div>
-    <div class="alloc">${CATS.map(c=>`<div class="row"><div class="name">${c.name}</div>
-      <div class="stepper"><button data-k="${c.k}" data-d="-1" ${alloc[c.k]<=0?'disabled':''} aria-label="減少">−</button>
+    const left=budget()-used();
+    el.innerHTML=`<div class="kicker">第 ${yi+1} 關・${year()} 年度預算</div>${goalBox()}
+    <p class="tip">幕僚：${LEVELS[year()].tip(S)}</p>
+    <h2>這一年的錢要花在哪？</h2>
+    <div class="left">剩餘 <b>${left}</b> / ${budget()} 點</div>
+    <div class="alloc">${CATS.map(c=>{const open=unlocked(c.k),isNew=UNLOCK[c.k]===year()&&year()>YEARS[0];
+      return `<div class="row${open?'':' locked'}${isNew?' new':''}"><div class="name">${c.name}${isNew?' <span class="tag">新解鎖</span>':''}</div>
+      ${open?`<div class="stepper"><button data-k="${c.k}" data-d="-1" ${alloc[c.k]<=0?'disabled':''} aria-label="減少">−</button>
       <div class="pips">${Array.from({length:c.max},(_,i)=>`<i class="${i<alloc[c.k]?'on':''}"></i>`).join('')}</div>
-      <button data-k="${c.k}" data-d="1" ${alloc[c.k]>=c.max||left<=0?'disabled':''} aria-label="增加">＋</button></div>
-      <div class="hint">${c.hint}</div></div>`).join('')}</div>
+      <button data-k="${c.k}" data-d="1" ${alloc[c.k]>=c.max||left<=0?'disabled':''} aria-label="增加">＋</button></div>`
+      :`<div class="lock">${UNLOCK[c.k]} 年解鎖</div>`}
+      <div class="hint">${c.hint}</div></div>`}).join('')}</div>
     <button class="btn" id="go" ${left>0?'disabled':''}>${left>0?`還有 ${left} 點沒分配`:'執行年度預算'}</button>`;
     el.querySelectorAll('.stepper button').forEach(b=>b.onclick=()=>{alloc[b.dataset.k]+=+b.dataset.d;render()});
     el.querySelector('#go').onclick=runYear;
@@ -236,7 +285,10 @@ function renderPanel(){
     if(year()===2022)extra=lostElection
       ?`<p class="down">🗳️ 開票結果：聲量只有 ${Math.round(S.approval)}，你落選了。</p>`
       :`<p class="up">🗳️ 開票結果：聲量 ${Math.round(S.approval)}，你連任了。</p>`;
-    el.innerHTML=`<div class="kicker">${year()} 年・年終結算</div><h2>這一年過去了</h2>
+    const lv=LEVELS[year()];
+    el.innerHTML=`<div class="kicker">第 ${yi+1} 關・${year()} 年終結算</div>
+    <div class="goal ${result.star?'ok':'fail'}">${result.star?'★ 目標達成':'☆ 目標未達成'}：${lv.goal}</div>
+    <h2>這一年過去了</h2>
     <p>聲量 ${sg(d.approval)}　大里垃圾 ${sg(d.garbage,true)} 萬噸　藍線進度 ${sg(d.blue)}</p>
     <ul class="notes">${result.notes.map(n=>`<li>${n}</li>`).join('')}</ul>${extra}
     <button class="btn" data-action="next">${lostElection||yi===YEARS.length-1?'看結局':`進入 ${year()+1} 年`}</button>`;
@@ -265,9 +317,11 @@ function verdictOf(){
 function renderEnd(el){
   const ach=score(),ap=Math.round(S.approval);
   const [v,desc]=verdictOf();
-  const festPts=S.history.reduce((a,h)=>a+h.fest,0),total=S.history.length*BUDGET;
+  const festPts=S.history.reduce((a,h)=>a+h.fest,0),total=S.history.reduce((a,h)=>a+h.fest+h.inc+h.blue+h.food,0);
   el.innerHTML=`<div class="kicker">${lostElection?'2022 年底・任期結束':'2026 年 12 月・八年任期結束'}</div>
   <div class="verdict">${v}</div><p>${desc}</p>
+  <div class="stars-sum">關卡星數 <b>${Object.values(S.stars).filter(Boolean).length}</b> / ${YEARS.length}
+    <ol>${YEARS.map(y=>`<li class="${y in S.stars?(S.stars[y]?'star':'miss'):'skip'}">${y in S.stars?(S.stars[y]?'★':'☆'):'－'} ${y} ${LEVELS[y].name}<small>${LEVELS[y].goal}</small></li>`).join('')}</ol></div>
   <div class="scores"><div class="score"><div>📣 聲量</div><div class="num">${ap}</div></div>
   <div class="score"><div>🧱 實績</div><div class="num">${ach}</div><small>垃圾、焚化爐、藍線、廚餘加權</small></div></div>
   <h2 style="margin-top:18px">你 vs. 現實中的台中</h2>
@@ -351,7 +405,7 @@ function toggleMute(){
   document.getElementById('mute').textContent=audio.muted?'音樂：關':'音樂：開';
 }
 
-function render(){renderMeters();renderTicker();renderScene();renderPanel();syncMusic()}
+function render(){renderMap();renderMeters();renderTicker();renderScene();renderPanel();syncMusic()}
 
 // 不用 onclick 屬性，網站的 CSP 禁止內嵌腳本
 document.getElementById('panel').addEventListener('click',e=>{

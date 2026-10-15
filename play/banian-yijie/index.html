@@ -102,7 +102,39 @@ footer{color:var(--muted);font-size:.78rem;margin-top:14px}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 .bubble{animation:bob 2s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){.fw,.swallow,.puff,.bubble{animation:none}}
+/* 關卡地圖與關卡目標 */
+.map{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.map:empty{display:none}
+.chapter{border:1px solid var(--line);border-radius:10px;padding:6px 8px;background:var(--card);min-width:0}
+.ch-name{font-size:.72rem;color:var(--muted);font-weight:700;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nodes{display:flex;gap:6px}
+.node{flex:1;display:flex;flex-direction:column;align-items:center;border-radius:8px;padding:4px 0;border:1.5px solid var(--line);background:var(--bg);line-height:1.25}
+.node b{font-size:.95rem}
+.node span{font-size:.7rem;color:var(--muted)}
+.node.future{opacity:.55}
+.node.cur{border-color:var(--accent);box-shadow:0 0 0 2px rgba(217,72,15,.2)}
+.node.boss{border-style:dashed}
+.node.boss b{color:var(--bad);font-size:.72rem;letter-spacing:.05em}
+.node.star b{color:#e8a700;font-size:1.1rem;letter-spacing:0}
+.node.miss b{color:var(--muted);font-size:1.1rem;letter-spacing:0}
+.goal{border-left:4px solid var(--accent);background:var(--bg);padding:8px 12px;border-radius:6px;margin:8px 0;font-size:.95rem}
+.goal.boss{border-left-color:var(--bad)}
+.goal.ok{border-left-color:var(--good);font-weight:700}
+.goal.fail{border-left-color:var(--muted);color:var(--muted)}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;padding:1px 6px;border-radius:4px;background:var(--bad);color:#fff;margin-right:6px;vertical-align:middle}
+.row.new{border-color:var(--accent)}
+.row.new .tag{background:var(--accent);color:var(--accent-ink);margin:0 0 0 6px}
+.row.locked{opacity:.5}
+.lock{font-size:.85rem;color:var(--muted)}
+.tip{font-size:.9rem;color:var(--muted);margin:4px 0 8px}
+.stars-sum{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);margin:12px 0}
+.stars-sum>b{color:#e8a700;font-size:1.3rem}
+.stars-sum ol{list-style:none;padding:0;margin:6px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-size:.88rem}
+.stars-sum li small{display:block;color:var(--muted);font-size:.75rem}
+.stars-sum li.miss,.stars-sum li.skip{color:var(--muted)}
 @media (max-width:560px){
+  .map{grid-template-columns:repeat(2,1fr)}
+  .stars-sum ol{grid-template-columns:1fr}
   h1{font-size:1.3rem}
   .bar{width:60px}
   #panel{padding:14px}
@@ -117,6 +149,7 @@ footer{color:var(--muted);font-size:.78rem;margin-top:14px}
     <div class="meters" id="meters"></div>
     <button class="mute" id="mute" hidden>音樂：開</button>
   </header>
+  <nav class="map" id="map" aria-label="關卡地圖"></nav>
   <section class="scene">
     <svg id="scene" viewBox="0 0 800 360" role="img" aria-label="台中市景：垃圾山、焚化爐、廚餘湖、捷運藍線與購物節"></svg>
     <div class="ticker" id="ticker"></div>
