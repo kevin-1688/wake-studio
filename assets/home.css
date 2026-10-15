@@ -12,6 +12,15 @@
 body.home header{position:fixed;left:0;right:0;transition:background .4s,border-color .4s,backdrop-filter .4s}
 body.home:not(.past-hero) header{background:transparent;border-bottom-color:transparent;backdrop-filter:none}
 
+/* ---------- 整頁背景：夜到天亮（home.js 依捲動畫在 canvas 上） ---------- */
+body.home{background:#070B13}
+html[data-theme="light"] body.home{background:#E9E6E0}
+.backdrop{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;display:block}
+.closing-copy h2,.closing-copy p{text-shadow:0 2px 22px rgba(7,11,19,.55)}
+html[data-theme="light"] .closing-copy h2,html[data-theme="light"] .closing-copy p{text-shadow:0 2px 22px rgba(255,248,236,.7)}
+.chapters-foot,.chapters-head{text-shadow:0 1px 14px rgba(7,11,19,.6)}
+html[data-theme="light"] .chapters-foot,html[data-theme="light"] .chapters-head{text-shadow:none}
+
 /* ---------- 開場 ---------- */
 .loader{
   position:fixed;inset:0;z-index:200;background:#070B13;color:var(--cream);
@@ -111,8 +120,9 @@ html[lang="en"] .scene-copy h1{font-size:clamp(1.6rem,2.7vw,2.3rem);letter-spaci
 @keyframes hint{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* ---------- 四個方向 ---------- */
-.pillars{padding:24px 0 90px;background:linear-gradient(180deg,#070B13,var(--night) 70%)}
-html[data-theme="light"] .pillars{background:linear-gradient(180deg,#070B13 0,var(--night) 60%)}
+.pillars{padding:24px 0 90px;background:linear-gradient(180deg,#070B13,rgba(7,11,19,0) 100%)}
+html[data-theme="light"] .pillars{background:none}
+html[data-theme="light"] .scene::after{background:linear-gradient(180deg,transparent,var(--night) 92%)}
 .pillar-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
 .pillar{display:flex;gap:18px;padding:30px 22px 0 0}
 .pillar b{font-family:var(--sans);font-weight:300;font-size:2.8rem;line-height:1;color:var(--cream);letter-spacing:-.02em}
@@ -157,17 +167,13 @@ html[data-theme="light"] .pillar:nth-child(-n+4){color:var(--cream)}
 .segs i{background:var(--gold);transform-origin:left;transform:scaleX(var(--fill,0))}
 
 /* ---------- 結尾 ---------- */
-.closing{position:relative;overflow:hidden;padding:120px 0 0;background:linear-gradient(180deg,var(--night),#0B111B 80%)}
-html[data-theme="light"] .closing{background:linear-gradient(180deg,var(--night),#E9E1D2)}
-.closing .motes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.closing{position:relative;padding:140px 0 34vh}
 .closing-grid{position:relative;z-index:1;display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,80px);align-items:center}
 .closing .mascot{justify-self:start;transform:rotate(-1.8deg)}
 .closing-copy h2{font-family:var(--serif);font-weight:900;font-size:clamp(2.6rem,7vw,5rem);letter-spacing:.14em;line-height:1.1;margin-top:22px}
 .closing-copy p:not(.kicker){color:var(--haze);margin-top:18px;max-width:30em}
 .closing-copy .kicker{color:var(--cream)}
 .closing-copy .cta-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:34px}
-.closing-ridge{display:block;width:100%;height:clamp(140px,22vw,300px);object-fit:cover;object-position:50% 100%;margin-top:60px;position:relative;z-index:0}
-html[data-theme="light"] .closing-ridge{opacity:.9}
 body.home footer{background:#0E1520;color:#93A2B5;border-top-color:transparent;margin-top:-1px}
 body.home footer a{color:#93A2B5}
 

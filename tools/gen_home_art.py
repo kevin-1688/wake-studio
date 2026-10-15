@@ -383,22 +383,10 @@ def slide_civic():
     save("slide-civic.svg", f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" preserveAspectRatio="xMidYMid slice"><defs>{defs}</defs>{"".join(s)}</svg>')
 
 
-def closing():
-    """結尾：只剩稜線和芒草的剪影。"""
-    rng = random.Random(9)
-    back = ridge(rng, 300, 40, .55, peaks=[(560, 160, 200), (1200, 90, 260)], x0=-60, x1=W + 60)
-    front = ridge(rng, 380, 26, .5, peaks=[(300, 50, 300)])
-    body = (f'<path d="{poly_path(back, 520)}" fill="#1A2638"/>'
-            f'<path d="{poly_path(front, 520)}" fill="#0E1520"/>')
-    for i in range(30):
-        x = rng.uniform(0, W)
-        body += grass_clump(rng, x, y_at(front, x) + 30, 50, rng.uniform(60, 110), "#0E1520", "#CFC2A8", 10, .5, 1)
-    save("closing.svg", f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} 520" width="{W}" height="520" preserveAspectRatio="xMidYMax slice">{body}</svg>')
-
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     sky(); moon(); far(); village(); near()
     foreground("fg-left.svg", "left", 101)
     foreground("fg-right.svg", "right", 202)
-    slide_bobang(); slide_civic(); closing()
+    slide_bobang(); slide_civic()
