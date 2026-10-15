@@ -10,18 +10,6 @@
 
   gtag('config', 'G-9L39JVR3DE');
 </script>
-<!-- Google tag (gtag.js) -->
-<link rel="alternate" hreflang="zh-TW" href="https://wake.com.tw/" />
-<link rel="alternate" hreflang="en" href="https://wake.com.tw/en/" />
-<link rel="alternate" hreflang="x-default" href="https://wake.com.tw/" />
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9L39JVR3DE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-9L39JVR3DE');
-</script>
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("wake-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,8 +27,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/home.css">
 </head>
-<body>
+<body class="home">
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-mark">WAKE<em>.</em></div>
+  <p class="loader-cjk">醒</p>
+  <div class="loader-bar"><i></i></div>
+  <p class="loader-row"><span>天亮之前</span><span class="pct">0%</span></p>
+</div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
 
 <header>
   <nav class="nav" aria-label="主導覽">
@@ -58,49 +55,90 @@
 
 <main>
 
-<!-- Hero -->
-<section class="hero wrap">
-  <div>
-    <p class="file-no">WAKE STUDIO · TAIWAN · EST. 2026</p>
-    <h1>WAKE<span class="dot">.</span></h1>
-    <p class="tagline">把台灣的記憶，做成可被身體體驗的系統。</p>
-    <p class="sub">WAKE Studio 是一間結合遊戲開發、互動體驗與3D視覺的創意科技工作室，致力於將文化、記憶與未來科技轉化為可體驗的作品。</p>
-    <div class="cta-row">
-      <a class="btn" href="works.html">瀏覽作品檔案</a>
-      <a class="btn ghost" href="about.html">認識 WAKE</a>
-    </div>
+<!-- 主視覺：分層景深場景 -->
+<section class="scene" aria-label="主視覺">
+  <div class="layers" aria-hidden="true">
+    <img class="layer" data-depth="0" src="assets/home/sky.svg" alt="">
+    <img class="layer moon" data-depth=".06" src="assets/home/moon.svg" alt="">
+    <img class="layer" data-depth=".14" src="assets/home/far.svg" alt="">
+    <img class="layer" data-depth=".28" src="assets/home/village.svg" alt="">
+    <div class="layer word" data-depth=".4"><span>W</span><span>A</span><span>K</span><span>E</span></div>
+    <img class="layer" data-depth=".6" src="assets/home/near.svg" alt="">
+    <canvas class="layer motes" data-depth=".75"></canvas>
+    <div class="layer fg fg-l" data-depth="1"><img src="assets/home/fg-left.svg" alt=""></div>
+    <div class="layer fg fg-r" data-depth="1"><img src="assets/home/fg-right.svg" alt=""></div>
   </div>
-  <figure class="mascot">
-    <div class="frame"><img src="assets/mascot.jpg" alt="WAKE 工作室吉祥物——暮色中的長毛小狗插畫" width="1200" height="779"></div>
-    <figcaption><b>工作室吉祥物</b><span>MASCOT · 暈船小狗</span></figcaption>
-  </figure>
+  <div class="scene-copy">
+    <p class="kicker"><i></i>檔號 00 — 天亮之前</p>
+    <h1>把台灣的記憶，<br>做成可被身體<br class="sm">體驗的系統。</h1>
+    <p class="lede">WAKE 是張凱翔的獨立工作室。敘事遊戲、互動體驗與 3D 視覺——整條管線，同一雙手。</p>
+  </div>
+  <p class="scene-vert" aria-hidden="true">醒過來</p>
+  <div class="scene-hint" aria-hidden="true"><span>往下捲動</span><i></i></div>
 </section>
 
-<!-- 主案 -->
-<section id="bobang">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="bar"></span><h2>主案</h2><span class="en">FLAGSHIP — 001</span>
+<!-- 四個方向 -->
+<section class="pillars">
+  <div class="wrap pillar-grid">
+    <div class="pillar reveal"><b>01</b><div><h2>敘事遊戲</h2><p>用機制承載記憶，讓玩家活在那個時代的邏輯裡。</p></div></div>
+    <div class="pillar reveal"><b>02</b><div><h2>公民議題</h2><p>媒體識讀、財商、國防——把做決定的位置交給玩家。</p></div></div>
+    <div class="pillar reveal"><b>03</b><div><h2>3D 視覺</h2><p>產品動畫、爆炸圖，以及依史料考據重建的場景。</p></div></div>
+    <div class="pillar reveal"><b>04</b><div><h2>產品與系統</h2><p>網頁產品、SaaS 與量化系統，從 0 到 1。</p></div></div>
+  </div>
+</section>
+
+<!-- 作品：捲動切換的畫框 -->
+<section class="chapters" id="work" aria-label="作品">
+  <div class="pin">
+    <div class="wrap chapters-head">
+      <p class="kicker"><i></i>檔號 01 — 作品</p>
+      <p class="chapters-note">往下捲動，翻過三扇門。</p>
     </div>
-    <article class="feature reveal">
-      <p class="meta">檔號 WAKE-001 ／ 2026—2027</p>
-      <h3>BÔ BÂNG</h3>
-      <p class="kind">第三人稱敘事冒險遊戲・台灣白色恐怖</p>
-      <p>以 1950 年代台灣為背景的敘事冒險。不是讓玩家「看」那段歷史，而是讓玩家活在那個時代的邏輯裡——在監視、不可逆的選擇與資訊不對等之中，做出自己必須承擔的決定。</p>
-      <p class="quiet">基於史料考據自建場景與角色：時代建築研究、磚材與構造重現、角色管線全程獨立完成。更多內容將於 2026 年下半年公開。</p>
-      <div class="tags">
-        <span>Unreal Engine 5</span><span>Blender</span><span>MetaHuman</span><span>互動體感技術</span><span>台語文化考據</span>
+    <div class="frame-card">
+      <figure class="slide is-on">
+        <img src="assets/home/slide-bobang.svg" alt="1950 年代雨夜的街屋與路燈插畫" loading="lazy">
+        <figcaption><span class="tag">BÔ BÂNG</span><span class="cjk">主案</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="assets/home/slide-luku.jpg" alt="《鹿窟》遊戲畫面：一九五三年一月的山路" loading="lazy">
+        <figcaption><span class="tag">LUKU 1952</span><span class="cjk">鹿窟</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="assets/home/slide-civic.svg" alt="老公寓夜景，三扇亮著不同顏色的窗" loading="lazy">
+        <figcaption><span class="tag">CIVIC TRILOGY</span><span class="cjk">公民</span></figcaption>
+      </figure>
+    </div>
+    <div class="wrap chapters-foot">
+      <div class="caps">
+        <div class="cap is-on">
+          <h3>BÔ BÂNG</h3>
+          <p>以 1950 年代台灣為背景的第三人稱敘事冒險。在監視、不可逆的選擇與資訊不對等之中，做出自己必須承擔的決定。2027 發布。</p>
+          <a class="link" href="https://bubangofficial.vercel.app" target="_blank" rel="noopener">前往官方網站 →</a>
+        </div>
+        <div class="cap">
+          <h3>鹿窟</h3>
+          <p>以 1952 年鹿窟事件為背景的 2D 點擊解謎。孫女與那年冬天的村民輪流說話，四章，可在瀏覽器直接玩。</p>
+          <a class="link" href="https://luku-sigma.vercel.app" target="_blank" rel="noopener">立即遊玩 →</a>
+        </div>
+        <div class="cap">
+          <h3>公民議題三部曲</h3>
+          <p>假訊息、財商、國防預算。三個公共議題、同一套方法：讓玩家坐上做決定的位置。</p>
+          <a class="link" href="#trilogy">往下看三款遊戲 →</a>
+        </div>
       </div>
-      <a class="btn" href="https://bubangofficial.vercel.app" target="_blank" rel="noopener">前往官方網站 →</a>
-    </article>
+      <div class="counter">
+        <p><b class="now">01</b> / 03</p>
+        <div class="segs"><button type="button" aria-label="第一件作品"><i></i></button><button type="button" aria-label="第二件作品"><i></i></button><button type="button" aria-label="第三件作品"><i></i></button></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- 精選 -->
-<section>
+<!-- 公民議題三部曲 -->
+<section id="trilogy">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="bar"></span><h2>精選</h2><span class="en">CIVIC GAME TRILOGY</span>
+      <span class="bar"></span><h2>三部曲</h2><span class="en">CIVIC GAME TRILOGY</span>
     </div>
     <div class="mini-grid reveal">
 
@@ -132,11 +170,31 @@
       </article>
 
     </div>
-    <p class="sub" style="margin-top:28px;color:var(--haze);max-width:42em">三個公民議題、同一套方法：用遊戲機制承載公共討論，讓玩家從「做決定的人」的位置理解問題——這也是 WAKE 做遊戲的核心信念。</p>
     <div class="more-row reveal">
       <a class="btn ghost" href="works.html">查看全部十三筆檔案 →</a>
     </div>
   </div>
+</section>
+
+<!-- 結尾 -->
+<section class="closing">
+  <canvas class="motes" aria-hidden="true"></canvas>
+  <div class="wrap closing-grid">
+    <figure class="mascot reveal">
+      <div class="frame"><img src="assets/mascot.jpg" alt="WAKE 工作室吉祥物——暮色中的長毛小狗插畫" width="1200" height="779" loading="lazy"></div>
+      <figcaption><b>工作室吉祥物</b><span>MASCOT · 暈船小狗</span></figcaption>
+    </figure>
+    <div class="closing-copy reveal">
+      <p class="kicker"><i></i>檔號 02 — 天亮以後</p>
+      <h2>天會亮的。</h2>
+      <p>有想一起做的東西？遊戲、互動網頁、3D 視覺，都可以聊。</p>
+      <div class="cta-row">
+        <a class="btn" href="contact.html">聯絡 WAKE</a>
+        <a class="btn ghost" href="about.html">認識 WAKE</a>
+      </div>
+    </div>
+  </div>
+  <img class="closing-ridge" src="assets/home/closing.svg" alt="" aria-hidden="true" loading="lazy">
 </section>
 
 </main>
@@ -144,5 +202,6 @@
 <footer>WAKE STUDIO © 2026 · MADE IN TAIWAN · <a href="mailto:kevin@wake.com.tw">KEVIN@WAKE.COM.TW</a></footer>
 
 <script src="assets/reveal.js"></script>
+<script src="assets/home.js"></script>
 </body>
 </html>

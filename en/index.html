@@ -30,8 +30,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/home.css">
 </head>
-<body>
+<body class="home">
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-mark">WAKE<em>.</em></div>
+  <p class="loader-cjk">醒</p>
+  <div class="loader-bar"><i></i></div>
+  <p class="loader-row"><span>BEFORE DAWN</span><span class="pct">0%</span></p>
+</div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
 
 <header>
   <nav class="nav" aria-label="Main navigation">
@@ -49,46 +58,90 @@
 
 <main>
 
-<section class="hero wrap">
-  <div>
-    <p class="file-no">WAKE STUDIO · TAIWAN · EST. 2026</p>
-    <h1>WAKE<span class="dot">.</span></h1>
-    <p class="tagline">Turning Taiwan's memory into systems the body can experience.</p>
-    <p class="sub">An independent game and visual design studio led by Kevin Chang. From narrative games and interactive technology to commercial 3D — one person, the entire pipeline.</p>
-    <div class="cta-row">
-      <a class="btn" href="works.html">Browse the Archive</a>
-      <a class="btn ghost" href="about.html">About WAKE</a>
-    </div>
+<!-- 主視覺：分層景深場景 -->
+<section class="scene" aria-label="Hero">
+  <div class="layers" aria-hidden="true">
+    <img class="layer" data-depth="0" src="../assets/home/sky.svg" alt="">
+    <img class="layer moon" data-depth=".06" src="../assets/home/moon.svg" alt="">
+    <img class="layer" data-depth=".14" src="../assets/home/far.svg" alt="">
+    <img class="layer" data-depth=".28" src="../assets/home/village.svg" alt="">
+    <div class="layer word" data-depth=".4"><span>W</span><span>A</span><span>K</span><span>E</span></div>
+    <img class="layer" data-depth=".6" src="../assets/home/near.svg" alt="">
+    <canvas class="layer motes" data-depth=".75"></canvas>
+    <div class="layer fg fg-l" data-depth="1"><img src="../assets/home/fg-left.svg" alt=""></div>
+    <div class="layer fg fg-r" data-depth="1"><img src="../assets/home/fg-right.svg" alt=""></div>
   </div>
-  <figure class="mascot">
-    <div class="frame"><img src="../assets/mascot.jpg" alt="WAKE studio mascot — a scruffy puppy in dusk light, digital illustration" width="1200" height="779"></div>
-    <figcaption><b>STUDIO MASCOT</b><span>THE SEASICK PUP</span></figcaption>
-  </figure>
+  <div class="scene-copy">
+    <p class="kicker"><i></i>FILE 00 — BEFORE DAWN</p>
+    <h1>Turning Taiwan's memory<br>into systems the body<br class="sm"> can experience.</h1>
+    <p class="lede">WAKE is Kevin Chang's independent studio. Narrative games, interactive experiences and 3D visuals — the whole pipeline, one pair of hands.</p>
+  </div>
+  <p class="scene-vert" aria-hidden="true">醒過來</p>
+  <div class="scene-hint" aria-hidden="true"><span>SCROLL</span><i></i></div>
 </section>
 
-<section id="bobang">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="bar"></span><h2>Flagship</h2><span class="en">FLAGSHIP — 001</span>
+<!-- 四個方向 -->
+<section class="pillars">
+  <div class="wrap pillar-grid">
+    <div class="pillar reveal"><b>01</b><div><h2>NARRATIVE GAMES</h2><p>Mechanics that carry memory, so players live inside an era's logic.</p></div></div>
+    <div class="pillar reveal"><b>02</b><div><h2>CIVIC ISSUES</h2><p>Media, money, defense — putting players in the decision-maker's seat.</p></div></div>
+    <div class="pillar reveal"><b>03</b><div><h2>3D VISUALS</h2><p>Product animation, exploded views and research-based reconstructions.</p></div></div>
+    <div class="pillar reveal"><b>04</b><div><h2>PRODUCTS &amp; SYSTEMS</h2><p>Web products, SaaS and quant systems, from zero to one.</p></div></div>
+  </div>
+</section>
+
+<!-- 作品：捲動切換的畫框 -->
+<section class="chapters" id="work" aria-label="Works">
+  <div class="pin">
+    <div class="wrap chapters-head">
+      <p class="kicker"><i></i>FILE 01 — WORKS</p>
+      <p class="chapters-note">KEEP SCROLLING — THREE DOORS</p>
     </div>
-    <article class="feature reveal">
-      <p class="meta">FILE WAKE-001 / 2026—2027</p>
-      <h3>BÔ BÂNG</h3>
-      <p class="kind">Third-person narrative adventure · Taiwan's White Terror</p>
-      <p>A narrative adventure set in 1950s Taiwan. Rather than letting players watch that history, BÔ BÂNG makes them live inside its logic — making choices they must own, under surveillance, irreversibility, and asymmetric information.</p>
-      <p class="quiet">Environments and characters built from primary historical research: period architecture, brick-accurate reconstruction, and a fully independent character pipeline. More to be revealed in late 2026.</p>
-      <div class="tags">
-        <span>Unreal Engine 5</span><span>Blender</span><span>MetaHuman</span><span>Embodied interaction</span><span>Taiwanese cultural research</span>
+    <div class="frame-card">
+      <figure class="slide is-on">
+        <img src="../assets/home/slide-bobang.svg" alt="Illustration of 1950s shophouses and a street lamp on a rainy night" loading="lazy">
+        <figcaption><span class="tag">BÔ BÂNG</span><span class="cjk">主案</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="../assets/home/slide-luku.jpg" alt="Screenshot from Luku: a mountain road in January 1953" loading="lazy">
+        <figcaption><span class="tag">LUKU 1952</span><span class="cjk">鹿窟</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="../assets/home/slide-civic.svg" alt="An old apartment block at night with three windows lit in different colors" loading="lazy">
+        <figcaption><span class="tag">CIVIC TRILOGY</span><span class="cjk">公民</span></figcaption>
+      </figure>
+    </div>
+    <div class="wrap chapters-foot">
+      <div class="caps">
+        <div class="cap is-on">
+          <h3>BÔ BÂNG</h3>
+          <p>A third-person narrative adventure set in 1950s Taiwan — making choices you must own, under surveillance, irreversibility and asymmetric information. Coming 2027.</p>
+          <a class="link" href="https://bubangofficial.vercel.app" target="_blank" rel="noopener">Official website →</a>
+        </div>
+        <div class="cap">
+          <h3>Luku</h3>
+          <p>A 2D point-and-click puzzle game set during the 1952 Luku Incident. A granddaughter and the villagers of that winter take turns across four chapters — playable in the browser.</p>
+          <a class="link" href="https://luku-sigma.vercel.app" target="_blank" rel="noopener">Play now →</a>
+        </div>
+        <div class="cap">
+          <h3>Civic Game Trilogy</h3>
+          <p>Disinformation, personal finance, the defense budget. Three public issues, one method: put the player in the decision-maker's seat.</p>
+          <a class="link" href="#trilogy">See the three games →</a>
+        </div>
       </div>
-      <a class="btn" href="https://bubangofficial.vercel.app" target="_blank" rel="noopener">Official Website →</a>
-    </article>
+      <div class="counter">
+        <p><b class="now">01</b> / 03</p>
+        <div class="segs"><button type="button" aria-label="First work"><i></i></button><button type="button" aria-label="Second work"><i></i></button><button type="button" aria-label="Third work"><i></i></button></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section>
+<!-- 公民議題三部曲 -->
+<section id="trilogy">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="bar"></span><h2>Featured</h2><span class="en">CIVIC GAME TRILOGY</span>
+      <span class="bar"></span><h2>Trilogy</h2><span class="en">CIVIC GAME TRILOGY</span>
     </div>
     <div class="mini-grid reveal">
 
@@ -120,11 +173,31 @@
       </article>
 
     </div>
-    <p class="sub" style="margin-top:28px;color:var(--haze);max-width:42em">Three public issues, one method: carrying civic discussion through game mechanics, so players understand problems from the decision-maker's seat — the core belief behind everything WAKE makes.</p>
     <div class="more-row reveal">
       <a class="btn ghost" href="works.html">See all thirteen files →</a>
     </div>
   </div>
+</section>
+
+<!-- 結尾 -->
+<section class="closing">
+  <canvas class="motes" aria-hidden="true"></canvas>
+  <div class="wrap closing-grid">
+    <figure class="mascot reveal">
+      <div class="frame"><img src="../assets/mascot.jpg" alt="WAKE studio mascot — a scruffy puppy in dusk light, digital illustration" width="1200" height="779" loading="lazy"></div>
+      <figcaption><b>STUDIO MASCOT</b><span>THE SEASICK PUP</span></figcaption>
+    </figure>
+    <div class="closing-copy reveal">
+      <p class="kicker"><i></i>FILE 02 — AFTER DAWN</p>
+      <h2>Dawn will come.</h2>
+      <p>Something you want to make together? Games, interactive web, 3D visuals — let's talk.</p>
+      <div class="cta-row">
+        <a class="btn" href="contact.html">Contact WAKE</a>
+        <a class="btn ghost" href="about.html">About WAKE</a>
+      </div>
+    </div>
+  </div>
+  <img class="closing-ridge" src="../assets/home/closing.svg" alt="" aria-hidden="true" loading="lazy">
 </section>
 
 </main>
@@ -132,5 +205,6 @@
 <footer>WAKE STUDIO © 2026 · MADE IN TAIWAN · <a href="mailto:kevin@wake.com.tw">KEVIN@WAKE.COM.TW</a></footer>
 
 <script src="../assets/reveal.js"></script>
+<script src="../assets/home.js"></script>
 </body>
 </html>
