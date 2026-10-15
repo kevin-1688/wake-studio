@@ -192,6 +192,24 @@ header{
   overflow:hidden;
 }
 .about .portrait img{display:block;width:100%;height:auto}
+/* 立體肖像：外框隨游標傾斜，人物與背景兩層反向位移 */
+.about .portrait .tilt{
+  position:relative;background:#F3E9D7;
+  --rx:0deg;--ry:0deg;--px:0;--py:0;--gx:50%;--gy:30%;
+  transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  will-change:transform;
+}
+.about .portrait .layer{will-change:transform}
+.about .portrait .bg{transform:translate(calc(var(--px) * -9px),calc(var(--py) * -9px)) scale(1.08)}
+.about .portrait .fg{
+  position:absolute;inset:0;
+  transform:translate(calc(var(--px) * 6px),calc(var(--py) * 6px)) scale(1.04);
+  filter:drop-shadow(calc(var(--px) * -4px) 6px 8px rgba(20,29,43,.28));
+}
+.about .portrait .glare{
+  position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;
+  background:radial-gradient(circle at var(--gx) var(--gy),rgba(255,255,255,.55),transparent 55%);
+}
 .about .portrait figcaption{
   margin-top:16px;display:flex;justify-content:space-between;align-items:baseline;
   font-family:var(--mono);font-size:.64rem;letter-spacing:.24em;color:var(--haze);
