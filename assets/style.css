@@ -269,6 +269,15 @@ footer{
 .cs ul{margin:0 0 18px 0;padding-left:0;list-style:none}
 .cs ul li{padding:5px 0 5px 20px;position:relative}
 .cs ul li::before{content:"·";position:absolute;left:6px;color:var(--gold);font-weight:700}
+.cs .cs-media{margin:32px 0}
+.cs .cs-media figcaption{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--haze);margin-top:10px;text-align:center}
+.cs .cs-media video,.turntable{display:block;width:100%;height:auto;border:1px solid var(--line);background:#05070C}
+.turntable{position:relative;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;overflow:hidden}
+.turntable.dragging{cursor:grabbing}
+.turntable img{display:block;width:100%;height:auto;pointer-events:none}
+.turntable:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.turntable .tt-hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;color:#C9D2DE;background:rgba(7,11,19,.55);padding:5px 12px;transition:opacity .4s;text-shadow:none}
+.turntable.dragging .tt-hint{opacity:0}
 .cs .cta-box{border:1px solid var(--gold);padding:32px;text-align:center;margin-top:64px}
 .cs .cta-box h2{border:none;padding:0;margin:0 0 12px;font-size:1.3rem}
 .cs .cta-box p{color:var(--haze)}
