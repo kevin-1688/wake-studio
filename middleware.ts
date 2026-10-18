@@ -20,10 +20,10 @@ import { ipAddress, next } from '@vercel/functions';
  */
 
 export const config = {
-  // Run on page navigations only. Skip /assets, robots, sitemap and any
+  // Run on page navigations only. Skip /assets, robots, sitemap, llms.txt and any
   // static file extension so we don't burn API lookups on sub-resources.
   matcher: [
-    '/((?!assets/|favicon\\.ico|robots\\.txt|sitemap\\.xml|.*\\.(?:css|js|mjs|map|png|jpe?g|gif|svg|webp|avif|ico|woff2?|ttf|otf|wav)$).*)',
+    '/((?!assets/|favicon\\.ico|robots\\.txt|sitemap\\.xml|llms\\.txt|.*\\.(?:css|js|mjs|map|png|jpe?g|gif|svg|webp|avif|ico|woff2?|ttf|otf|wav)$).*)',
   ],
 };
 

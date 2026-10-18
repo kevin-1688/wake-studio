@@ -20,6 +20,372 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
+<!-- geo:jsonld -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://wake.com.tw/#org",
+   "name": "WAKE Studio",
+   "alternateName": [
+    "WAKE",
+    "WAKE 工作室"
+   ],
+   "url": "https://wake.com.tw/",
+   "logo": "https://wake.com.tw/assets/og-image.jpg",
+   "email": "kevin@wake.com.tw",
+   "foundingDate": "2026",
+   "founder": {
+    "@id": "https://wake.com.tw/#person"
+   },
+   "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "TW"
+   },
+   "areaServed": "TW",
+   "sameAs": [
+    "https://github.com/kevin-1688"
+   ],
+   "description": "A one-person independent game and visual design studio in Taiwan led by Kevin Chang: narrative and civic games, 3D product visualization, and web products."
+  },
+  {
+   "@type": "Person",
+   "@id": "https://wake.com.tw/#person",
+   "name": "Kevin Chang",
+   "alternateName": "張凱翔",
+   "url": "https://wake.com.tw/en/about.html",
+   "image": "https://wake.com.tw/assets/founder-sketch.jpg",
+   "jobTitle": "Founder of WAKE Studio, independent game developer",
+   "worksFor": {
+    "@id": "https://wake.com.tw/#org"
+   },
+   "nationality": "TW",
+   "email": "kevin@wake.com.tw",
+   "sameAs": [
+    "https://github.com/kevin-1688"
+   ],
+   "knowsAbout": [
+    "Game development",
+    "Narrative design",
+    "Godot",
+    "Unreal Engine 5",
+    "Unity",
+    "Blender",
+    "3D product visualization",
+    "Web development",
+    "Taiwanese history"
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://wake.com.tw/#website",
+   "url": "https://wake.com.tw/",
+   "name": "WAKE Studio",
+   "inLanguage": [
+    "zh-Hant",
+    "en"
+   ],
+   "publisher": {
+    "@id": "https://wake.com.tw/#org"
+   }
+  },
+  {
+   "@type": "CollectionPage",
+   "url": "https://wake.com.tw/en/works.html",
+   "name": "Works | WAKE — Independent Game & Visual Design Studio",
+   "description": "The complete WAKE project archive: White Terror narrative game BÔ BÂNG, civic-issue web games on media literacy, finance and defense, SaaS products, algorithmic trading systems, and commercial 3D visualization.",
+   "inLanguage": "en",
+   "isPartOf": {
+    "@id": "https://wake.com.tw/#website"
+   },
+   "about": {
+    "@id": "https://wake.com.tw/#org"
+   },
+   "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": 15,
+    "itemListElement": [
+     {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+       "@type": "VideoGame",
+       "identifier": "WAKE-001",
+       "name": "BÔ BÂNG",
+       "description": "A narrative adventure set in 1950s Taiwan. Rather than letting players watch that history, BÔ BÂNG makes them live inside its logic — making choices they must own, under surveillance, irreversibility, and asymmetric information.",
+       "url": "https://bubangofficial.vercel.app",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "Unreal Engine 5, Blender, MetaHuman, Embodied interaction, Taiwanese cultural research",
+       "inLanguage": "en",
+       "genre": "Third-person narrative adventure · Taiwan's White Terror",
+       "gamePlatform": "Web browser",
+       "playMode": "SinglePlayer"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+       "@type": "VideoGame",
+       "identifier": "WAKE-015",
+       "name": "For Your Own Good",
+       "description": "A game about the controlling Asian parent. Eight levels, eight ages from 7 to 30: you plan your week after school, Mum crosses out the slots she doesn't like in red pen, and you decide whether to obey, talk it through, or nod and do it anyway. The tighter her control, the wider the door stays open — then come the camera, the phone password and location sharing. Exams at 15, university choices at 18 and Lunar New Year dinner at 30 are the boss levels. The soundtrack is a music-box Für Elise, with a metronome that gets louder as her control grows.",
+       "url": "https://wake.com.tw/play/wei-ni-hao/",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "HTML / JS, Narrative game, Family, Web Audio",
+       "inLanguage": "en",
+       "genre": "NARRATIVE GAME · CHINESE ONLY",
+       "gamePlatform": "Web browser",
+       "playMode": "SinglePlayer"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+       "@type": "VideoGame",
+       "identifier": "WAKE-014",
+       "name": "Eight Years, One Festival",
+       "description": "A satirical city-hall simulator set in Taichung. You take office at the end of 2018 with eight years of budgets: spend on a shopping festival that makes tomorrow's news, or on an incinerator, a metro line and food-waste readiness that take years to show? Eight years are eight levels: mechanics unlock year by year, each level has a goal and a star, and the 2022 election and the 2025 swine-fever outbreak are boss levels. The ending sets your city beside the real headlines, with sources and the city government's responses. The music has two layers — the more you pour into the festival, the louder it gets.",
+       "url": "https://wake.com.tw/play/banian-yijie/",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "HTML / JS, Godot 4, Civic issues, Procedural music",
+       "inLanguage": "en",
+       "genre": "CIVIC SATIRE · CHINESE ONLY",
+       "gamePlatform": "Web browser",
+       "playMode": "SinglePlayer"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+       "@type": "VideoGame",
+       "identifier": "WAKE-013",
+       "name": "Luku",
+       "description": "A 2D point-and-click puzzle game set during Taiwan's Luku Incident of 1952. A granddaughter in the present and the villagers of that winter take turns across four chapters: hiding a copybook, thumbprinting a record he cannot read, being made to shout on a mountain road, scratching eighty-three days into a wall. Events follow the Control Yuan's findings and the National Human Rights Museum's public records; the characters are fictional.",
+       "url": "https://luku-sigma.vercel.app",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "Godot 4, Browser game, White Terror, Chinese / English",
+       "inLanguage": "en",
+       "genre": "POINT-AND-CLICK PUZZLE",
+       "gamePlatform": "Web browser",
+       "playMode": "SinglePlayer"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+       "@type": "VideoGame",
+       "identifier": "WAKE-002",
+       "name": "The Hand Behind the Click",
+       "description": "A browser game for media literacy education. Players run a disinformation operation themselves and learn the logic of information warfare from the operator's side — you can only resist a playbook you have seen run.",
+       "url": "https://media-learning.vercel.app",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "HTML / JS, Vercel, Civic education",
+       "inLanguage": "en",
+       "genre": "MEDIA LITERACY GAME",
+       "gamePlatform": "Web browser",
+       "playMode": "SinglePlayer"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+       "@type": "CreativeWork",
+       "identifier": "WAKE-003",
+       "name": "Grindvault",
+       "description": "A SaaS product gamifying training and personal finance. Full product build: frontend, serverless backend, membership system, freemium model.",
+       "url": "https://github.com/kevin-1688/grindvault",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "Vercel Serverless, Supabase, OAuth",
+       "inLanguage": "en"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 7,
+      "item": {
+       "@type": "VideoGame",
+       "identifier": "WAKE-004",
+       "name": "Escape the Rat Race",
+       "description": "A browser finance game built on cashflow logic. Buy assets that generate income, spot liabilities disguised as assets — the new car, the owner-occupied home, the raise that funds a bigger lifestyle — and push passive cashflow past expenses. Concepts taught through consequences, with a shareable score card built in.",
+       "url": "https://mice-runner.vercel.app",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "HTML / JS, Vercel, Financial literacy",
+       "inLanguage": "en",
+       "genre": "CASHFLOW LIFE GAME",
+       "gamePlatform": "Web browser",
+       "playMode": "SinglePlayer"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 8,
+      "item": {
+       "@type": "VideoGame",
+       "identifier": "WAKE-005",
+       "name": "Defense Allocation Simulator",
+       "description": "Allocate a NT$500B special defense budget across submarines, foreign heavy platforms, and domestic drones, and receive a \"defense resilience health check\". Specialization spikes single scores, but only balance survives — with humorous easter eggs and one-tap sharing.",
+       "url": "https://github.com/kevin-1688/national-defense",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "HTML / JS, Civic issues, Share-driven design",
+       "inLanguage": "en",
+       "genre": "DEFENSE RESILIENCE"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 9,
+      "item": {
+       "@type": "CreativeWork",
+       "identifier": "WAKE-006",
+       "name": "Algorithmic Trading Systems",
+       "description": "A US equities trading bot (Alpaca API, Kelly Criterion position sizing, ML regime detection, deployed on Railway), plus a crypto trading bot (Binance API) and a Taiwan portfolio monitor (TWSE + Telegram alerts).",
+       "url": "https://github.com/kevin-1688/crypto-trading-bot",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "Python, Alpaca / Binance, Railway",
+       "inLanguage": "en"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 10,
+      "item": {
+       "@type": "CreativeWork",
+       "identifier": "WAKE-007",
+       "name": "EchoWork",
+       "description": "Turn chaos into reusable work — distilling scattered workflows into reusable modules. A productivity tool in development, built with TypeScript.",
+       "url": "https://github.com/kevin-1688/EchoWork",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "TypeScript",
+       "inLanguage": "en"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 11,
+      "item": {
+       "@type": "CreativeWork",
+       "identifier": "WAKE-008",
+       "name": "In the Black Time, Dance",
+       "description": "A concept design in tribute to a cultural heritage site: a Japanese-era dormitory and its wooden floor, which carried a modern dance pioneer's work from 1953 on and seventy years of movement education. One scrolling page tells the story of the rescue, the fire and the rebuilding, and of a preservation fight that lasted decades.",
+       "url": "https://dance-wine.vercel.app/",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "Concept design, Narrative web page, Cultural heritage",
+       "inLanguage": "en"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 12,
+      "item": {
+       "@type": "CreativeWork",
+       "identifier": "WAKE-009",
+       "name": "Sudoku",
+       "description": "A full-featured web Sudoku: puzzle generation across difficulties, pencil notes, hints, undo, mistake counting, and a timer. Pure vanilla JS, zero framework dependencies.",
+       "url": "https://github.com/kevin-1688/sudoku",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "Vanilla JS, Algorithms",
+       "inLanguage": "en"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 13,
+      "item": {
+       "@type": "CreativeWork",
+       "identifier": "WAKE-010",
+       "name": "Campaign Website",
+       "description": "A commissioned official website for a local election candidate — personal narrative, policy information architecture, and full visual identity, designed and built end to end. Details withheld for client confidentiality.",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "keywords": "Web design & build, Brand narrative",
+       "inLanguage": "en"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 14,
+      "item": {
+       "@type": "CreativeWork",
+       "identifier": "WAKE-011",
+       "name": "Commercial 3D Product Visuals",
+       "description": "Product animation, exploded views, mechanism simulation. Recent case: full visualization of a smart suitcase — wheel assembly mechanics, vacuum compression system animation, and marketing assets.",
+       "url": "https://wake.com.tw/en/projects/3d-product-visualization.html",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "keywords": "Blender, Animation / Exploded views, Marketing assets",
+       "inLanguage": "en"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 15,
+      "item": {
+       "@type": "CreativeWork",
+       "identifier": "WAKE-012",
+       "name": "Vertical Farming Simulation",
+       "description": "An algorithmic simulation prototype for vertical farming systems, an extension of a long-running interest in energy and sustainability.",
+       "url": "https://github.com/kevin-1688/bfs-virtical-farming",
+       "creator": {
+        "@id": "https://wake.com.tw/#person"
+       },
+       "dateCreated": "2026",
+       "keywords": "Algorithms, Sustainability",
+       "inLanguage": "en"
+      }
+     }
+    ]
+   }
+  }
+ ]
+}
+</script>
+<!-- /geo:jsonld -->
+<link rel="canonical" href="https://wake.com.tw/en/works.html">
 </head>
 <body class="works">
 
@@ -160,11 +526,11 @@
       <article class="card">
         <p class="no">WAKE-008 / 2026</p>
         <span class="status live">RELEASED</span>
-        <h4>RÚNAKAST</h4>
-        <p class="en-name">RUNE DIVINATION</p>
-        <p>A rune divination web app: all 24 Elder Futhark runes with upright and reversed readings, draws, interpretation, and ritual-feel interface motion — a mystic experience condensed into a single page.</p>
-        <div class="tags"><span>React</span><span>Interaction design</span></div>
-        <a class="link" href="https://github.com/kevin-1688/rune" target="_blank" rel="noopener">github.com/kevin-1688/rune →</a>
+        <h4>In the Black Time, Dance</h4>
+        <p class="en-name">IN THE BLACK TIME, DANCE</p>
+        <p>A concept design in tribute to a cultural heritage site: a Japanese-era dormitory and its wooden floor, which carried a modern dance pioneer's work from 1953 on and seventy years of movement education. One scrolling page tells the story of the rescue, the fire and the rebuilding, and of a preservation fight that lasted decades.</p>
+        <div class="tags"><span>Concept design</span><span>Narrative web page</span><span>Cultural heritage</span></div>
+        <a class="link" href="https://dance-wine.vercel.app/" target="_blank" rel="noopener">dance-wine.vercel.app →</a>
       </article>
 
       <article class="card">
