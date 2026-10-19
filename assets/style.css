@@ -312,6 +312,19 @@ html[data-theme="light"] .works .feature{background:
   radial-gradient(ellipse 70% 90% at 90% 10%,rgba(180,84,30,.06),transparent 60%),
   rgba(255,255,255,.5)}
 
+/* ---------- 作品檔案的動態（assets/works-motion.js，參考 lenis.dev） ---------- */
+html.lenis,html.lenis body{height:auto}
+html.lenis.lenis-smooth{scroll-behavior:auto!important}
+html.lenis.lenis-stopped{overflow:hidden}
+.wm .page-head h1 .wm-mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}
+.wm .page-head h1 .wm-ch{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.2,.75,.1,1)}
+.wm .page-head h1.wm-in .wm-ch{transform:none}
+.wm .page-head .lede .wm-w{opacity:.22;transition:opacity .35s ease}
+.wm .page-head .lede .wm-w.on{opacity:1}
+.wm .works .wm-rise{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.75,.1,1)}
+.wm .works .wm-in .wm-rise{opacity:1;transform:none}
+.wm .works .grid.reveal{opacity:1;transform:none}
+
 /* ---------- 主題系統：亮色模式 ---------- */
 html[data-theme="light"]{
   --night:#F8F5EF; --dusk:#FFFFFF; --gold:#A8731B; --ember:#B4541E;
