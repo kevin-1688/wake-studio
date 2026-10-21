@@ -45,6 +45,7 @@ scripts/level_data.gd    三關的資料：房間座標、樓梯、躲藏點、�
 tests/smoke_test.gd      檢查每關的樓梯、物件都接在地板上，起點走得到目標
 tests/playthrough_test.gd 自動玩家：用模擬按鍵把三關打到真心話結局
 tools/subset_font.py     重新裁切中文字型（改了台詞之後用）
+tools/publish_web.py     把網頁版放到網站並更新安全設定
 assets/fonts/            Noto Sans TC 子集字型（SIL Open Font License，見 OFL.txt）
 ```
 
@@ -62,7 +63,14 @@ assets/fonts/            Noto Sans TC 子集字型（SIL Open Font License，見
 
 放上 itch.io：把 `export/web/` 裡的檔案壓成 zip 上傳，類型選 HTML，勾「This file will be played in the browser」。
 
-要放到 wake.com.tw：網站的 Content-Security-Policy 目前不允許行內 script 和 WebAssembly，要先在 `vercel.json` 幫遊戲路徑放寬（加上 `'unsafe-inline'` 和 `'wasm-unsafe-eval'`）。另外 `index.wasm` 約 35 MB，進 git 前要考慮 repo 大小。
+網站上的版本在 `wake.com.tw/play/wei-ni-hao-proto/`（檔案在 repo 的 `play/wei-ni-hao-proto/`）。
+`vercel.json` 只對這個路徑放寬安全設定：允許 WebAssembly（`'wasm-unsafe-eval'`）和**指定雜湊值**的那一段行內 script，其他頁面的設定不變。
+因為每次匯出那段 script 都可能不同，重新匯出後要用工具同步：
+
+```bash
+godot --headless --path . --export-release "Web" export/web/index.html
+python3 tools/publish_web.py    # 複製到 play/wei-ni-hao-proto/ 並更新 vercel.json 的雜湊值
+```
 
 `export/` 已列在 `.gitignore`，匯出的檔案不會被提交。
 
