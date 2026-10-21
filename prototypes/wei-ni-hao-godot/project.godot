@@ -1,0 +1,28 @@
+; Engine configuration file.
+; 用 Godot 4.3 以上開啟。
+
+config_version=5
+
+[application]
+
+config/name="為你好 — 2D 探索原型"
+config/description="WAKE《為你好》改編的 2D 探索型關卡原型：三關、家的剖面地圖、媽媽的視線。"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[physics]
+
+common/physics_ticks_per_second=60
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.0823529, 0.0745098, 0.121569, 1)
