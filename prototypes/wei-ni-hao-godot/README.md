@@ -50,6 +50,22 @@ assets/fonts/            Noto Sans TC 子集字型（SIL Open Font License，見
 
 要調整難度，改 `scripts/level_data.gd` 就好，例如視線亮／暗的秒數（`on`／`off`）、巡房倒數（`timer`）、媽媽巡邏的速度（`speed`）。
 
+## 網頁版
+
+`export_presets.cfg` 已經設好 Web 匯出（不開多執行緒，所以一般靜態網站、itch.io 都能直接放，不需要特殊的伺服器標頭）。
+
+1. Godot 選單 Editor → Manage Export Templates → Download（第一次要裝匯出範本）。
+2. Project → Export → 選「Web」→ Export Project，輸出到 `export/web/`。
+   或用指令：`godot --headless --path . --export-release "Web" export/web/index.html`
+3. 本機試玩要開一個簡單的伺服器（直接雙擊 index.html 不行）：
+   `python3 -m http.server -d export/web 8000`，再打開 http://localhost:8000
+
+放上 itch.io：把 `export/web/` 裡的檔案壓成 zip 上傳，類型選 HTML，勾「This file will be played in the browser」。
+
+要放到 wake.com.tw：網站的 Content-Security-Policy 目前不允許行內 script 和 WebAssembly，要先在 `vercel.json` 幫遊戲路徑放寬（加上 `'unsafe-inline'` 和 `'wasm-unsafe-eval'`）。另外 `index.wasm` 約 35 MB，進 git 前要考慮 repo 大小。
+
+`export/` 已列在 `.gitignore`，匯出的檔案不會被提交。
+
 ## 測試
 
 ```bash
@@ -75,4 +91,3 @@ python3 tools/subset_font.py 路徑/NotoSansTC[wght].ttf
 - 音效與音樂（原作的八音盒版《給愛麗絲》、跟著控制變大聲的節拍器）
 - 原作的另外五關（10、13、17、18、25 歲）
 - 美術：目前角色和家具都是色塊
-- 網頁版匯出（需要下載 Godot 匯出範本）
