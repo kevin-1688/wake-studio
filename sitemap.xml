@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://wake.com.tw/works.html</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://wake.com.tw/works.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://wake.com.tw/en/works.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wake.com.tw/works.html"/>
@@ -26,7 +26,7 @@
   </url>
   <url>
     <loc>https://wake.com.tw/en/works.html</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://wake.com.tw/works.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://wake.com.tw/en/works.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wake.com.tw/works.html"/>
@@ -105,5 +105,10 @@
     <loc>https://wake.com.tw/play/banian-yijie/</loc>
     <lastmod>2026-10-16</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wake.com.tw/projects/zhonghe-map/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9L39JVR3DE"></script>
+<script src="/assets/ga.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>張志豪中和政見地圖｜WAKE</title>
+<meta name="description" content="2026 新北市議員選舉中和選區參選人張志豪的在地政見與過往政績，依地點標在中和區村里地圖上。WAKE 資訊視覺化作品，資料整理自公開新聞報導。">
+<meta property="og:title" content="張志豪中和政見地圖｜WAKE">
+<meta property="og:description" content="2026 新北市議員選舉中和選區參選人張志豪的在地政見與過往政績，依地點標在中和區村里地圖上。WAKE 資訊視覺化作品，資料整理自公開新聞報導。">
+<meta property="og:image" content="https://wake.com.tw/assets/og-image.jpg">
+<meta property="og:url" content="https://wake.com.tw/projects/zhonghe-map/">
+<link rel="canonical" href="https://wake.com.tw/projects/zhonghe-map/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="map2d.css">
+</head>
+<body>
+<div class="wake-bar"><a href="/works.html">← WAKE 作品檔案 · WAKE-016</a><span class="r"><span>資訊視覺化作品，非競選陣營官方資料</span><a href="3d.html">切換 3D 版 →</a></span></div>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">2026 新北市議員選舉 · 第 5 選區（中和）</div>
+      <h1>張志豪中和政見地圖</h1>
+    </div>
+    <p class="meta">民進黨籍參選人張志豪公開提出的中和在地政見與過往政績，依地點標示。資料整理自 2026 年 6–10 月新聞報導，截至 10/23。</p>
+  </header>
+
+  <div class="filters" role="group" aria-label="顯示圖層">
+    <button class="chip" id="f-plan" data-f="plan" aria-pressed="true"><span class="dot" style="background:var(--plan)"></span>2026 政見</button>
+    <button class="chip" id="f-done" data-f="done" aria-pressed="true"><span class="dot" style="background:var(--done)"></span>過往政績</button>
+  </div>
+
+  <div class="grid">
+    <div class="mapcard">
+      <svg id="map" viewBox="0 0 1000 894" role="img" aria-label="中和區地圖，標示張志豪政見位置"></svg>
+      <p class="mapnote">虛線範圍為示意：報導只說「南勢地區」，未公布確切基地或路段，此處以南勢角周邊各里概括。其餘地點為公園或地名的大致位置。</p>
+    </div>
+
+    <div class="ledger">
+      <section class="sect" data-kind="plan">
+        <h2><span class="dot" style="background:var(--plan)"></span>有地點的政見 <small>點選與地圖連動</small></h2>
+        <div class="rows" id="rows-plan"></div>
+      </section>
+      <section class="sect" data-kind="plan">
+        <h2><span class="dot" style="background:var(--muted)"></span>全區性政見 <small>不對應單一地點</small></h2>
+        <div class="rows" id="rows-wide"></div>
+      </section>
+      <section class="sect" data-kind="done">
+        <h2><span class="dot" style="background:var(--done)"></span>過往政績</h2>
+        <div class="rows" id="rows-done"></div>
+      </section>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div>本頁只整理參選人自己提出或報導中明確歸屬於他的項目；同場合市長參選人蘇巧慧提出的捷運、都更等主張未列入。未經參選人陣營確認，內容以原始報導為準。</div>
+    <ul>
+      <li><a href="https://mknews.com.tw/2026/10/1006141/" target="_blank" rel="noopener">墨新聞｜中和聯合競總成立（2026-10-17）</a></li>
+      <li><a href="https://news.ltn.com.tw/news/politics/breakingnews/5571973" target="_blank" rel="noopener">自由時報｜南勢角後援會成立（2026-09-12）</a></li>
+      <li><a href="https://udn.com/news/story/7323/9550223" target="_blank" rel="noopener">聯合報｜豪友會會員大會（2026-06-06）</a></li>
+      <li><a href="https://udn.com/news/story/124652/9592539" target="_blank" rel="noopener">聯合報｜打造友善孩童城市（2026-06-27）</a></li>
+      <li><a href="https://udn.com/news/story/124652/9665101" target="_blank" rel="noopener">聯合報｜四號公園親子活動</a></li>
+      <li>行政區與村里界：內政部資料（taiwan-atlas 簡化版）</li>
+    </ul>
+  </div>
+</div>
+<script src="map2d.js"></script>
+</body>
+</html>
