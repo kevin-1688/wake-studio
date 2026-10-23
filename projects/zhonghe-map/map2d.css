@@ -6,7 +6,7 @@
   --land:#ffffff; --land-other:#e2e7e9; --vill:#d7dee1;
   --plan:#d4561c; --plan-soft:rgba(212,86,28,.14);
   --done:#2c6a8f; --done-soft:rgba(44,106,143,.14);
-  --flyer:#7a4fc2; --flyer-soft:rgba(122,79,194,.14); --mrt:#b8901a;
+  --road:#aab5ba; --road-hw:#c9984a; --flyer:#7a4fc2; --flyer-soft:rgba(122,79,194,.14); --mrt:#b8901a;
   --area:#d4561c;
   --f-display:"Noto Serif TC","Songti TC","PMingLiU",serif;
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
@@ -15,11 +15,11 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --ground:#141a1c; --paper:#1b2326; --ink:#e7ecee; --muted:#98a6ab; --line:#33403f;
   --land:#222c30; --land-other:#182023; --vill:#34424a;
-  --plan:#f0834d; --plan-soft:rgba(240,131,77,.18); --done:#6fb2d8; --done-soft:rgba(111,178,216,.18); --flyer:#b98cff; --flyer-soft:rgba(185,140,255,.18); --mrt:#e8c75a; --area:#f0834d; color-scheme:dark}}
+  --plan:#f0834d; --plan-soft:rgba(240,131,77,.18); --done:#6fb2d8; --done-soft:rgba(111,178,216,.18); --road:#4c5d64; --road-hw:#9a7a42; --flyer:#b98cff; --flyer-soft:rgba(185,140,255,.18); --mrt:#e8c75a; --area:#f0834d; color-scheme:dark}}
 :root[data-theme="dark"]{
   --ground:#141a1c; --paper:#1b2326; --ink:#e7ecee; --muted:#98a6ab; --line:#33403f;
   --land:#222c30; --land-other:#182023; --vill:#34424a;
-  --plan:#f0834d; --plan-soft:rgba(240,131,77,.18); --done:#6fb2d8; --done-soft:rgba(111,178,216,.18); --flyer:#b98cff; --flyer-soft:rgba(185,140,255,.18); --mrt:#e8c75a; --area:#f0834d; color-scheme:dark}
+  --plan:#f0834d; --plan-soft:rgba(240,131,77,.18); --done:#6fb2d8; --done-soft:rgba(111,178,216,.18); --road:#4c5d64; --road-hw:#9a7a42; --flyer:#b98cff; --flyer-soft:rgba(185,140,255,.18); --mrt:#e8c75a; --area:#f0834d; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 40px}
@@ -99,3 +99,9 @@ svg{display:block;width:100%;height:auto}
 .nw{white-space:nowrap}
 
 .creek{fill:none;stroke:#3d8fd1;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:.8}
+.road{fill:none;stroke:var(--road);stroke-linecap:round;stroke-linejoin:round}
+.road.r0{stroke:var(--road-hw);stroke-width:4.5}
+.road.r1,.road.r2{stroke-width:2.8}
+.road.r3{stroke-width:1.7}
+.road.r4{stroke-width:1;opacity:.75}
+.road-lbl{font-size:10.5px;letter-spacing:.08em;fill:var(--muted);paint-order:stroke;stroke:var(--land);stroke-width:3px;pointer-events:none}
