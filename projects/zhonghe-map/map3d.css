@@ -60,3 +60,13 @@ canvas{display:block}
 .wake-links{font-family:var(--f-ui);font-size:11px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
 .wake-links a{color:var(--muted);text-decoration:none}
 .wake-links a:hover{color:var(--gold)}
+
+.id{display:flex;align-items:center;gap:12px;margin:4px 0 6px}
+.avatar{width:64px;height:64px;border-radius:50%;flex:none;background:linear-gradient(160deg,#2a3f4c,#14212a);border:2px solid var(--gold);object-fit:cover;object-position:top}
+.id h1{margin:0 0 2px}
+.who{font-size:12px;color:var(--muted)}
+.who b{color:var(--ink);font-size:14px;letter-spacing:.08em}
+@media (max-width:760px){.avatar{width:48px;height:48px}}
+.nw{white-space:nowrap}
+.title{max-width:min(440px,calc(100% - 32px))}
+.id h1{font-size:clamp(20px,2.4vw,28px)}
