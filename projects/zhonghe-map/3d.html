@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>中和政見任務圖（3D）｜WAKE</title>
-<meta name="description" content="2026 新北市議員選舉中和選區參選人張志豪的在地政見與過往政績，依地點標在中和區村里地圖上。WAKE 資訊視覺化作品，資料整理自公開新聞報導。">
+<meta name="description" content="2026 新北市議員選舉中和選區參選人張志豪的在地政見與過往政績，依地點標在中和區村里地圖上。WAKE 資訊視覺化作品，資料整理自 2026 競選文宣與公開新聞報導。">
 <meta property="og:title" content="中和政見任務圖（3D）｜WAKE">
-<meta property="og:description" content="2026 新北市議員選舉中和選區參選人張志豪的在地政見與過往政績，依地點標在中和區村里地圖上。WAKE 資訊視覺化作品，資料整理自公開新聞報導。">
+<meta property="og:description" content="2026 新北市議員選舉中和選區參選人張志豪的在地政見與過往政績，依地點標在中和區村里地圖上。WAKE 資訊視覺化作品，資料整理自 2026 競選文宣與公開新聞報導。">
 <meta property="og:image" content="https://wake.com.tw/assets/og-image.jpg">
 <meta property="og:url" content="https://wake.com.tw/projects/zhonghe-map/3d.html">
 <link rel="canonical" href="https://wake.com.tw/projects/zhonghe-map/3d.html">
@@ -26,9 +26,10 @@
     <div class="wake-links"><a href="/works.html">← WAKE-016</a> · <a href="./">2D 版</a></div>
     <div class="k">2026 新北市議員 · 第 5 選區</div>
     <h1>中和政見任務圖</h1>
-    <p>民進黨籍參選人張志豪公開提出的中和在地政見與過往政績。資料整理自 2026 年 6–10 月新聞報導，未經陣營確認。</p>
+    <p>民進黨籍參選人張志豪的中和在地政見與過往政績。橘色＝2026 競選文宣與新聞；紫色＝舊版「力拚連任」文宣中、2026 版已不再提的項目。</p>
     <div class="bar" role="group" aria-label="圖層">
       <button class="btn" id="f-plan" data-f="plan" aria-pressed="true">◆ 政見</button>
+      <button class="btn" id="f-flyer" data-f="flyer" aria-pressed="true">◆ 舊文宣</button>
       <button class="btn" id="f-done" data-f="done" aria-pressed="true">◆ 政績</button>
       <button class="btn" id="reset">⟲ 全景</button>
     </div>
@@ -37,8 +38,10 @@
 
   <aside class="log" aria-label="任務日誌">
     <h2><span>任務日誌</span><span id="count"></span></h2>
-    <div class="grp">主線 · 2026 政見</div><div id="l-plan"></div>
-    <div class="grp">全區任務 · 不對應單一地點</div><div id="l-wide"></div>
+    <div class="grp">主線 · 2026 在地政見</div><div id="l-plan"></div>
+    <div class="grp">主線 · 福利與全區政見</div><div id="l-wide"></div>
+    <div class="grp">已放棄？ · 舊文宣有、2026 版沒有</div><div id="l-flyer"></div>
+    <div class="grp">舊文宣 · 全市性主張</div><div id="l-fwide"></div>
     <div class="grp">已完成 · 過往政績</div><div id="l-done"></div>
   </aside>
 

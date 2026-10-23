@@ -3,7 +3,7 @@
 /* Layout: full-screen 3D scene; HUD title top-left, quest log right (bottom sheet on phones), detail card bottom-left. Deliberately single dark "night ops" look. */
 :root{
   --bg:#0b1218; --panel:rgba(14,24,32,.86); --edge:#2a3f4c; --ink:#e6f0f3; --muted:#8aa1ab;
-  --plan:#ff7a3d; --done:#4fc3ff; --gold:#ffd27a;
+  --plan:#ff7a3d; --done:#4fc3ff; --flyer:#b98cff; --gold:#ffd27a;
   --f-ui:"Chakra Petch","Noto Sans TC",ui-monospace,monospace;
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
   color-scheme:dark;
@@ -37,7 +37,7 @@ canvas{display:block}
 .q small{display:block;font-size:11px;color:var(--muted)}
 .q.static{cursor:default}
 .q.static .ic{border-color:var(--muted)}
-[data-kind="plan"]{--k:var(--plan)}[data-kind="done"]{--k:var(--done)}
+[data-kind="plan"]{--k:var(--plan)}[data-kind="done"]{--k:var(--done)}[data-kind="flyer"]{--k:var(--flyer)}
 .card{position:absolute;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(420px,calc(100% - 32px));background:var(--panel);border:1px solid var(--edge);border-top:3px solid var(--k);padding:12px 14px;backdrop-filter:blur(6px)}
 .card .t{font-family:var(--f-ui);font-size:11px;letter-spacing:.18em;color:var(--k)}
 .card h3{margin:2px 0 4px;font-size:18px}
@@ -47,6 +47,7 @@ canvas{display:block}
 .card .src a{color:var(--ink)}
 .lbl{position:fixed;left:0;top:0;pointer-events:none;font-size:12px;font-weight:700;white-space:nowrap;padding:2px 7px;background:rgba(8,14,20,.75);border:1px solid var(--k);color:var(--ink);transform:translate(-50%,-150%)}
 .lbl.nb{border:none;background:none;color:#5c7480;font-weight:500;letter-spacing:.3em;font-size:13px}
+.lbl.st{border:none;background:none;color:#e8d36a;font-weight:500;font-size:11px}
 .lbl.area{border-style:dashed;color:var(--plan);font-weight:500}
 .hint{font-family:var(--f-ui);font-size:10.5px;letter-spacing:.12em;color:var(--muted);margin-top:8px}
 @media (max-width:760px){
