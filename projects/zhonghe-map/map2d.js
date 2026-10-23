@@ -93,7 +93,6 @@ const roadG=el("g",{id:"roads"});
 const rl=roadLabelSpots();for(const n in rl){const {pt,ang}=rl[n];const t=el("text",{x:pt[0],y:pt[1]-3,class:"road-lbl","text-anchor":"middle",transform:`rotate(${ang.toFixed(1)} ${pt[0].toFixed(1)} ${pt[1].toFixed(1)})`},roadG);t.textContent=ROADLBL[n]||n}
 el("text",{x:470,y:300,class:"zh-label","text-anchor":"middle"}).textContent="中和區";
 [["永和區",880,170],["板橋區",120,70],["土城區",70,820],["新店區",900,780]].forEach(([n,x,y])=>el("text",{x,y,class:"nb-label","text-anchor":"middle"}).textContent=n);
-GEO.villages.forEach(v=>{const t=el("text",{x:v.c[0],y:v.c[1]+3,class:"vlabel","text-anchor":"middle"});t.textContent=v.n.replace("里","")});
 
 // MRT Wanda–Zhonghe (approximate)
 const creekG=el("g",{id:"creek"});GEO.creek.forEach(l=>el("polyline",{points:l.map(p=>p.join(",")).join(" "),class:"creek"},creekG));
