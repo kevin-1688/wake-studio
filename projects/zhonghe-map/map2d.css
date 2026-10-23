@@ -84,3 +84,7 @@ svg{display:block;width:100%;height:auto}
 .wake-bar a{color:inherit;text-decoration:none}
 .wake-bar a:hover{color:var(--ink,#1d2528);text-decoration:underline}
 .wake-bar .r{display:flex;gap:14px}
+.pin[data-kind="done"] text:not(.pin-num){display:none}
+.pin[data-kind="done"].on text:not(.pin-num),.pin[data-kind="done"]:hover text:not(.pin-num),.pin[data-kind="done"]:focus-visible text:not(.pin-num){display:block}
+.pin[data-kind="done"] circle:not(.halo){r:11px}
+.pin[data-kind="done"] .pin-num{font-size:11px}

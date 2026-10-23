@@ -7,6 +7,7 @@ const SRC = {
   udn2:["聯合報 2026-06-27","https://udn.com/news/story/124652/9592539"],
   udn3:["聯合報 四號公園活動","https://udn.com/news/story/124652/9665101"],
   f26:["2026 競選文宣（使用者提供圖片）",null],
+  card:["議員任內成績單（使用者提供圖片，「4 年成績」版）",null],
   flyer:["舊版文宣（力拚連任版，年份未標示）",null],
 };
 const ITEMS = [
@@ -21,7 +22,20 @@ const ITEMS = [
   {id:"o2",kind:"flyer",at:"huaxin",short:"華新街特色街區",title:"華新街南向經貿特色街區",where:"華新街（緬甸街）· 南勢角站旁",desc:"打造華新街為南向經貿特色街區，並引入興南夜市活化。2026 文宣未再列出。",src:["flyer"]},
   {id:"o3",kind:"flyer",at:"zhongyuan",short:"中原溝除臭",title:"中原溝截流清淤",where:"中原溝 · 大左岸（標在中原里）",desc:"力促中原溝汙水截流及清淤除臭整治。2026 文宣未再列出。",src:["flyer"]},
   {id:"d1",kind:"done",at:"park4",short:"四號公園",title:"四號公園共融遊戲場",where:"中和公園（四號公園）· 2017",desc:"與特公盟家長推動雙和第一座共融遊戲場，並爭取無障礙坡道溜滑梯。",src:["udn3"]},
-  {id:"d2",kind:"done",at:"jinhe",short:"錦和運動公園",title:"錦和運動公園親子廁所",where:"錦和運動公園（大致位置）",desc:"與立委張雅琳（時任特公盟理事長）共同爭取。",src:["udn3"]},
+  {id:"d2",kind:"done",at:"jinhe",short:"錦和運動公園",title:"錦和運動公園親子廁所",where:"錦和運動公園（大致位置）",desc:"爭取 500 萬增設親子廁所和洗手台。與立委張雅琳（時任特公盟理事長）共同爭取。",src:["card", "udn3"]},
+  {id:"d3",kind:"done",at:"gfieldD",short:"國管院操場翻修",title:"翻修國管院大操場",where:"國管院舊址（大致位置）",desc:"爭取 700 萬翻修，成功保留民眾運動綠地空間。2026 再提「永久保留」。",src:["card"]},
+  {id:"d4",kind:"done",at:"v:瑞穗里",short:"瑞穗配水池",title:"整修瑞穗配水池古蹟",where:"瑞穗配水池（標在瑞穗里）",desc:"爭取 640 萬整修日治時期古蹟，重啟瑞穗配水池。",src:["card"]},
+  {id:"d5",kind:"done",at:"v:德穗里",short:"德穗親子廁所",title:"德穗綠家園親子廁所",where:"德穗綠家園（標在德穗里）",desc:"補助 300 萬增設親子廁所。",src:["card"]},
+  {id:"d6",kind:"done",at:"v:漳和里",short:"漳和濕地",title:"漳和濕地與漳和國中",where:"漳和濕地 · 漳和國中（標在漳和里）",desc:"中央地方合作爭取 2,758 萬重新整修開放漳和濕地；補助 218 萬漳和國中微型美術館，並爭取重建羽球館。",src:["card"]},
+  {id:"d7",kind:"done",at:"wayaoD",short:"瓦磘溝 5 億",title:"瓦磘溝整治經費",where:"瓦磘溝沿線（標在瓦磘里）",desc:"爭取 5 億經費加速整治，促成雙和公共溝通會議。2026 文宣仍列除臭清淤，表示問題還沒解決。",src:["card"]},
+  {id:"d8",kind:"done",at:"v:興南里",short:"興南夜市牌樓",title:"興南夜市法制化",where:"興南夜市 · 興南國小（標在興南里）",desc:"輔導夜市法制化、爭取保留牌樓；補助興南國小 90 萬改善隔音與周邊鋪面。",src:["card"]},
+  {id:"d9",kind:"done",at:"v:內南里",short:"內南生態步道",title:"內南生態公園與烘爐地步道",where:"南勢山區（標在內南里）",desc:"爭取 816 萬興闢內南生態公園步道；烘爐地登山步道翻新並納入市府森心之旅路線。",src:["card"]},
+  {id:"d10",kind:"done",at:"xiu",short:"十秀活動中心",title:"十秀活動中心",where:"秀字輩十里（標在秀字里中心）",desc:"中央地方合作爭取 1,035 萬催生十秀活動中心。",src:["card"]},
+  {id:"d11",kind:"done",at:"v:積穗里",short:"積穗國中小",title:"積穗國小、積穗國中",where:"積穗國中小（標在積穗里）",desc:"補助 546 萬積穗國小人行道與通學巷改善；爭取 450 萬改善積穗國中電力並裝冷氣。",src:["card"]},
+  {id:"d12",kind:"done",at:"v:復興里",short:"復興國小",title:"復興國小",where:"復興國小（標在復興里）",desc:"補助 32 萬幼兒園室內攀岩牆、20 萬女兒牆工程。",src:["card"]},
+  {id:"d13",kind:"done",at:"v:佳和里",short:"佳和公托公幼",title:"佳和公園公托與公幼",where:"佳和公園（標在佳和里）",desc:"爭取佳和公園多目標大樓新建工程增設公托和公立幼兒園。",src:["card"]},
+  {id:"d14",kind:"done",at:"v:福祥里",short:"高壓電塔遷移",title:"福祥路高壓電塔遷移",where:"福祥路橋和路口（標在福祥里）",desc:"推動路口高壓電塔遷離。",src:["card"]},
+  {id:"d15",kind:"done",at:"v:力行里",short:"力行福德宮",title:"力行福德宮 LED 照明",where:"力行福德宮（標在力行里）",desc:"補助 50 萬新增 LED 照明。",src:["card"]},
 ];
 const WIDE = [
   ["長輩帶狀皰疹疫苗","全面補助，免費接種"],
@@ -33,7 +47,7 @@ const WIDE = [
   ["公共通行權","人行道大翻新，加速電箱移置、電桿電線下地"],
 ];
 const FWIDE=[["青年局單一窗口","青少年活動補助"],["婦女友善城市","女性公廁與婦幼車位比例、就業輔導、職場性平"]];
-const DONE_WIDE=[["步道改善、行人空間拓寬","站台者提及，報導未列路段"],["議員任內自述數字","出席及質詢率 100%、提案逾 250 案、會勘逾 700 件、選民服務 3,500 多件（舊版文宣自述，未查證）"]];
+const DONE_WIDE=[["中山路人行道電箱遷移", "爭取 5,100 萬，保障行人公共通行權。"], ["華中橋護欄與人行道", "爭取 1,634 萬全面翻新。"], ["員山公園", "整修滑草坡、全面汰換沙丘細沙、修繕龜裂鋪面。"], ["太武山莊活化", "爭取 119 萬重現眷村文化。"], ["民樂人行廣場", "補助 190 萬擴大兒童遊戲區、新設體健設施。"], ["大洋塑膠舊址", "爭取規劃納入新中和分局與中原派出所。"], ["學校零星補助", "中和國小諮商室 63 萬、景新國小紗窗 35 萬、光復國小監視器與觸控螢幕 30 萬。"], ["中和哈克會館", "補助 90 萬設施整修。"], ["步道改善、行人空間拓寬", "2026 站台者提及，未列路段。"], ["任內自述數字", "成績單版：提案 319 件、會勘 659 件以上、選民服務 3,127 件以上、法律諮詢 2,536 人以上、骨質義診 1,516 人以上。舊文宣版：提案逾 250、會勘逾 700、服務 3,500 多件。兩版數字對不上，皆未查證。"]];
 
 // ---------- scene ----------
 const stage=document.getElementById("stage");
@@ -95,6 +109,14 @@ parse(GEO.towns.find(t=>t.n==="中和區").d).forEach(r=>{
 // positions
 let nx=0,ny=0;const nsV=GEO.villages.filter(v=>NANSHI.includes(v.n));nsV.forEach(v=>{nx+=v.c[0];ny+=v.c[1]});nx/=nsV.length;ny/=nsV.length;
 const POS={...GEO.pts,nanshiA:[nx-35,ny+55],nanshiB:[nx+75,ny+25]};
+function posOf(at){
+  if(at.startsWith("v:")){const v=GEO.villages.find(v=>v.n===at.slice(2));return v.c}
+  if(at==="xiu"){const xs=GEO.villages.filter(v=>v.n.startsWith("秀"));return [xs.reduce((a,v)=>a+v.c[0],0)/xs.length,xs.reduce((a,v)=>a+v.c[1],0)/xs.length]}
+  if(at==="gfieldD")return [GEO.pts.gfield[0]+5,GEO.pts.gfield[1]+48];
+  if(at==="wayaoD")return [GEO.pts.wayao[0]-55,GEO.pts.wayao[1]+20];
+  return POS[at];
+}
+
 
 // beacons
 const beacons={};
@@ -102,7 +124,7 @@ const labelsEl=document.getElementById("labels");
 const labels=[];
 function addLabel(text,v3,cls,kind){const d=document.createElement("div");d.className="lbl "+(cls||"");if(kind)d.dataset.kind=kind;d.textContent=text;labelsEl.appendChild(d);const o={el:d,p:v3};labels.push(o);return o}
 ITEMS.forEach(it=>{
-  const [X,Z]=toXZ(...POS[it.at]);
+  const [X,Z]=toXZ(...posOf(it.at));
   const col=new THREE.Color({plan:0xff7a3d,done:0x4fc3ff,flyer:0xb98cff}[it.kind]);
   const g=new THREE.Group();g.position.set(X,16,Z);
   const pillar=new THREE.Mesh(new THREE.CylinderGeometry(4,4,120,16,1,true),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.35,side:THREE.DoubleSide,depthWrite:false}));
@@ -114,6 +136,8 @@ ITEMS.forEach(it=>{
   g.userData={id:it.id,gem,ring,pillar};
   scene.add(g);beacons[it.id]=g;
   it.label=addLabel(it.short,new THREE.Vector3(X,150,Z),"",it.kind);
+  it.label.id=it.id;
+  if(it.kind==="done"){pillar.scale.y=.6;pillar.position.y=36;gem.position.y=80;it.label.p.y=95}
 });
 // MRT Wanda–Zhonghe (approximate alignment)
 const mrtPts=GEO.mrt.map(m=>{const [X,Z]=toXZ(...m.p);return new THREE.Vector3(X,19,Z)});
@@ -203,13 +227,13 @@ function loop(){
     camera.position.lerpVectors(tween.p0,tween.p1,e);controls.target.lerpVectors(tween.t0,tween.t1,e);if(tween.t>=1)tween=null}
   controls.update();
   for(const id in beacons){const {gem,ring,pillar}=beacons[id].userData;const on=id===active;
-    if(!reduce){gem.rotation.y+=dt*1.2;gem.position.y=130+Math.sin(t*2+id.length)*4;
+    if(!reduce){gem.rotation.y+=dt*1.2;gem.position.y=(id[0]==="d"?80:130)+Math.sin(t*2+id.length)*4;
       const s=1+((t*.8)%1)*(on?1.6:.8);ring.scale.set(s,s,s);ring.material.opacity=.7*(1-((t*.8)%1))}
     pillar.material.opacity=on?.6:.3;gem.scale.setScalar(on?1.5:1)}
   renderer.render(scene,camera);
   const w=innerWidth,h=innerHeight;
   labels.forEach(l=>{tmp.copy(l.p).project(camera);const vis=tmp.z<1&&Math.abs(tmp.x)<1.1&&Math.abs(tmp.y)<1.1;
-    l.el.style.visibility=vis?"":"hidden";l.el.style.transform=`translate(${(tmp.x*.5+.5)*w}px,${(-tmp.y*.5+.5)*h}px) ${l.el.classList.contains("st")?"translate(-50%,60%)":"translate(-50%,-150%)"}`});
+    l.el.style.visibility=(vis&&!(l.el.dataset.kind==="done"&&l.id!==active))?"":"hidden";l.el.style.transform=`translate(${(tmp.x*.5+.5)*w}px,${(-tmp.y*.5+.5)*h}px) ${l.el.classList.contains("st")?"translate(-50%,60%)":"translate(-50%,-150%)"}`});
   requestAnimationFrame(loop);
 }
 loop();

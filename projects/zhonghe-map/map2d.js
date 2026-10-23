@@ -3,6 +3,7 @@ const NANSHI = ["興南","景南","崇南","東南","忠孝","華南","華新","
 const SRC = {
   f26:["2026 競選文宣",null],
   flyer:["舊版「力拚連任」文宣",null],
+  card:["議員任內成績單（4 年成績版）",null],
   mk:["墨新聞 10/17","https://mknews.com.tw/2026/10/1006141/"],
   ltn:["自由時報 9/12","https://news.ltn.com.tw/news/politics/breakingnews/5571973"],
   udn1:["聯合報 6/6","https://udn.com/news/story/7323/9550223"],
@@ -20,7 +21,20 @@ const ITEMS = [
   {id:"o2",kind:"flyer",at:"huaxin",short:"華新街",title:"華新街南向經貿特色街區",where:"華新街（緬甸街）",desc:"打造南向經貿特色街區並引入興南夜市活化。2026 版未再列出。",src:["flyer"]},
   {id:"o3",kind:"flyer",at:"zhongyuan",short:"中原溝",title:"中原溝截流清淤",where:"中原溝（標在中原里）",desc:"力促汙水截流及清淤除臭整治。2026 版未再列出。",src:["flyer"]},
   {id:"d1",kind:"done",at:"park4",short:"四號公園",title:"四號公園共融遊戲場",where:"中和公園（四號公園）· 2017",desc:"與特公盟家長推動雙和第一座共融遊戲場，並爭取無障礙坡道溜滑梯。",src:["udn3"]},
-  {id:"d2",kind:"done",at:"jinhe",short:"錦和運動公園",title:"錦和運動公園親子廁所",where:"錦和運動公園",desc:"與立委張雅琳（時任特公盟理事長）共同爭取。",src:["udn3"]},
+  {id:"d2",kind:"done",at:"jinhe",short:"錦和運動公園",title:"錦和運動公園親子廁所",where:"錦和運動公園（大致位置）",desc:"爭取 500 萬增設親子廁所和洗手台。與立委張雅琳（時任特公盟理事長）共同爭取。",src:["card", "udn3"]},
+  {id:"d3",kind:"done",at:"gfieldD",short:"國管院操場翻修",title:"翻修國管院大操場",where:"國管院舊址（大致位置）",desc:"爭取 700 萬翻修，成功保留民眾運動綠地空間。2026 再提「永久保留」。",src:["card"]},
+  {id:"d4",kind:"done",at:"v:瑞穗里",short:"瑞穗配水池",title:"整修瑞穗配水池古蹟",where:"瑞穗配水池（標在瑞穗里）",desc:"爭取 640 萬整修日治時期古蹟，重啟瑞穗配水池。",src:["card"]},
+  {id:"d5",kind:"done",at:"v:德穗里",short:"德穗親子廁所",title:"德穗綠家園親子廁所",where:"德穗綠家園（標在德穗里）",desc:"補助 300 萬增設親子廁所。",src:["card"]},
+  {id:"d6",kind:"done",at:"v:漳和里",short:"漳和濕地",title:"漳和濕地與漳和國中",where:"漳和濕地 · 漳和國中（標在漳和里）",desc:"中央地方合作爭取 2,758 萬重新整修開放漳和濕地；補助 218 萬漳和國中微型美術館，並爭取重建羽球館。",src:["card"]},
+  {id:"d7",kind:"done",at:"wayaoD",short:"瓦磘溝 5 億",title:"瓦磘溝整治經費",where:"瓦磘溝沿線（標在瓦磘里）",desc:"爭取 5 億經費加速整治，促成雙和公共溝通會議。2026 文宣仍列除臭清淤，表示問題還沒解決。",src:["card"]},
+  {id:"d8",kind:"done",at:"v:興南里",short:"興南夜市牌樓",title:"興南夜市法制化",where:"興南夜市 · 興南國小（標在興南里）",desc:"輔導夜市法制化、爭取保留牌樓；補助興南國小 90 萬改善隔音與周邊鋪面。",src:["card"]},
+  {id:"d9",kind:"done",at:"v:內南里",short:"內南生態步道",title:"內南生態公園與烘爐地步道",where:"南勢山區（標在內南里）",desc:"爭取 816 萬興闢內南生態公園步道；烘爐地登山步道翻新並納入市府森心之旅路線。",src:["card"]},
+  {id:"d10",kind:"done",at:"xiu",short:"十秀活動中心",title:"十秀活動中心",where:"秀字輩十里（標在秀字里中心）",desc:"中央地方合作爭取 1,035 萬催生十秀活動中心。",src:["card"]},
+  {id:"d11",kind:"done",at:"v:積穗里",short:"積穗國中小",title:"積穗國小、積穗國中",where:"積穗國中小（標在積穗里）",desc:"補助 546 萬積穗國小人行道與通學巷改善；爭取 450 萬改善積穗國中電力並裝冷氣。",src:["card"]},
+  {id:"d12",kind:"done",at:"v:復興里",short:"復興國小",title:"復興國小",where:"復興國小（標在復興里）",desc:"補助 32 萬幼兒園室內攀岩牆、20 萬女兒牆工程。",src:["card"]},
+  {id:"d13",kind:"done",at:"v:佳和里",short:"佳和公托公幼",title:"佳和公園公托與公幼",where:"佳和公園（標在佳和里）",desc:"爭取佳和公園多目標大樓新建工程增設公托和公立幼兒園。",src:["card"]},
+  {id:"d14",kind:"done",at:"v:福祥里",short:"高壓電塔遷移",title:"福祥路高壓電塔遷移",where:"福祥路橋和路口（標在福祥里）",desc:"推動路口高壓電塔遷離。",src:["card"]},
+  {id:"d15",kind:"done",at:"v:力行里",short:"力行福德宮",title:"力行福德宮 LED 照明",where:"力行福德宮（標在力行里）",desc:"補助 50 萬新增 LED 照明。",src:["card"]},
 ];
 const WIDE = [
   {title:"長輩帶狀皰疹疫苗",desc:"全面補助，免費接種。"},
@@ -35,10 +49,7 @@ const FWIDE = [
   {title:"青年局單一窗口",desc:"辦理青少年活動補助。"},
   {title:"婦女友善城市",desc:"提高女性公廁及婦幼停車格比例、就業輔導、職場性平。"},
 ];
-const DONE_WIDE = [
-  {title:"步道改善、行人空間拓寬",desc:"站台者提及的議員任內政績，報導未列具體路段。"},
-  {title:"議員任內自述數字",desc:"出席及質詢率 100%、提案逾 250 案、會勘逾 700 件、選民服務 3,500 多件（舊版文宣自述，未查證）。"},
-];
+const DONE_WIDE = [{title:"中山路人行道電箱遷移",desc:"爭取 5,100 萬，保障行人公共通行權。"},{title:"華中橋護欄與人行道",desc:"爭取 1,634 萬全面翻新。"},{title:"員山公園",desc:"整修滑草坡、全面汰換沙丘細沙、修繕龜裂鋪面。"},{title:"太武山莊活化",desc:"爭取 119 萬重現眷村文化。"},{title:"民樂人行廣場",desc:"補助 190 萬擴大兒童遊戲區、新設體健設施。"},{title:"大洋塑膠舊址",desc:"爭取規劃納入新中和分局與中原派出所。"},{title:"學校零星補助",desc:"中和國小諮商室 63 萬、景新國小紗窗 35 萬、光復國小監視器與觸控螢幕 30 萬。"},{title:"中和哈克會館",desc:"補助 90 萬設施整修。"},{title:"步道改善、行人空間拓寬",desc:"2026 站台者提及，未列路段。"},{title:"任內自述數字",desc:"成績單版：提案 319 件、會勘 659 件以上、選民服務 3,127 件以上、法律諮詢 2,536 人以上、骨質義診 1,516 人以上。舊文宣版：提案逾 250、會勘逾 700、服務 3,500 多件。兩版數字對不上，皆未查證。"}];
 const COL={plan:"var(--plan)",flyer:"var(--flyer)",done:"var(--done)"};
 const SOFT={plan:"var(--plan-soft)",flyer:"var(--flyer-soft)",done:"var(--done-soft)"};
 
@@ -65,9 +76,17 @@ GEO.mrt.forEach(m=>{el("circle",{cx:m.p[0],cy:m.p[1],r:6,class:"mrt-st"},mrtG);
   const t=el("text",{x:m.p[0],y:m.p[1]+22,class:"mrt-lbl","text-anchor":"middle"},mrtG);t.textContent=m.n+"站"});
 
 const POS={...GEO.pts,nanshiA:[nx-35,ny+55],nanshiB:[nx+75,ny+25]};
+function posOf(at){
+  if(at.startsWith("v:")){const v=GEO.villages.find(v=>v.n===at.slice(2));return v.c}
+  if(at==="xiu"){const xs=GEO.villages.filter(v=>v.n.startsWith("秀"));return [xs.reduce((a,v)=>a+v.c[0],0)/xs.length,xs.reduce((a,v)=>a+v.c[1],0)/xs.length]}
+  if(at==="gfieldD")return [GEO.pts.gfield[0]+5,GEO.pts.gfield[1]+48];
+  if(at==="wayaoD")return [GEO.pts.wayao[0]-55,GEO.pts.wayao[1]+20];
+  return POS[at];
+}
+
 const pins={};
 ITEMS.forEach(it=>{
-  const [x,y]=POS[it.at];
+  const [x,y]=posOf(it.at);
   const g=el("g",{class:"pin","data-kind":it.kind,"data-id":it.id,tabindex:"0",role:"button","aria-label":it.title});
   const col=COL[it.kind];
   el("circle",{cx:x,cy:y,r:30,class:"halo",fill:SOFT[it.kind]},g);
