@@ -18,9 +18,9 @@ const ITEMS = [
   {id:"p5",kind:"plan",at:"wayao",short:"瓦磘溝親水綠帶",title:"瓦磘溝除臭清淤",where:"瓦磘溝沿線（標在瓦磘里）",desc:"持續爭取瓦磘溝除臭清淤改善工程，引活水打造親水綠帶。",src:["f26","flyer"]},
   {id:"p6",kind:"plan",at:"mrt",short:"萬大線接駁",title:"萬大中和線公車接駁網",where:"中和站 · 連城錦和站 · 中和高中站（黃線為路線示意）",desc:"以萬大中和線各站為核心，整合現有公車路線，建構完善接駁路網。",src:["f26"]},
   {id:"p7",kind:"plan",at:"xingnan",short:"興南夜市",title:"興南夜市復興",where:"興南路一段 · 南勢角站旁（大致位置）",desc:"2026 文宣沒有列這條，但他在 9 月南勢角後援會上公開提過，故保留。",src:["ltn","mk"]},
-  {id:"o1",kind:"flyer",at:"minan",short:"民安街交通",title:"改善民安街交通壅塞",where:"民安街一帶（大致位置）",desc:"舊版文宣把它綁在國管院都計檢討裡；2026 版只留「縫合內外員山」，沒再提民安街。",src:["flyer"]},
-  {id:"o2",kind:"flyer",at:"huaxin",short:"華新街特色街區",title:"華新街南向經貿特色街區",where:"華新街（緬甸街）· 南勢角站旁",desc:"打造華新街為南向經貿特色街區，並引入興南夜市活化。2026 文宣未再列出。",src:["flyer"]},
-  {id:"o3",kind:"flyer",at:"zhongyuan",short:"中原溝除臭",title:"中原溝截流清淤",where:"中原溝 · 大左岸（標在中原里）",desc:"力促中原溝汙水截流及清淤除臭整治。2026 文宣未再列出。",src:["flyer"]},
+  {id:"o1",kind:"done",old:true,at:"minan",short:"民安街交通",title:"改善民安街交通壅塞",where:"民安街一帶（大致位置）",desc:"舊版文宣把它綁在國管院都計檢討裡；2026 版只留「縫合內外員山」，沒再提民安街。",src:["flyer"]},
+  {id:"o2",kind:"done",old:true,at:"huaxin",short:"華新街特色街區",title:"華新街南向經貿特色街區",where:"華新街（緬甸街）· 南勢角站旁",desc:"打造華新街為南向經貿特色街區，並引入興南夜市活化。2026 文宣未再列出。",src:["flyer"]},
+  {id:"o3",kind:"done",old:true,at:"zhongyuan",short:"中原溝除臭",title:"中原溝截流清淤",where:"中原溝 · 大左岸（標在中原里）",desc:"力促中原溝汙水截流及清淤除臭整治。2026 文宣未再列出。",src:["flyer"]},
   {id:"d1",kind:"done",at:"park4",short:"四號公園",title:"四號公園共融遊戲場",where:"中和公園（四號公園）· 2017",desc:"與特公盟家長推動雙和第一座共融遊戲場，並爭取無障礙坡道溜滑梯。",src:["udn3"]},
   {id:"d2",kind:"done",at:"jinhe",short:"錦和運動公園",title:"錦和運動公園親子廁所",where:"錦和運動公園（大致位置）",desc:"爭取 500 萬增設親子廁所和洗手台。與立委張雅琳（時任特公盟理事長）共同爭取。",src:["card", "udn3"]},
   {id:"d3",kind:"done",at:"gfieldD",short:"國管院操場翻修",title:"翻修國管院大操場",where:"國管院舊址（大致位置）",desc:"爭取 700 萬翻修，成功保留民眾運動綠地空間。2026 再提「永久保留」。",src:["card"]},
@@ -153,18 +153,18 @@ const areaLbl=addLabel("南勢角生活圈 · 示意範圍",new THREE.Vector3(..
 const qEls={};
 function q(it,parent){
   const d=document.createElement("div");d.className="q";d.dataset.kind=it.kind;d.tabIndex=0;d.setAttribute("role","button");
-  d.innerHTML=`<div class="ic ${it.area?"dash":""}"><span>${it.kind==="done"?"✓":it.id.slice(1)}</span></div><div><b></b><small></small></div>`;
+  d.innerHTML=`<div class="ic ${it.area?"dash":""}"><span>${it.kind==="done"?(it.old?"舊":"✓"):it.id.slice(1)}</span></div><div><b></b><small></small></div>`;
   d.querySelector("b").textContent=it.title;d.querySelector("small").textContent=it.where.split(" · ")[0];
   parent.appendChild(d);qEls[it.id]=d;
   d.addEventListener("click",()=>select(it.id));d.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(it.id)}});
 }
 ITEMS.filter(i=>i.kind==="plan").forEach(i=>q(i,document.getElementById("l-plan")));
-ITEMS.filter(i=>i.kind==="done").forEach(i=>q(i,document.getElementById("l-done")));
+ITEMS.filter(i=>i.kind==="done"&&!i.old).forEach(i=>q(i,document.getElementById("l-done")));
 function st(a,parent,kind){const d=document.createElement("div");d.className="q static";d.dataset.kind=kind;d.innerHTML=`<div class="ic"><span>·</span></div><div><b></b><small></small></div>`;d.querySelector("b").textContent=a[0];d.querySelector("small").textContent=a[1];parent.appendChild(d)}
 WIDE.forEach(a=>st(a,document.getElementById("l-wide"),"plan"));
 DONE_WIDE.forEach(a=>st(a,document.getElementById("l-done"),"done"));
-FWIDE.forEach(a=>st(a,document.getElementById("l-fwide"),"flyer"));
-ITEMS.filter(i=>i.kind==="flyer").forEach(i=>q(i,document.getElementById("l-flyer")));
+ITEMS.filter(i=>i.old).forEach(i=>q(i,document.getElementById("l-old")));
+FWIDE.forEach(a=>st(a,document.getElementById("l-old"),"done"));
 document.getElementById("count").textContent=`${ITEMS.length+WIDE.length+DONE_WIDE.length+FWIDE.length} 項`;
 
 // ---------- camera tween ----------
@@ -184,7 +184,7 @@ function select(id){
   nsMeshes.forEach(m=>{m.material.emissiveIntensity=(it&&it.area)?.55:.12});
   if(!it){card.hidden=true;flyTo(HOME.pos.clone(),HOME.tgt.clone());return}
   card.hidden=false;card.dataset.kind=it.kind;
-  document.getElementById("c-t").textContent=({plan:"主線任務 ",flyer:"舊文宣 ",done:"已完成 "}[it.kind])+it.id.toUpperCase();
+  document.getElementById("c-t").textContent=(it.old?"舊政見 ":{plan:"主線任務 ",done:"已完成 "}[it.kind])+it.id.toUpperCase();
   document.getElementById("c-h").textContent=it.title;
   document.getElementById("c-p").textContent=it.desc;
   document.getElementById("c-w").textContent="📍 "+it.where;
@@ -196,7 +196,7 @@ function select(id){
 document.getElementById("reset").addEventListener("click",()=>{if(active)select(active);else flyTo(HOME.pos.clone(),HOME.tgt.clone())});
 
 // filters
-const show={plan:true,done:true,flyer:true};
+const show={plan:true,done:true};
 document.querySelectorAll(".btn[data-f]").forEach(b=>b.addEventListener("click",()=>{
   const f=b.dataset.f;show[f]=!show[f];b.setAttribute("aria-pressed",show[f]);
   ITEMS.forEach(it=>{if(it.kind===f){beacons[it.id].visible=show[f];it.label.el.hidden=!show[f]}});

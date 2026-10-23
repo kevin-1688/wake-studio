@@ -88,3 +88,6 @@ svg{display:block;width:100%;height:auto}
 .pin[data-kind="done"].on text:not(.pin-num),.pin[data-kind="done"]:hover text:not(.pin-num),.pin[data-kind="done"]:focus-visible text:not(.pin-num){display:block}
 .pin[data-kind="done"] circle:not(.halo){r:11px}
 .pin[data-kind="done"] .pin-num{font-size:11px}
+
+.subhead{font-size:14px;font-weight:700;margin:14px 0 6px;color:var(--muted)}
+.subhead small{font-weight:400;font-size:12px}

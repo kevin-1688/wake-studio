@@ -17,9 +17,9 @@ const ITEMS = [
   {id:"p5",kind:"plan",at:"wayao",short:"瓦磘溝",title:"瓦磘溝除臭清淤",where:"瓦磘溝沿線（標在瓦磘里）",desc:"持續爭取除臭清淤改善工程，引活水打造親水綠帶。",src:["f26","flyer"]},
   {id:"p6",kind:"plan",at:"mrt",short:"萬大線接駁",title:"萬大中和線公車接駁網",where:"中和站 · 連城錦和站 · 中和高中站（路線為示意）",desc:"以萬大中和線各站為核心，整合現有公車路線，建構完善接駁路網。",src:["f26"]},
   {id:"p7",kind:"plan",at:"xingnan",short:"興南夜市",title:"興南夜市復興",where:"興南路一段 · 南勢角站旁（大致位置）",desc:"2026 文宣沒有列，但他 9 月在南勢角後援會公開提過。",src:["ltn","mk"]},
-  {id:"o1",kind:"flyer",at:"minan",short:"民安街",title:"改善民安街交通壅塞",where:"民安街一帶（大致位置）",desc:"舊版把它綁在國管院都計檢討裡，2026 版沒再提民安街。",src:["flyer"]},
-  {id:"o2",kind:"flyer",at:"huaxin",short:"華新街",title:"華新街南向經貿特色街區",where:"華新街（緬甸街）",desc:"打造南向經貿特色街區並引入興南夜市活化。2026 版未再列出。",src:["flyer"]},
-  {id:"o3",kind:"flyer",at:"zhongyuan",short:"中原溝",title:"中原溝截流清淤",where:"中原溝（標在中原里）",desc:"力促汙水截流及清淤除臭整治。2026 版未再列出。",src:["flyer"]},
+  {id:"o1",kind:"done",old:true,at:"minan",short:"民安街",title:"改善民安街交通壅塞",where:"民安街一帶（大致位置）",desc:"舊版把它綁在國管院都計檢討裡，2026 版沒再提民安街。",src:["flyer"]},
+  {id:"o2",kind:"done",old:true,at:"huaxin",short:"華新街",title:"華新街南向經貿特色街區",where:"華新街（緬甸街）",desc:"打造南向經貿特色街區並引入興南夜市活化。2026 版未再列出。",src:["flyer"]},
+  {id:"o3",kind:"done",old:true,at:"zhongyuan",short:"中原溝",title:"中原溝截流清淤",where:"中原溝（標在中原里）",desc:"力促汙水截流及清淤除臭整治。2026 版未再列出。",src:["flyer"]},
   {id:"d1",kind:"done",at:"park4",short:"四號公園",title:"四號公園共融遊戲場",where:"中和公園（四號公園）· 2017",desc:"與特公盟家長推動雙和第一座共融遊戲場，並爭取無障礙坡道溜滑梯。",src:["udn3"]},
   {id:"d2",kind:"done",at:"jinhe",short:"錦和運動公園",title:"錦和運動公園親子廁所",where:"錦和運動公園（大致位置）",desc:"爭取 500 萬增設親子廁所和洗手台。與立委張雅琳（時任特公盟理事長）共同爭取。",src:["card", "udn3"]},
   {id:"d3",kind:"done",at:"gfieldD",short:"國管院操場翻修",title:"翻修國管院大操場",where:"國管院舊址（大致位置）",desc:"爭取 700 萬翻修，成功保留民眾運動綠地空間。2026 再提「永久保留」。",src:["card"]},
@@ -93,7 +93,7 @@ ITEMS.forEach(it=>{
   if(it.ring)el("circle",{cx:x,cy:y,r:15,fill:"var(--land)",stroke:col,"stroke-width":3,"stroke-dasharray":"4 3"},g);
   else el("circle",{cx:x,cy:y,r:15,fill:col,stroke:"var(--land)","stroke-width":3},g);
   const n=el("text",{x,y:y+5,"text-anchor":"middle",class:"pin-num",style:`fill:${it.ring?col:"var(--land)"}`},g);
-  n.textContent=it.kind==="done"?"✓":it.id.slice(1);
+  n.textContent=it.kind==="done"?(it.old?"舊":"✓"):it.id.slice(1);
   const lab=el("text",{x:x+22,y:y+5},g);lab.textContent=it.short;
   pins[it.id]=g;
 });
@@ -106,7 +106,7 @@ function srcLine(it){const d=document.createElement("div");d.className="src";d.t
 function mkRow(it,parent){
   const r=document.createElement("div");r.className="row";r.dataset.kind=it.kind;r.tabIndex=0;r.setAttribute("role","button");
   r.innerHTML=`<span class="badge ${it.ring?"ring":""}"></span><div class="body"><div class="where"></div><h3></h3><p></p></div>`;
-  r.querySelector(".badge").textContent=it.kind==="done"?"✓":it.id.slice(1);
+  r.querySelector(".badge").textContent=it.kind==="done"?(it.old?"舊":"✓"):it.id.slice(1);
   r.querySelector(".where").textContent=it.where;r.querySelector("h3").textContent=it.title;r.querySelector("p").textContent=it.desc;
   r.querySelector(".body").appendChild(srcLine(it));
   parent.appendChild(r);rows[it.id]=r;
@@ -115,9 +115,9 @@ function mkStatic(w,parent,kind){const r=document.createElement("div");r.classNa
   r.innerHTML=`<span class="badge">·</span><div><h3></h3><p></p></div>`;r.querySelector("h3").textContent=w.title;r.querySelector("p").textContent=w.desc;parent.appendChild(r)}
 ITEMS.filter(i=>i.kind==="plan").forEach(i=>mkRow(i,document.getElementById("rows-plan")));
 WIDE.forEach(w=>mkStatic(w,document.getElementById("rows-wide"),"plan"));
-ITEMS.filter(i=>i.kind==="flyer").forEach(i=>mkRow(i,document.getElementById("rows-flyer")));
-FWIDE.forEach(w=>mkStatic(w,document.getElementById("rows-flyer"),"flyer"));
-ITEMS.filter(i=>i.kind==="done").forEach(i=>mkRow(i,document.getElementById("rows-done")));
+ITEMS.filter(i=>i.kind==="done"&&!i.old).forEach(i=>mkRow(i,document.getElementById("rows-done")));
+ITEMS.filter(i=>i.old).forEach(i=>mkRow(i,document.getElementById("rows-old")));
+FWIDE.forEach(w=>mkStatic(w,document.getElementById("rows-old"),"done"));
 DONE_WIDE.forEach(w=>mkStatic(w,document.getElementById("rows-done"),"done"));
 
 let active=null;
@@ -131,7 +131,7 @@ function select(id){
 const bind=(node,id)=>{node.addEventListener("click",()=>select(id));node.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(id)}})};
 for(const k in pins){bind(pins[k],k);bind(rows[k],k)}
 
-const state={plan:true,flyer:true,done:true};
+const state={plan:true,done:true};
 document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
   const f=b.dataset.f;state[f]=!state[f];b.setAttribute("aria-pressed",state[f]);
   ITEMS.forEach(it=>{if(it.kind===f)pins[it.id].style.display=state[f]?"":"none"});
