@@ -113,10 +113,9 @@ GEO.towns.filter(t=>t.n!=="中和區").forEach(t=>{
 const vMat=new THREE.MeshStandardMaterial({color:0x2d4655,roughness:.7,metalness:.1});
 const nsMat=new THREE.MeshStandardMaterial({color:0x5a3a2a,roughness:.6,emissive:0xff7a3d,emissiveIntensity:.12});
 const nsMeshes=[];
-GEO.villages.forEach(v=>{
-  const ns=NANSHI.includes(v.n);
-  const m=extrude(shapesFrom(v.d,.93,v.c),ns?16:12,ns?nsMat.clone():vMat);
-  scene.add(m);if(ns)nsMeshes.push(m);
+scene.add(extrude(shapesFrom(GEO.towns.find(t=>t.n==="中和區").d),12,vMat));
+GEO.villages.filter(v=>NANSHI.includes(v.n)).forEach(v=>{
+  const m=extrude(shapesFrom(v.d),16,nsMat.clone());scene.add(m);nsMeshes.push(m);
 });
 // district outline glow
 parse(GEO.towns.find(t=>t.n==="中和區").d).forEach(r=>{

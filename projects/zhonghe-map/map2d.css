@@ -46,7 +46,8 @@ svg{display:block;width:100%;height:auto}
 .town-other{fill:var(--land-other);stroke:var(--line);stroke-width:1.2}
 .town-zh{fill:var(--land);stroke:var(--ink);stroke-width:2.4}
 .vill{fill:none;stroke:var(--vill);stroke-width:.8}
-.nanshi{fill:var(--plan-soft);stroke:var(--area);stroke-width:1.4;stroke-dasharray:5 4}
+.nanshi-fill{fill:var(--plan-soft);stroke:var(--plan-soft);stroke-width:.6}
+.nanshi{fill:none;stroke:var(--area);stroke-width:1.4;stroke-dasharray:5 4;stroke-linecap:round}
 .nb-label{font-family:var(--f-body);font-size:20px;fill:var(--muted);letter-spacing:.2em}
 .zh-label{font-family:var(--f-display);font-weight:900;font-size:30px;fill:var(--ink);opacity:.12;letter-spacing:.3em}
 .area-label{font-size:15px;fill:var(--area);font-weight:700}

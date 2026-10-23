@@ -78,10 +78,13 @@ const el=(t,a={},p=svg)=>{const e=document.createElementNS(NS,t);for(const k in 
 el("rect",{x:0,y:0,width:1000,height:894,fill:"var(--land-other)"});
 GEO.towns.filter(t=>t.n!=="中和區").forEach(t=>el("path",{d:t.d,class:"town-other"}));
 el("path",{d:GEO.towns.find(t=>t.n==="中和區").d,class:"town-zh"});
-GEO.villages.forEach(v=>el("path",{d:v.d,class:"vill"}));
 const ns=GEO.villages.filter(v=>NANSHI.includes(v.n));
 const nsG=el("g",{id:"area-nanshi"});
-ns.forEach(v=>el("path",{d:v.d,class:"nanshi"},nsG));
+ns.forEach(v=>el("path",{d:v.d,class:"nanshi-fill"},nsG));
+{const cnt=new Map();const k=(a,b)=>a<b?a+"|"+b:b+"|"+a;
+ ns.forEach(v=>v.d.split("M").filter(Boolean).forEach(r=>{const p=r.replace("Z","").split("L");for(let i=0;i<p.length;i++){const a=p[i],b=p[(i+1)%p.length];if(a===b)continue;const key=k(a,b);cnt.set(key,(cnt.get(key)||0)+1)}}));
+ const d=[...cnt].filter(([,n])=>n===1).map(([key])=>{const [a,b]=key.split("|");return "M"+a+"L"+b}).join("");
+ el("path",{d,class:"nanshi"},nsG);}
 let nx=0,ny=0;ns.forEach(v=>{nx+=v.c[0];ny+=v.c[1]});nx/=ns.length;ny/=ns.length;
 const ROADLBL={"福爾摩沙高速公路":"國道 3 號"};
 const LABELED=["中山路","中和路","中正路","景平路","連城路","錦和路","員山路","圓通路","板南路","橋和路","興南路","秀朗路","環河西路","金城路","永貞路","景安路","景新街","莒光路","民德路","建一路","福爾摩沙高速公路","華中橋","永和路","安樂路"];
