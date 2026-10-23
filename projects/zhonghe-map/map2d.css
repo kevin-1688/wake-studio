@@ -97,3 +97,5 @@ svg{display:block;width:100%;height:auto}
 .subhead{font-size:14px;font-weight:700;margin:14px 0 6px;color:var(--muted)}
 .subhead small{font-weight:400;font-size:12px}
 .nw{white-space:nowrap}
+
+.creek{fill:none;stroke:#3d8fd1;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:.8}
