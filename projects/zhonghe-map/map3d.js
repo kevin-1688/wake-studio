@@ -265,14 +265,16 @@ function select(id){
   const it=ITEMS.find(i=>i.id===active);
   nsMat.emissiveIntensity=(it&&it.area)?.35:0;
   if(!it){card.hidden=true;flyTo(VIEWS.home.p.clone(),VIEWS.home.t.clone());return}
-  card.hidden=false;card.dataset.kind=it.old?"old":it.kind;
+  card.hidden=false;card.classList.remove("open");card.dataset.kind=it.old?"old":it.kind;
   $("c-t").textContent=(it.old?"舊政見":it.kind==="plan"?"2026 政見 "+num(it):"過往政績");
   $("c-h").textContent=it.title;$("c-p").textContent=it.desc;$("c-w").textContent=it.where;
   rows[it.id]?.scrollIntoView({block:"nearest",behavior:reduceMotion?"auto":"smooth"});
   const b=markers[it.id].position;
-  flyTo(new THREE.Vector3(b.x+120,b.y+260,b.z+290),new THREE.Vector3(b.x,b.y,b.z));
+  const narrow=stage.clientWidth<600;
+  flyTo(new THREE.Vector3(b.x+120,b.y+(narrow?330:260),b.z+(narrow?370:290)),new THREE.Vector3(b.x,b.y,b.z+(narrow?40:0)));
 }
-$("card-close").addEventListener("click",()=>{if(active)select(active)});
+$("card-close").addEventListener("click",e=>{e.stopPropagation();if(active)select(active)});
+card.addEventListener("click",()=>card.classList.toggle("open"));
 
 // ---------- toolbar ----------
 const show={plan:true,done:true,names:true};
