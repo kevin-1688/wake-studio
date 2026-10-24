@@ -119,3 +119,6 @@ svg{display:block;width:100%;height:auto;border-radius:14px}
 .wake-bar a{color:inherit;text-decoration:none}
 .wake-bar a:hover{color:var(--ink,#1d2528);text-decoration:underline}
 .wake-bar .r{display:flex;gap:14px}
+
+.chip.music{border-left:1px solid var(--line);border-radius:0 12px 12px 0;margin-left:2px}
+.chip.music[aria-pressed="true"]{background:var(--plan);color:#fff;border-radius:12px}

@@ -203,7 +203,7 @@ const bind=(node,id)=>{node.addEventListener("click",()=>select(id));node.addEve
 for(const k in pins){bind(pins[k],k);bind(rows[k],k)}
 
 const state={plan:true,done:true};
-document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
+document.querySelectorAll(".chip[data-f]").forEach(b=>b.addEventListener("click",()=>{
   const f=b.dataset.f;state[f]=!state[f];b.setAttribute("aria-pressed",state[f]);
   ITEMS.forEach(it=>{if(it.kind===f)pins[it.id].style.display=state[f]?"":"none"});
   if(f==="done")decoG.style.opacity=1;
