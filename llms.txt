@@ -32,7 +32,7 @@
 - [在全黑的時代，跳舞 In the Black Time, Dance](https://dance-wine.vercel.app/): WAKE-008，2026，已發布。向一處文化資產致敬的概念設計：一棟日式宿舍、一塊木地板，承載現代舞先驅自 1953 年起的足跡與七十年的動作教育。以單頁敘事串起搶救、火劫與重建——把古蹟記憶與一場跨越數十年的保存戰役濃縮成一次滾動體驗。
 - [Sudoku 數獨](https://github.com/kevin-1688/sudoku): WAKE-009，2026，已發布。完整功能的網頁數獨：題目生成與多重難度、筆記模式、提示、復原與錯誤計數、計時。純 Vanilla JS 實作，零框架依賴。
 - [競選形象官網 Campaign Website](https://wake.com.tw/works.html): WAKE-010，委託案，客戶委託。地方候選人形象官網委託案——從個人敘事建構、政見主軸資訊架構到整體視覺識別，設計與開發一手包辦。應客戶屬性不公開細節。
-- [商業 3D 產品視覺 Commercial 3D Product Visuals](https://wake.com.tw/projects/3d-product-visualization.html): WAKE-011，接案，服務項目。產品動畫、爆炸圖、機構運作模擬。近期案例：智慧行李箱完整視覺化——輪組機構、真空收納系統動畫與行銷素材產出。
+- [商業 3D 產品視覺 Commercial 3D Product Visuals](https://wake.com.tw/projects/3d-product-visualization.html): WAKE-011，接案，服務項目。產品動畫、爆炸圖、機構運作模擬。近期案例：智慧行李箱完整視覺化——輪組機構、真空收納系統動畫與行銷素材產出。另有自主示範：半透明外殼的行星減速機內部運作動畫。
 - [垂直農場模擬 Vertical Farming Simulation](https://github.com/kevin-1688/bfs-virtical-farming): WAKE-012，2026，研究原型。垂直農業系統的演算法模擬原型，延伸自對能源與永續議題的長期關注。
 
 ## 可以直接玩的遊戲 Playable in the browser
