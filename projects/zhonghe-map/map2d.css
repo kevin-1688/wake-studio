@@ -125,3 +125,11 @@ svg{display:block;width:100%;height:auto;border-radius:14px}
 .site-label{font-size:12.5px;font-weight:700;fill:#9b3f1c;paint-order:stroke;stroke:#fff6ec;stroke-width:4px;pointer-events:none}
 .qilu-zone{fill:url(#hatch);stroke:#e0693a;stroke-width:2;stroke-dasharray:6 4;stroke-linejoin:round}
 #qilu.hi .qilu-zone{stroke-width:3.5}
+
+.pet-bub{fill:var(--voice);stroke:#fff;stroke-width:1.5;filter:drop-shadow(0 2px 3px rgba(40,40,90,.3))}
+.pet-dot{fill:#fff}
+.pet-pin{cursor:pointer}
+.pet-pin.on .pet-bub,.pet-pin:hover .pet-bub{stroke:#2b2622;stroke-width:2}
+.chip.pet-add{color:var(--voice);font-weight:700}
+svg.picking{cursor:crosshair;outline:3px solid var(--voice);outline-offset:-3px}
+@media (min-width:901px){.mapcard{position:sticky;top:16px}}

@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Fraunces:ital,opsz,wght@1,9..144,600&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="map2d.css">
+<link rel="stylesheet" href="petition.css">
 </head>
 <body>
 <div class="wake-bar"><a href="/works.html">← WAKE 作品檔案 · WAKE-016</a><span class="r"><a href="3d.html">切換 3D 版 →</a></span></div>
@@ -33,6 +34,8 @@
   <div class="filters" role="group" aria-label="顯示圖層">
     <button class="chip" id="f-plan" data-f="plan" aria-pressed="true"><span class="dot" style="background:var(--plan)"></span>2026 政見</button>
     <button class="chip" id="f-done" data-f="done" aria-pressed="true"><span class="dot" style="background:var(--done)"></span>過往政績</button>
+    <button class="chip" id="f-voice" data-f="voice" aria-pressed="true"><span class="dot" style="background:var(--voice)"></span>民眾陳情</button>
+    <button class="chip pet-add" type="button" data-pet-add>✎ 我要陳情</button>
     <button class="chip music" type="button" data-music><span aria-hidden="true">♪</span><span class="lbl">音樂</span></button>
   </div>
 
@@ -51,6 +54,11 @@
         <h2><span class="dot" style="background:var(--muted)"></span>2026 福利與全區政見 <small>不對應單一地點</small></h2>
         <div class="rows" id="rows-wide"></div>
       </section>
+      <section class="sect" data-kind="voice">
+        <h2><span class="dot" style="background:var(--voice)"></span>議員你給我聽好了 <small><span data-pet-count>0</span> 則公開陳情</small></h2>
+        <div class="pet-cta"><p>在地圖上標出你住的地方哪裡需要改善，服務處審核後會公開。</p><button type="button" class="pet-btn" data-pet-add>我要陳情</button></div>
+        <div data-pet-list></div>
+      </section>
       <section class="sect" data-kind="done">
         <h2><span class="dot" style="background:var(--done)"></span>過往政績</h2>
         <div class="rows" id="rows-done"></div>
@@ -64,5 +72,6 @@
 </div>
 <script src="map2d.js"></script>
 <script src="ambient.js"></script>
+<script src="petition.js"></script>
 </body>
 </html>

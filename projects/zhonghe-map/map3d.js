@@ -283,7 +283,7 @@ $("card-close").addEventListener("click",e=>{e.stopPropagation();if(active)selec
 card.addEventListener("click",()=>card.classList.toggle("open"));
 
 // ---------- toolbar ----------
-const show={plan:true,done:true,names:true};
+const show={plan:true,done:true,names:true,voice:true};
 function applyShow(){
   ITEMS.forEach(it=>{const on=it.kind==="plan"?show.plan:show.done;markers[it.id].visible=on});
   nsGroup.visible=show.plan;qilu.visible=show.plan;qilu.userData.line.visible=show.plan;areaLbl.el.hidden=!show.plan;
@@ -301,7 +301,9 @@ renderer.domElement.addEventListener("pointerdown",e=>down=[e.clientX,e.clientY]
 renderer.domElement.addEventListener("pointerup",e=>{
   if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)return;
   const r=renderer.domElement.getBoundingClientRect();mouse.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);
-  ray.setFromCamera(mouse,camera);const objs=[];Object.values(markers).forEach(g=>{if(g.visible)g.traverse(o=>o.isMesh&&objs.push(o))});
+  ray.setFromCamera(mouse,camera);
+  if(picking){const h=ray.intersectObjects([grass,sand,qilu,...nsGroup.children])[0];if(h){const x=h.point.x+500,y=h.point.z+447;if(inside(x,y)){const cb=picking;window.PetitionHost.cancelPick();cb(x,y)}}return}
+  const objs=[];Object.values(markers).forEach(g=>{if(g.visible)g.traverse(o=>o.isMesh&&objs.push(o))});
   const hit=ray.intersectObjects(objs)[0];if(hit){let o=hit.object;while(o&&!o.userData.id)o=o.parent;if(o)select(o.userData.id)}
 });
 
@@ -324,6 +326,7 @@ function loop(){
   renderer.render(scene,camera);
   const w=stage.clientWidth,h=stage.clientHeight,dist=camera.position.distanceTo(controls.target);
   labels.forEach(l=>{tmp.copy(l.p).project(camera);let vis=tmp.z<1&&Math.abs(tmp.x)<1.05&&Math.abs(tmp.y)<1.05;
+    if(l.pet)vis=vis&&show.voice;
     if(l.id){const it=ITEMS.find(i=>i.id===l.id);const layerOn=it.kind==="plan"?show.plan:show.done;
       vis=vis&&layerOn&&(l.id===active||(show.names&&(l.kind==="plan"||dist<430)))}
     l.el.style.visibility=vis?"":"hidden";l.el.classList.toggle("on",l.id===active);
@@ -331,3 +334,13 @@ function loop(){
   requestAnimationFrame(loop);
 }
 loop();
+
+// ---------- 議員你給我聽好了 host ----------
+let picking=null;const petLabels=[];
+window.PetitionHost={
+  startPick(cb){picking=cb;stage.classList.add("picking");if(active)select(active);flyTo(VIEWS.home.p.clone(),VIEWS.home.t.clone())},
+  cancelPick(){picking=null;stage.classList.remove("picking")},
+  render(list,onShow){petLabels.forEach(l=>{l.el.remove();const i=labels.indexOf(l);if(i>=0)labels.splice(i,1)});petLabels.length=0;
+    list.forEach(p=>{const o=addLabel("<i></i>",v3([p.x,p.y],TOP+1),"pet");o.pet=true;o.el.title=p.category+"："+p.body.slice(0,30);o.el.addEventListener("click",()=>onShow(p));petLabels.push(o)})},
+  focus(p){const b=v3([p.x,p.y],TOP);const narrow=stage.clientWidth<600;flyTo(new THREE.Vector3(b.x+120,b.y+(narrow?330:260),b.z+(narrow?370:290)),new THREE.Vector3(b.x,b.y,b.z+(narrow?40:0)))}
+};

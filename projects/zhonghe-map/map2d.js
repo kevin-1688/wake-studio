@@ -144,6 +144,7 @@ const PLACED={};(()=>{const used=[];ITEMS.forEach(it=>{const b=posOf(it.at);let 
   while(used.some(([ux,uy])=>Math.hypot(ux-x,uy-y)<24)&&i<16){i++;const a=i*2.4,r=20+i*3;x=b[0]+Math.cos(a)*r;y=b[1]+Math.sin(a)*r}
   used.push([x,y]);PLACED[it.id]=[x,y]})})();
 const pins={};
+const petG=el("g",{id:"pets"});
 const pinLayer=el("g",{id:"pins"});
 ITEMS.forEach(it=>{
   const [x,y]=PLACED[it.id];const key=it.old?"old":it.kind;
@@ -206,11 +207,28 @@ function select(id){
 const bind=(node,id)=>{node.addEventListener("click",()=>select(id));node.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(id)}})};
 for(const k in pins){bind(pins[k],k);bind(rows[k],k)}
 
-const state={plan:true,done:true};
+const state={plan:true,done:true,voice:true};
 document.querySelectorAll(".chip[data-f]").forEach(b=>b.addEventListener("click",()=>{
   const f=b.dataset.f;state[f]=!state[f];b.setAttribute("aria-pressed",state[f]);
   ITEMS.forEach(it=>{if(it.kind===f)pins[it.id].style.display=state[f]?"":"none"});
   if(f==="done")decoG.style.opacity=1;
   document.querySelectorAll(`.sect[data-kind="${f}"]`).forEach(s=>s.hidden=!state[f]);
+  if(f==="voice")petG.style.display=state.voice?"":"none";
   if(f==="plan"){nsG.style.display=state.plan?"":"none";qiluG.style.display=state.plan?"":"none";mrtG.style.display=state.plan?"":"none"}
 }));
+
+// ---------- 議員你給我聽好了 host ----------
+let picking=null;
+svg.addEventListener("click",e=>{if(!picking)return;const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform(svg.getScreenCTM().inverse());
+  if(inside(p.x,p.y)){const cb=picking;window.PetitionHost.cancelPick();cb(p.x,p.y)}},true);
+window.PetitionHost={
+  startPick(cb){picking=cb;svg.classList.add("picking");if(active)select(active);svg.scrollIntoView({block:"center",behavior:"smooth"})},
+  cancelPick(){picking=null;svg.classList.remove("picking")},
+  render(list,onShow){petG.textContent="";list.forEach(p=>{const g=el("g",{class:"pet-pin",tabindex:"0",role:"button","aria-label":"陳情："+p.category,"data-pid":p.id},petG);const x=p.x,y=p.y;
+    el("path",{d:`M${x-11},${y-25} h22 a5,5 0 0 1 5,5 v8 a5,5 0 0 1 -5,5 h-7 l-4,6 l-4,-6 h-7 a5,5 0 0 1 -5,-5 v-8 a5,5 0 0 1 5,-5z`,class:"pet-bub"},g);
+    [-6,0,6].forEach(dx=>el("circle",{cx:x+dx,cy:y-16,r:1.6,class:"pet-dot"},g));
+    const t=el("title",{},g);t.textContent=p.category+"："+p.body.slice(0,40);
+    const go=()=>{petG.querySelectorAll(".on").forEach(n=>n.classList.remove("on"));g.classList.add("on");onShow(p)};
+    g.addEventListener("click",e=>{if(picking)return;e.stopPropagation();go()});g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}})})},
+  focus(p){petG.querySelectorAll(".on").forEach(n=>n.classList.remove("on"));const g=petG.querySelector(`[data-pid="${CSS.escape(String(p.id))}"]`);if(g){g.classList.add("on");petG.appendChild(g)}if(matchMedia("(max-width:900px)").matches)svg.scrollIntoView({block:"center",behavior:"smooth"})}
+};

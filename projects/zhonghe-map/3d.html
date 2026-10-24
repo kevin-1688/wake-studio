@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Fraunces:ital,opsz,wght@1,9..144,600&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="map3d.css">
+<link rel="stylesheet" href="petition.css">
 </head>
 <body>
 <div class="app">
@@ -41,6 +42,8 @@
       <button type="button" class="tool" data-toggle="names" aria-pressed="true"><span class="ic">▭</span>名牌</button>
       <button type="button" class="tool" data-toggle="plan" aria-pressed="true"><span class="ic dot plan"></span>政見</button>
       <button type="button" class="tool" data-toggle="done" aria-pressed="true"><span class="ic dot done"></span>政績</button>
+      <button type="button" class="tool" data-toggle="voice" aria-pressed="true"><span class="ic dot voice"></span>陳情</button>
+      <button type="button" class="tool pet-add" data-pet-add><span class="ic">✎</span>我要陳情</button>
     </nav>
 
     <article class="card" id="card" data-kind="plan" hidden>
@@ -64,12 +67,18 @@
       <div class="tabs" role="tablist">
         <button type="button" class="tab" role="tab" data-pane="pane-plan" aria-selected="true">2026 政見</button>
         <button type="button" class="tab" role="tab" data-pane="pane-done" aria-selected="false">過往政績</button>
+        <button type="button" class="tab" role="tab" data-pane="pane-voice" aria-selected="false">陳情 <span data-pet-count>0</span></button>
       </div>
     </div>
     <div class="ix-body">
       <section class="pane" id="pane-plan">
         <h3 class="grp">在地政見</h3><div id="l-plan"></div>
         <h3 class="grp">福利與全區政見</h3><div id="l-wide"></div>
+      </section>
+      <section class="pane" id="pane-voice" hidden>
+        <h3 class="grp">議員你給我聽好了</h3>
+        <div class="pet-cta"><p>在島上標出你住的地方哪裡需要改善，服務處審核後會公開在地圖上。</p><button type="button" class="pet-btn" data-pet-add>我要陳情</button></div>
+        <div data-pet-list></div>
       </section>
       <section class="pane" id="pane-done" hidden>
         <h3 class="grp">有地點的政績</h3><div id="l-done"></div>
@@ -83,5 +92,6 @@
 <script src="vendor/OrbitControls.js"></script>
 <script src="map3d.js"></script>
 <script src="ambient.js"></script>
+<script src="petition.js"></script>
 </body>
 </html>
