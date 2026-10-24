@@ -6,50 +6,77 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>中和慧更豪｜問政藍圖（3D）｜WAKE</title>
-<meta name="description" content="2026 新北市議員選舉中和選區參選人張志豪的在地政見與過往政績，依地點標在中和區村里地圖上。WAKE 資訊視覺化作品，資料整理自 2026 競選文宣與公開新聞報導。">
+<meta name="description" content="2026 新北市議員選舉中和選區參選人張志豪的在地政見與過往政績，標在 3D 的「中和島」上。WAKE 資訊視覺化作品，資料整理自 2026 競選文宣與公開新聞報導。">
 <meta property="og:title" content="中和慧更豪｜問政藍圖（3D）｜WAKE">
-<meta property="og:description" content="2026 新北市議員選舉中和選區參選人張志豪的在地政見與過往政績，依地點標在中和區村里地圖上。WAKE 資訊視覺化作品，資料整理自 2026 競選文宣與公開新聞報導。">
+<meta property="og:description" content="2026 新北市議員選舉中和選區參選人張志豪的在地政見與過往政績，標在 3D 的「中和島」上。WAKE 資訊視覺化作品，資料整理自 2026 競選文宣與公開新聞報導。">
 <meta property="og:image" content="https://wake.com.tw/assets/og-image.jpg">
 <meta property="og:url" content="https://wake.com.tw/projects/zhonghe-map/3d.html">
 <link rel="canonical" href="https://wake.com.tw/projects/zhonghe-map/3d.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Chakra+Petch:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Fraunces:ital,opsz,wght@1,9..144,600&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="map3d.css">
 </head>
 <body>
+<div class="app">
+  <main class="world">
+    <div id="stage" aria-label="中和島 3D 地圖，標示張志豪政見與政績位置"></div>
+    <div id="labels" aria-hidden="true"></div>
 
-<div id="stage"></div>
-<div id="labels"></div>
-<div class="hud">
-  <div class="title">
-    <div class="wake-links"><a href="/works.html">← WAKE-016</a> · <a href="./">2D 版</a></div>
-    <div class="k">2026 新北市議員 · 第 6 選區</div>
-    <div class="id"><img class="avatar" src="img/zhihao-avatar.webp" alt="新北市議員候選人張志豪" width="240" height="240"><div><h1><span class="nw">中和慧更豪｜</span><span class="nw">問政藍圖</span></h1><div class="who">新北市議員候選人 <b>張志豪</b></div></div></div>
-    <p>民進黨籍參選人張志豪的中和在地政見與過往政績。橘色＝2026 競選文宣與新聞；藍色＝過往政績，以及舊版「力拚連任」文宣中 2026 版已不再提的政見。</p>
-    <div class="bar" role="group" aria-label="圖層">
-      <button class="btn" id="f-plan" data-f="plan" aria-pressed="true">◆ 政見</button>
-      <button class="btn" id="f-done" data-f="done" aria-pressed="true">◆ 政績</button>
-      <button class="btn" id="reset">⟲ 全景</button>
+    <header class="brand">
+      <img class="avatar" src="img/zhihao-avatar.webp" alt="新北市議員候選人張志豪" width="240" height="240">
+      <div class="brand-t">
+        <div class="eyebrow">2026 新北市議員 · 第 6 選區</div>
+        <h1><span class="nw">中和慧更豪｜</span><span class="nw">問政藍圖</span></h1>
+        <div class="who">候選人 <b>張志豪</b> · <a href="./">2D 版</a> · <a href="/works.html">WAKE-016</a></div>
+      </div>
+    </header>
+
+    <nav class="tools" aria-label="地圖工具">
+      <button type="button" class="tool" id="v-home"><span class="ic">⌂</span>全景</button>
+      <button type="button" class="tool" id="v-top"><span class="ic">◎</span>鳥瞰</button>
+      <button type="button" class="tool" id="v-spin" aria-pressed="false"><span class="ic">↻</span>旋轉</button>
+      <span class="sep" aria-hidden="true"></span>
+      <button type="button" class="tool" data-toggle="names" aria-pressed="true"><span class="ic">▭</span>名牌</button>
+      <button type="button" class="tool" data-toggle="plan" aria-pressed="true"><span class="ic dot plan"></span>政見</button>
+      <button type="button" class="tool" data-toggle="done" aria-pressed="true"><span class="ic dot done"></span>政績</button>
+    </nav>
+
+    <article class="card" id="card" data-kind="plan" hidden>
+      <button type="button" class="x" id="card-close" aria-label="關閉">×</button>
+      <div class="c-t" id="c-t"></div>
+      <h3 id="c-h"></h3>
+      <p id="c-p"></p>
+      <div class="c-w" id="c-w"></div>
+      <div class="c-s" id="c-s"></div>
+    </article>
+
+    <p class="credit">拖曳旋轉 · 滾輪或雙指縮放 · 點旗子看細節　地點與線形 © OpenStreetMap</p>
+  </main>
+
+  <aside class="index" aria-label="政見索引">
+    <div class="ix-head">
+      <div class="kicker">THE POLICY INDEX</div>
+      <h2>中和，加速度。</h2>
+      <p class="lede"><span id="count-plan"></span> 項 2026 政見 ／ <span id="count-done"></span> 項過往政績。點一項，飛到它在島上的位置。</p>
+      <label class="search"><span class="sr">搜尋</span><input id="q" type="search" placeholder="搜尋政見、地點、關鍵字…" autocomplete="off"></label>
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab" role="tab" data-pane="pane-plan" aria-selected="true">2026 政見</button>
+        <button type="button" class="tab" role="tab" data-pane="pane-done" aria-selected="false">過往政績</button>
+      </div>
     </div>
-    <div class="hint">拖曳旋轉 · 滾輪/雙指縮放 · 點光柱看任務 · 地點與線形 © OpenStreetMap</div>
-  </div>
-
-  <aside class="log" aria-label="任務日誌">
-    <h2><span>任務日誌</span><span id="count"></span></h2>
-    <div class="grp">主線 · 2026 在地政見</div><div id="l-plan"></div>
-    <div class="grp">主線 · 福利與全區政見</div><div id="l-wide"></div>
-    <div class="grp">已完成 · 過往政績</div><div id="l-done"></div>
-    <div class="grp">政績 · 舊政見（2026 版未再提）</div><div id="l-old"></div>
+    <div class="ix-body">
+      <section class="pane" id="pane-plan">
+        <h3 class="grp">在地政見</h3><div id="l-plan"></div>
+        <h3 class="grp">福利與全區政見</h3><div id="l-wide"></div>
+      </section>
+      <section class="pane" id="pane-done" hidden>
+        <h3 class="grp">有地點的政績</h3><div id="l-done"></div>
+        <h3 class="grp">全區性政績</h3><div id="l-done-wide"></div>
+        <h3 class="grp">舊政見 · 2026 版未再提</h3><div id="l-old"></div>
+      </section>
+    </div>
   </aside>
-
-  <div class="card" id="card" data-kind="plan" hidden>
-    <div class="t" id="c-t"></div>
-    <h3 id="c-h"></h3>
-    <p id="c-p"></p>
-    <div class="w" id="c-w"></div>
-    <div class="src" id="c-s"></div>
-  </div>
 </div>
 <script src="vendor/three.min.js"></script>
 <script src="vendor/OrbitControls.js"></script>
