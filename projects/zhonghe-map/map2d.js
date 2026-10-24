@@ -75,9 +75,20 @@ const NS="http://www.w3.org/2000/svg";
 const svg=document.getElementById("map");
 const el=(t,a={},p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
 
-el("rect",{x:0,y:0,width:1000,height:894,fill:"var(--land-other)"});
-GEO.towns.filter(t=>t.n!=="中和區").forEach(t=>el("path",{d:t.d,class:"town-other"}));
-el("path",{d:GEO.towns.find(t=>t.n==="中和區").d,class:"town-zh"});
+// ---------- island ----------
+const ZH=GEO.towns.find(t=>t.n==="中和區");
+const RINGS=ZH.d.split("M").filter(Boolean).map(r=>r.replace("Z","").split("L").map(p=>p.split(",").map(Number)));
+function inside(x,y){let c=false;for(const r of RINGS)for(let i=0,j=r.length-1;i<r.length;j=i++){const [xi,yi]=r[i],[xj,yj]=r[j];if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))c=!c}return c}
+function clipRuns(pts){const runs=[];let cur=[];pts.forEach(p=>{if(inside(p[0],p[1]))cur.push(p);else{if(cur.length>1)runs.push(cur);cur=[]}});if(cur.length>1)runs.push(cur);return runs}
+const pl=pts=>pts.map(p=>p.join(",")).join(" ");
+el("rect",{x:0,y:0,width:1000,height:894,class:"sea"});
+// soft wave lines on the water
+const waveG=el("g",{class:"waves"});
+for(let i=0;i<14;i++){const y=40+i*62,x=(i*137)%900;el("path",{d:`M${x},${y} q12,-7 24,0 t24,0`,class:"wave"},waveG);el("path",{d:`M${(x+460)%960},${y+28} q12,-7 24,0 t24,0`,class:"wave"},waveG)}
+el("path",{d:ZH.d,class:"isl-shadow",transform:"translate(6 12)"});
+el("path",{d:ZH.d,class:"isl-shallow"});
+el("path",{d:ZH.d,class:"isl-sand"});
+el("path",{d:ZH.d,class:"isl-grass"});
 const ns=GEO.villages.filter(v=>NANSHI.includes(v.n));
 const nsG=el("g",{id:"area-nanshi"});
 ns.forEach(v=>el("path",{d:v.d,class:"nanshi-fill"},nsG));
@@ -86,23 +97,36 @@ ns.forEach(v=>el("path",{d:v.d,class:"nanshi-fill"},nsG));
  const d=[...cnt].filter(([,n])=>n===1).map(([key])=>{const [a,b]=key.split("|");return "M"+a+"L"+b}).join("");
  el("path",{d,class:"nanshi"},nsG);}
 let nx=0,ny=0;ns.forEach(v=>{nx+=v.c[0];ny+=v.c[1]});nx/=ns.length;ny/=ns.length;
+
+// decoration: trees in the southern hills, small houses along roads (illustrative only)
+let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+const bb=(()=>{let a=[1e9,1e9,-1e9,-1e9];RINGS.flat().forEach(([x,y])=>{a=[Math.min(a[0],x),Math.min(a[1],y),Math.max(a[2],x),Math.max(a[3],y)]});return a})();
+const segs=[];GEO.roads.forEach(r=>{if(r.r>3)return;for(let i=1;i<r.p.length;i++)segs.push([r.p[i-1],r.p[i]])});
+const nearRoad=(x,y,d)=>segs.some(([a,b])=>{const dx=b[0]-a[0],dy=b[1]-a[1],L=dx*dx+dy*dy||1,t=Math.max(0,Math.min(1,((x-a[0])*dx+(y-a[1])*dy)/L));return Math.hypot(a[0]+t*dx-x,a[1]+t*dy-y)<d});
+function sample(n,test){const out=[];let g=0;while(out.length<n&&g++<n*60){const x=bb[0]+rnd()*(bb[2]-bb[0]),y=bb[1]+rnd()*(bb[3]-bb[1]);if(inside(x,y)&&test(x,y))out.push([x,y])}return out}
+const decoG=el("g",{class:"deco","aria-hidden":"true"});
+const ROOFS=["#d77a52","#c9643f","#6f8fa6","#e4b363"];
+sample(150,(x,y)=>y<=560&&!nearRoad(x,y,6)&&nearRoad(x,y,22)).forEach(([x,y])=>{const w=6+rnd()*4;const r=rnd()*80-40;const g=el("g",{transform:`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${r.toFixed(0)})`},decoG);
+  el("rect",{x:-w/2,y:-w/2+1.5,width:w,height:w,class:"house-sh"},g);el("rect",{x:-w/2,y:-w/2,width:w,height:w,class:"house"},g);el("rect",{x:-w/2,y:-w/2,width:w,height:w*.45,fill:ROOFS[Math.floor(rnd()*ROOFS.length)]},g)});
+[...sample(230,(x,y)=>y>560&&!nearRoad(x,y,6)),...sample(90,(x,y)=>y<=560&&!nearRoad(x,y,9))].sort((a,b)=>a[1]-b[1]).forEach(([x,y])=>{const r=3.6+rnd()*2.6;
+  el("circle",{cx:x+1.2,cy:y+2.2,r,class:"tree-sh"},decoG);el("circle",{cx:x,cy:y,r,class:"tree"},decoG);el("circle",{cx:x-r*.3,cy:y-r*.3,r:r*.38,class:"tree-hi"},decoG)});
+
 const ROADLBL={"福爾摩沙高速公路":"國道 3 號"};
 const LABELED=["中山路","中和路","中正路","景平路","連城路","錦和路","員山路","圓通路","板南路","橋和路","興南路","秀朗路","環河西路","金城路","永貞路","景安路","景新街","莒光路","民德路","建一路","福爾摩沙高速公路","華中橋","永和路","安樂路"];
-function roadLabelSpots(){const best={};GEO.roads.forEach(r=>{if(!LABELED.includes(r.n))return;let len=0;for(let i=1;i<r.p.length;i++)len+=Math.hypot(r.p[i][0]-r.p[i-1][0],r.p[i][1]-r.p[i-1][1]);
-  let acc=0,half=len/2,pt=null,ang=0;for(let i=1;i<r.p.length;i++){const a=r.p[i-1],b=r.p[i],d=Math.hypot(b[0]-a[0],b[1]-a[1]);if(acc+d>=half){const t=(half-acc)/(d||1);pt=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];ang=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;break}acc+=d}
-  if(!pt||pt[0]<60||pt[0]>940||pt[1]<40||pt[1]>850)return;if(ang>90)ang-=180;if(ang<-90)ang+=180;if(!best[r.n]||len>best[r.n].len)best[r.n]={len,pt,ang}});return best}
 const roadG=el("g",{id:"roads"});
-[...GEO.roads].sort((a,b)=>b.r-a.r).forEach(r=>el("polyline",{points:r.p.map(p=>p.join(",")).join(" "),class:"road r"+r.r},roadG));
-const rl=roadLabelSpots();for(const n in rl){const {pt,ang}=rl[n];const t=el("text",{x:pt[0],y:pt[1]-3,class:"road-lbl","text-anchor":"middle",transform:`rotate(${ang.toFixed(1)} ${pt[0].toFixed(1)} ${pt[1].toFixed(1)})`},roadG);t.textContent=ROADLBL[n]||n}
-el("text",{x:470,y:300,class:"zh-label","text-anchor":"middle"}).textContent="中和區";
-[["永和區",880,170],["板橋區",120,70],["土城區",70,820],["新店區",900,780]].forEach(([n,x,y])=>el("text",{x,y,class:"nb-label","text-anchor":"middle"}).textContent=n);
-
-// MRT Wanda–Zhonghe (approximate)
-const creekG=el("g",{id:"creek"});GEO.creek.forEach(l=>el("polyline",{points:l.map(p=>p.join(",")).join(" "),class:"creek"},creekG));
+const clipped=[];GEO.roads.forEach(r=>clipRuns(r.p).forEach(p=>clipped.push({n:r.n,r:r.r,p})));
+clipped.sort((a,b)=>b.r-a.r).forEach(r=>{if(r.r<=2)el("polyline",{points:pl(r.p),class:"road-case r"+r.r},roadG)});
+clipped.sort((a,b)=>b.r-a.r).forEach(r=>el("polyline",{points:pl(r.p),class:"road r"+r.r},roadG));
+{const best={};clipped.forEach(r=>{if(!LABELED.includes(r.n))return;let len=0;for(let i=1;i<r.p.length;i++)len+=Math.hypot(r.p[i][0]-r.p[i-1][0],r.p[i][1]-r.p[i-1][1]);
+  let acc=0,half=len/2,pt=null,ang=0;for(let i=1;i<r.p.length;i++){const a=r.p[i-1],b=r.p[i],d=Math.hypot(b[0]-a[0],b[1]-a[1]);if(acc+d>=half){const t=(half-acc)/(d||1);pt=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];ang=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;break}acc+=d}
+  if(!pt||len<40)return;if(ang>90)ang-=180;if(ang<-90)ang+=180;if(!best[r.n]||len>best[r.n].len)best[r.n]={len,pt,ang}});
+ for(const n in best){const {pt,ang}=best[n];const t=el("text",{x:pt[0],y:pt[1]-4,class:"road-lbl","text-anchor":"middle",transform:`rotate(${ang.toFixed(1)} ${pt[0].toFixed(1)} ${pt[1].toFixed(1)})`},roadG);t.textContent=ROADLBL[n]||n}}
+[["永和 →",850,95],["板橋 →",110,40],["土城 →",70,840],["新店 →",905,820]].forEach(([n,x,y])=>el("text",{x,y,class:"nb-label","text-anchor":"middle"}).textContent=n);
+const creekG=el("g",{id:"creek"});GEO.creek.forEach(l=>clipRuns(l).forEach(p=>el("polyline",{points:pl(p),class:"creek"},creekG)));
 const mrtG=el("g",{id:"mrt"});
-el("polyline",{points:GEO.mrtLine.map(p=>p.join(",")).join(" "),class:"mrt-line"},mrtG);
-GEO.mrt.forEach(m=>{el("circle",{cx:m.p[0],cy:m.p[1],r:6,class:"mrt-st"},mrtG);
-  const t=el("text",{x:m.p[0],y:m.p[1]+22,class:"mrt-lbl","text-anchor":"middle"},mrtG);t.textContent=m.n+"站"});
+clipRuns(GEO.mrtLine).forEach(p=>{el("polyline",{points:pl(p),class:"mrt-case"},mrtG);el("polyline",{points:pl(p),class:"mrt-line"},mrtG)});
+GEO.mrt.forEach(m=>{if(!inside(m.p[0],m.p[1]))return;el("circle",{cx:m.p[0],cy:m.p[1],r:6,class:"mrt-st"},mrtG);
+  const t=el("text",{x:m.p[0],y:m.p[1]+21,class:"mrt-lbl","text-anchor":"middle"},mrtG);t.textContent=m.n+"站"});
 
 const POS={...GEO.pts,nanshiA:[nx-35,ny+55],nanshiB:[nx+75,ny+25]};
 function posOf(at){
@@ -117,20 +141,35 @@ const PLACED={};(()=>{const used=[];ITEMS.forEach(it=>{const b=posOf(it.at);let 
   while(used.some(([ux,uy])=>Math.hypot(ux-x,uy-y)<24)&&i<16){i++;const a=i*2.4,r=20+i*3;x=b[0]+Math.cos(a)*r;y=b[1]+Math.sin(a)*r}
   used.push([x,y]);PLACED[it.id]=[x,y]})})();
 const pins={};
+const pinLayer=el("g",{id:"pins"});
 ITEMS.forEach(it=>{
-  const [x,y]=PLACED[it.id];
-  const g=el("g",{class:"pin","data-kind":it.kind,"data-id":it.id,tabindex:"0",role:"button","aria-label":it.title});
-  const col=COL[it.kind];
-  el("circle",{cx:x,cy:y,r:30,class:"halo",fill:SOFT[it.kind]},g);
-  if(it.ring)el("circle",{cx:x,cy:y,r:15,fill:"var(--land)",stroke:col,"stroke-width":3,"stroke-dasharray":"4 3"},g);
-  else el("circle",{cx:x,cy:y,r:15,fill:col,stroke:"var(--land)","stroke-width":3},g);
-  const n=el("text",{x,y:y+5,"text-anchor":"middle",class:"pin-num",style:`fill:${it.ring?col:"var(--land)"}`},g);
-  n.textContent=it.kind==="done"?(it.old?"舊":"✓"):it.id.slice(1);
-  const lab=el("text",{x:x+22,y:y+5},g);lab.textContent=it.short;
+  const [x,y]=PLACED[it.id];const key=it.old?"old":it.kind;
+  const g=el("g",{class:"pin","data-kind":key,"data-id":it.id,tabindex:"0",role:"button","aria-label":it.title},pinLayer);
+  el("circle",{cx:x,cy:y,r:16,class:"halo"},g);
+  if(it.kind==="plan"){
+    el("circle",{cx:x,cy:y,r:5.5,class:"pin-dot"},g);
+    const tag=el("g",{class:"tag"},g);
+    const t=el("text",{x:0,y:0,class:"tag-t"},tag);t.textContent=it.short;
+    const w=t.getComputedTextLength()+44,h=28,tx=x-w/2,ty=y-h-12;
+    tag.insertBefore(el("path",{d:`M${x-6},${ty+h-1} L${x},${y-6} L${x+6},${ty+h-1}Z`,class:"tag-bg"},tag),t);
+    tag.insertBefore(el("rect",{x:tx,y:ty,width:w,height:h,rx:14,class:"tag-bg"},tag),t);
+    el("circle",{cx:tx+15,cy:ty+h/2,r:10.5,class:"tag-badge"},tag);
+    const n=el("text",{x:tx+15,y:ty+h/2+4.3,class:"tag-n","text-anchor":"middle"},tag);n.textContent=String(it.id.slice(1)).padStart(2,"0");
+    t.setAttribute("x",tx+31);t.setAttribute("y",ty+h/2+5);
+    if(it.ring)el("circle",{cx:x,cy:y,r:12,class:"pin-ring"},g);
+  }else{
+    el("polygon",{points:[0,1,2,3,4,5].map(i=>{const a=Math.PI/3*i+Math.PI/6;return (x+Math.cos(a)*8).toFixed(1)+","+(y+Math.sin(a)*8).toFixed(1)}).join(" "),class:"pin-hex"},g);
+    const n=el("text",{x,y:y+3.6,class:"pin-n","text-anchor":"middle"},g);n.textContent=it.old?"舊":"✓";
+    const tag=el("g",{class:"tag tag-done"},g);
+    const t=el("text",{x:0,y:0,class:"tag-t small"},tag);t.textContent=it.short;
+    const w=t.getComputedTextLength()+20,h=24,tx=x-w/2,ty=y-h-12;
+    tag.insertBefore(el("rect",{x:tx,y:ty,width:w,height:h,rx:12,class:"tag-bg"},tag),t);
+    t.setAttribute("x",tx+10);t.setAttribute("y",ty+h/2+4.5);
+  }
   pins[it.id]=g;
 });
-ITEMS.filter(i=>i.kind==="plan").forEach(i=>svg.appendChild(pins[i.id]));
-el("text",{x:nx,y:ny+105,class:"area-label","text-anchor":"middle"}).textContent="南勢角生活圈（示意）";
+ITEMS.filter(i=>i.kind==="plan").forEach(i=>pinLayer.appendChild(pins[i.id]));
+el("text",{x:nx,y:ny+105,class:"area-label","text-anchor":"middle"}).textContent="南勢角生活圈 · 示意範圍";
 
 const rows={};
 function srcLine(it){const d=document.createElement("div");d.className="src";d.textContent="來源：";
@@ -139,7 +178,7 @@ function srcLine(it){const d=document.createElement("div");d.className="src";d.t
 function mkRow(it,parent){
   const r=document.createElement("div");r.className="row";r.dataset.kind=it.kind;r.tabIndex=0;r.setAttribute("role","button");
   r.innerHTML=`<span class="badge ${it.ring?"ring":""}"></span><div class="body"><div class="where"></div><h3></h3><p></p></div>`;
-  r.querySelector(".badge").textContent=it.kind==="done"?(it.old?"舊":"✓"):it.id.slice(1);
+  r.dataset.kind=it.old?"old":it.kind;r.querySelector(".badge").textContent=it.kind==="done"?(it.old?"舊":"✓"):String(it.id.slice(1)).padStart(2,"0");
   r.querySelector(".where").textContent=it.where;r.querySelector("h3").textContent=it.title;r.querySelector("p").textContent=it.desc;
   r.querySelector(".body").appendChild(srcLine(it));
   parent.appendChild(r);rows[it.id]=r;
@@ -158,7 +197,7 @@ function select(id){
   active=(active===id)?null:id;
   for(const k in pins){pins[k].classList.toggle("on",k===active);rows[k].classList.toggle("on",k===active)}
   const it=ITEMS.find(i=>i.id===active);
-  nsG.style.opacity=(!it||it.ring)?1:.35;
+  nsG.style.opacity=(!it||it.ring)?1:.45;if(it){const g=pins[it.id];g.parentNode.appendChild(g)}
   mrtG.classList.toggle("hi",!!it&&it.at==="mrt");
 }
 const bind=(node,id)=>{node.addEventListener("click",()=>select(id));node.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(id)}})};
@@ -168,6 +207,7 @@ const state={plan:true,done:true};
 document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
   const f=b.dataset.f;state[f]=!state[f];b.setAttribute("aria-pressed",state[f]);
   ITEMS.forEach(it=>{if(it.kind===f)pins[it.id].style.display=state[f]?"":"none"});
+  if(f==="done")decoG.style.opacity=1;
   document.querySelectorAll(`.sect[data-kind="${f}"]`).forEach(s=>s.hidden=!state[f]);
   if(f==="plan"){nsG.style.display=state.plan?"":"none";mrtG.style.display=state.plan?"":"none"}
 }));
