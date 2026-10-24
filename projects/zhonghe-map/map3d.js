@@ -304,16 +304,19 @@ renderer.domElement.addEventListener("pointerup",e=>{
   ray.setFromCamera(mouse,camera);
   if(picking){const h=ray.intersectObjects([grass,sand,qilu,...nsGroup.children])[0];if(h){const x=h.point.x+500,y=h.point.z+447;if(inside(x,y)){const cb=picking;window.PetitionHost.cancelPick();cb(x,y)}}return}
   const objs=[];Object.values(markers).forEach(g=>{if(g.visible)g.traverse(o=>o.isMesh&&objs.push(o))});
-  const hit=ray.intersectObjects(objs)[0];if(hit){let o=hit.object;while(o&&!o.userData.id)o=o.parent;if(o)select(o.userData.id)}
+  const hit=ray.intersectObjects(objs)[0];if(hit){let o=hit.object;while(o&&!o.userData.id)o=o.parent;if(o){select(o.userData.id);return}}
+  if(window.GroundClick){const g=ray.intersectObjects([grass,sand,qilu,...nsGroup.children])[0];if(g){const x=g.point.x+500,y=g.point.z+447;if(inside(x,y))window.GroundClick(x,y)}}
 });
 
 // ---------- loop ----------
 function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix()}
 addEventListener("resize",()=>{resize();fitHome()});resize();
 const tmp=new THREE.Vector3();const clock=new THREE.Clock();
+const TICKS=[];
 function loop(){
   const dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime;
   if(tween){tween.k=Math.min(1,tween.k+dt/1.2);const e=1-Math.pow(1-tween.k,3);camera.position.lerpVectors(tween.p0,tween.p1,e);controls.target.lerpVectors(tween.t0,tween.t1,e);if(tween.k>=1)tween=null}
+  for(const f of TICKS)f(dt,t);
   controls.update();
   if(!reduceMotion){
     clouds.forEach(c=>{c.userData.a+=c.userData.s*dt;c.position.x=Math.cos(c.userData.a)*c.userData.R;c.position.z=Math.sin(c.userData.a)*c.userData.R});
