@@ -11,7 +11,7 @@ const SRC = {
   udn3:["聯合報 四號公園","https://udn.com/news/story/124652/9665101"],
 };
 const ITEMS = [
-  {"id": "p1", "kind": "plan", "at": "nanshiA", "area": true, "short": "萬坪綠地大公園", "title": "南勢角萬坪綠地大公園", "where": "南勢角 · 齊魯特種工業區（基地未公布，虛線為示意範圍）", "desc": "加速齊魯特種工業區都市計畫，中央地方聯手催生南勢角萬坪綠地大公園。", "src": ["f26", "mk", "flyer"]},
+  {"id": "p1", "kind": "plan", "at": "nanshiA", "area": true, "short": "萬坪綠地大公園", "title": "南勢角萬坪綠地大公園", "where": "齊魯工業用地 · 南勢角", "desc": "加速齊魯特種工業區都市計畫，中央地方聯手催生南勢角萬坪綠地大公園。", "src": ["f26", "mk", "flyer"]},
   {"id": "p2", "kind": "plan", "at": "nanshiB", "area": true, "short": "南勢角交通", "title": "解決南勢角聯外道路壅塞", "where": "南勢角聯外道路 · 未指定路段", "desc": "先期落實智慧燈號及調撥車道。", "src": ["f26", "ltn", "mk"]},
   {"id": "p3", "kind": "plan", "at": "huiyao", "short": "灰磘生醫園區", "title": "催生中和生醫園區", "where": "灰磘地區", "desc": "檢視灰磘都市計畫，持續催生中和生醫園區。", "src": ["f26", "udn1"]},
   {"id": "p4", "kind": "plan", "at": "gfield", "short": "國管院大操場", "title": "國管院都計與大操場", "where": "前國防管理學院 · 內外員山", "desc": "重新檢討國管院都市計畫，縫合內外員山；永久保留並全面優化國管院綠地大操場，爭取闢建地下停車場。", "src": ["f26", "flyer"]},
@@ -169,6 +169,7 @@ ITEMS.forEach(it=>{
   pins[it.id]=g;
 });
 ITEMS.filter(i=>i.kind==="plan").forEach(i=>pinLayer.appendChild(pins[i.id]));
+{const [qx,qy]=PLACED.p1;el("text",{x:qx,y:qy+26,class:"site-label","text-anchor":"middle"},pinLayer).textContent="齊魯工業用地";}
 el("text",{x:nx,y:ny+105,class:"area-label","text-anchor":"middle"}).textContent="南勢角生活圈 · 示意範圍";
 
 const rows={};

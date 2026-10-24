@@ -58,6 +58,7 @@ button{font:inherit;color:inherit}
 .tag.on{box-shadow:0 0 0 3px var(--k),0 6px 18px rgba(70,55,35,.25);z-index:2}
 .tag.st{pointer-events:none;padding:2px 8px;background:#fff6e4;color:#9a6b17;font-size:11px;font-weight:500;box-shadow:none;border:1px solid #ecd2a0;transform-origin:center}
 .tag.area{pointer-events:none;background:rgba(255,255,255,.75);border:1.5px dashed var(--plan);color:#b4502a;font-size:12px;font-weight:500;box-shadow:none}
+.tag.site{pointer-events:none;background:#fff6ec;border:1.5px solid var(--plan);color:#9b3f1c;font-size:12px;font-weight:700;padding:3px 9px;box-shadow:none;transform-origin:center}
 .tag.nb{pointer-events:none;background:none;box-shadow:none;color:#3f6f78;font-size:13px;letter-spacing:.3em;font-weight:500}
 
 /* index column */
