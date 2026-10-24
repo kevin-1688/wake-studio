@@ -39,3 +39,10 @@
 .pet-cta .pet-btn{flex:none}
 .picking,.picking *{cursor:crosshair!important}
 @media (max-width:860px){.pet-card{left:8px;right:8px;width:auto;bottom:8px}}
+
+.pet-pdpa{border:1px solid #e4dccf;border-radius:12px;background:#fff;padding:0 12px;font-size:12.5px;line-height:1.65;color:#4b433b}
+.pet-pdpa summary{cursor:pointer;padding:9px 0;font-weight:700;color:#2b2622;font-size:13px}
+.pet-pdpa[open] summary{border-bottom:1px solid #e4dccf;margin-bottom:6px}
+.pet-pdpa p{margin:6px 0}
+.pet-pdpa ol{margin:4px 0 8px;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.pet-pdpa b{color:#2b2622}

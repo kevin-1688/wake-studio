@@ -5,6 +5,7 @@
 (function(){
   const API="https://dddrodlxbnwrztxayoce.supabase.co/rest/v1/petitions";
   const KEY="sb_publishable_TF-gRoz7oXvS7qiVDvANBw_jQEipJY1";
+  const OFFICE="中和區中山路二段 582 號｜電話 02-8226-6888";
   const CATS=["交通","公園綠地","治安","環境衛生","教育","長照福利","其他"];
   const host=window.PetitionHost;
   const $=s=>document.querySelector(s);
@@ -23,8 +24,23 @@
       <label class="pet-f"><span>暱稱（選填，會公開）</span><input id="pet-nick" maxlength="20" autocomplete="nickname" placeholder="不填就顯示「中和鄉親」"></label>
       <label class="pet-f"><span>聯絡方式（選填，不公開）</span><input id="pet-contact" maxlength="100" autocomplete="off" placeholder="電話或 Email，服務處需要時聯繫你"></label>
       <label class="pet-hp" aria-hidden="true">網站<input id="pet-hp" tabindex="-1" autocomplete="off"></label>
-      <label class="pet-agree" id="pet-agree-row" hidden><input type="checkbox" id="pet-agree"> 我同意服務處為處理本次陳情，蒐集並使用我留下的聯絡方式。</label>
-      <p class="pet-note">送出後由服務處審核，通過才會出現在地圖上。請勿留下他人個資或不實指控。</p>
+      <details class="pet-pdpa" id="pet-pdpa">
+        <summary>個人資料蒐集告知</summary>
+        <p>依《個人資料保護法》第 8 條，告知以下事項：</p>
+        <ol>
+          <li><b>蒐集者</b>：新北市議員候選人張志豪服務處（以下稱本服務處）。網站由 WAKE Studio 受託建置與維護，僅依本服務處指示處理資料。</li>
+          <li><b>蒐集目的</b>：選民服務管理（特定目的代號 153）——受理、處理及回覆你的陳情。</li>
+          <li><b>個人資料類別</b>：暱稱、聯絡方式（電話或電子郵件）、陳情內容與你在地圖上標示的位置。</li>
+          <li><b>利用期間</b>：自送出起，至 2026 年 12 月 31 日或陳情處理完畢時（以較晚者為準），期滿即刪除。</li>
+          <li><b>利用地區</b>：臺灣，以及資料庫服務所在地日本（Supabase 東京節點）。</li>
+          <li><b>利用對象與方式</b>：僅本服務處及受託維護人員以電子方式處理，不提供給第三人，也不做行銷或其他用途。經審核公開的陳情只顯示暱稱、類別、內容、位置與日期；聯絡方式一律不公開。</li>
+          <li><b>你的權利</b>：你可以請求查詢、閱覽、製給複本、補充或更正、停止蒐集處理利用，以及刪除你的資料。請聯絡本服務處：<span id="pet-office">（服務處聯絡方式）</span>。</li>
+          <li><b>不提供的影響</b>：暱稱與聯絡方式都是選填。不填仍可送出陳情，但本服務處將無法與你聯繫或個別回覆。</li>
+        </ol>
+        <p>請勿在陳情內容中填寫他人的個人資料。</p>
+      </details>
+      <label class="pet-agree" id="pet-agree-row" hidden><input type="checkbox" id="pet-agree"> 我已閱讀個人資料蒐集告知，並同意本服務處依上述目的蒐集及利用我留下的聯絡方式。</label>
+      <p class="pet-note">送出後由服務處審核，通過才會出現在地圖上。請勿留下他人個資或不實指控。送出即表示你已知悉上方的個人資料蒐集告知。</p>
       <p class="pet-err" id="pet-err" role="alert"></p>
       <div class="pet-actions"><button type="button" class="pet-btn ghost" id="pet-close">取消</button><button type="submit" class="pet-btn" id="pet-send">送出陳情</button></div>
     </form>
@@ -38,6 +54,7 @@
   </div>
   <div class="pet-toast" id="pet-toast" hidden role="status"></div>`;
   document.body.appendChild(wrap);
+  $("#pet-office").textContent=OFFICE;
 
   let picked=null;
   function toast(t){const el=$("#pet-toast");el.textContent=t;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,4200)}
@@ -52,7 +69,7 @@
   $("#pet-modal").addEventListener("click",e=>{if(e.target.id==="pet-modal")closeForm()});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(!$("#pet-modal").hidden)closeForm();else if(!$("#pet-banner").hidden)$("#pet-cancel").click();else $("#pet-card").hidden=true}});
   $("#pet-body").addEventListener("input",e=>{$("#pet-count").textContent=e.target.value.length+" / 300"});
-  $("#pet-contact").addEventListener("input",e=>{$("#pet-agree-row").hidden=!e.target.value.trim()});
+  $("#pet-contact").addEventListener("input",e=>{const on=!!e.target.value.trim();$("#pet-agree-row").hidden=!on;if(on)$("#pet-pdpa").open=true});
   document.querySelectorAll("[data-pet-add]").forEach(b=>b.addEventListener("click",startAdd));
 
   $("#pet-form").addEventListener("submit",async e=>{
