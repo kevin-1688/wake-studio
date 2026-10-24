@@ -12,13 +12,13 @@ const SRC = {
   flyer:["舊版文宣（力拚連任版，年份未標示）",null],
 };
 const ITEMS = [
-  {"id": "p1", "kind": "plan", "at": "nanshiA", "area": true, "short": "萬坪綠地大公園", "title": "南勢角萬坪綠地大公園", "where": "南勢角 · 齊魯特種工業區（基地未公布，虛線為示意範圍）", "desc": "加速齊魯特種工業區都市計畫，中央地方聯手催生南勢角萬坪綠地大公園。舊版文宣已有同一條。", "src": ["f26", "mk", "flyer"]},
+  {"id": "p1", "kind": "plan", "at": "nanshiA", "area": true, "short": "萬坪綠地大公園", "title": "南勢角萬坪綠地大公園", "where": "南勢角 · 齊魯特種工業區（基地未公布，虛線為示意範圍）", "desc": "加速齊魯特種工業區都市計畫，中央地方聯手催生南勢角萬坪綠地大公園。", "src": ["f26", "mk", "flyer"]},
   {"id": "p2", "kind": "plan", "at": "nanshiB", "area": true, "short": "南勢角交通", "title": "解決南勢角聯外道路壅塞", "where": "南勢角聯外道路 · 未指定路段", "desc": "先期落實智慧燈號及調撥車道。", "src": ["f26", "ltn", "mk"]},
   {"id": "p3", "kind": "plan", "at": "huiyao", "short": "灰磘生醫園區", "title": "催生中和生醫園區", "where": "灰磘地區", "desc": "檢視灰磘都市計畫，持續催生中和生醫園區。", "src": ["f26", "udn1"]},
   {"id": "p4", "kind": "plan", "at": "gfield", "short": "國管院大操場", "title": "國管院都計與大操場", "where": "前國防管理學院 · 內外員山", "desc": "重新檢討國管院都市計畫，縫合內外員山；永久保留並全面優化國管院綠地大操場，爭取闢建地下停車場。", "src": ["f26", "flyer"]},
   {"id": "p5", "kind": "plan", "at": "wayao", "short": "瓦磘溝親水綠帶", "title": "瓦磘溝除臭清淤", "where": "瓦磘溝（藍線為實際河道）", "desc": "持續爭取瓦磘溝除臭清淤改善工程，引活水打造親水綠帶。", "src": ["f26", "flyer"]},
   {"id": "p6", "kind": "plan", "at": "mrt", "short": "萬大線接駁", "title": "萬大中和線公車接駁網", "where": "中和站 · 連城錦和站 · 中和高中站", "desc": "以萬大中和線各站為核心，整合現有公車路線，建構完善接駁路網。", "src": ["f26"]},
-  {"id": "p7", "kind": "plan", "at": "xingnan", "short": "興南夜市", "title": "興南夜市復興", "where": "興南夜市", "desc": "2026 文宣沒有列這條，但他在 9 月南勢角後援會上公開提過。", "src": ["ltn", "mk"]},
+  {"id": "p7", "kind": "plan", "at": "xingnan", "short": "興南夜市", "title": "興南夜市復興", "where": "興南夜市", "desc": "活化興南夜市，帶動夜市經濟與地方產業。", "src": ["ltn", "mk"]},
   {"id": "d1", "kind": "done", "at": "park4", "short": "四號公園", "title": "四號公園共融遊戲場", "where": "中和公園（四號公園）· 2017", "desc": "與特公盟家長推動雙和第一座共融遊戲場，並爭取無障礙坡道溜滑梯。", "src": ["udn3"]},
   {"id": "d2", "kind": "done", "at": "jinhe", "short": "錦和運動公園", "title": "錦和運動公園", "where": "錦和運動公園", "desc": "爭取 450 萬興建親子廁所；爭取體健設施、夜間照明、草皮維護，並裝設監視器。", "src": ["doc", "udn3"]},
   {"id": "d3", "kind": "done", "at": "gfield", "short": "國管院跑道", "title": "國管院大操場跑道翻新", "where": "前國防管理學院", "desc": "爭取 700 萬翻新跑道，保留民眾運動綠地。", "src": ["doc", "card"]},
@@ -28,13 +28,13 @@ const ITEMS = [
   {"id": "d11", "kind": "done", "at": "jisuiES", "short": "積穗國小", "title": "積穗國小通學巷", "where": "積穗國小（員山路 154 號）", "desc": "爭取 433 萬劃設通學巷，保護學童安全。", "src": ["doc"]},
   {"id": "d23", "kind": "done", "at": "jisuiJHS", "short": "積穗國中", "title": "積穗國中設備更新", "where": "積穗國中（民安街 66 號）", "desc": "爭取 66 萬更新辦公及冷氣設備。", "src": ["doc"]},
   {"id": "d16", "kind": "done", "at": "jiasuiPark", "short": "嘉穗公園", "title": "嘉穗公園體健設施", "where": "嘉穗公園", "desc": "爭取 75 萬體健設施，提升運動品質。", "src": ["doc"]},
-  {"id": "d5", "kind": "done", "at": "v:德穗里", "short": "德穗親子廁所", "title": "德穗綠家園親子廁所", "where": "德穗綠家園（標在德穗里）", "desc": "成功爭取建設親子廁所（成績單列 300 萬）。", "src": ["doc", "card"]},
+  {"id": "d5", "kind": "done", "at": "v:德穗里", "short": "德穗親子廁所", "title": "德穗綠家園親子廁所", "where": "德穗綠家園（標在德穗里）", "desc": "成功爭取 300 萬建設親子廁所。", "src": ["doc", "card"]},
   {"id": "d6", "kind": "done", "at": "zhangheWet", "short": "漳和濕地", "title": "漳和濕地整修開放", "where": "漳和濕地", "desc": "中央地方合作爭取 2,758 萬重新整修開放，打造生態教學園區。", "src": ["card"]},
   {"id": "d24", "kind": "done", "at": "zhangheJHS", "short": "漳和國中", "title": "漳和國中", "where": "漳和國中（廣福路 39 號）", "desc": "爭取 13 萬冷氣；218 萬微型美術館；爭取重建羽球館。", "src": ["doc", "card"]},
   {"id": "d25", "kind": "done", "at": "zhES", "short": "中和國小", "title": "中和國小就學環境", "where": "中和國小（中和路 100 號）", "desc": "爭取 43 萬提升就學環境品質。", "src": ["doc"]},
   {"id": "d26", "kind": "done", "at": "zhJHS", "short": "中和國中", "title": "中和國中冷氣", "where": "中和國中（興南路二段一帶）", "desc": "爭取 20 萬安裝冷氣設備。", "src": ["doc"]},
   {"id": "d27", "kind": "done", "at": "guangfuES", "short": "光復國小", "title": "光復國小設備", "where": "光復國小（光環路二段 1 號）", "desc": "補助 20 萬校園監視器、10 萬觸控式螢幕。", "src": ["card"]},
-  {"id": "d28", "kind": "done", "at": "huazhong", "short": "華中橋", "title": "華中橋路面與護欄", "where": "華中橋中和端", "desc": "改善路面品質；成績單另列 1,634 萬護欄與人行道翻新。", "src": ["doc", "card"]},
+  {"id": "d28", "kind": "done", "at": "huazhong", "short": "華中橋", "title": "華中橋路面與護欄", "where": "華中橋中和端", "desc": "改善路面品質；另爭取 1,634 萬翻新護欄與人行道。", "src": ["doc", "card"]},
   {"id": "d29", "kind": "done", "at": "dino", "short": "恐龍園區", "title": "中和恐龍園區", "where": "中和恐龍園區（中原里）", "desc": "增設裝置藝術與特色彩繪牆。", "src": ["doc"]},
   {"id": "d30", "kind": "done", "at": "qiaohe", "short": "橋和路", "title": "橋和路面修繕", "where": "橋和路", "desc": "路面修繕，改善行人通行安全。", "src": ["doc"]},
   {"id": "d31", "kind": "done", "at": "zhongyuanPolice", "short": "中原派出所", "title": "大洋塑膠舊址規劃", "where": "中原派出所一帶", "desc": "爭取大洋塑膠捐地規劃納入新中和分局與中原派出所。", "src": ["card"]},
@@ -42,18 +42,18 @@ const ITEMS = [
   {"id": "d19", "kind": "done", "at": "v:福祥里", "short": "高壓電塔遷移", "title": "福祥路高壓電塔遷移", "where": "福祥路橋和路口（標在福祥里）", "desc": "推動路口高壓電塔遷離。", "src": ["card"]},
   {"id": "d20", "kind": "done", "at": "lixingTemple", "short": "力行福德宮", "title": "力行福德宮 LED 照明", "where": "力行福德宮（圓通路 162 巷）", "desc": "補助 50 萬新增 LED 照明。", "src": ["card"]},
   {"id": "d17", "kind": "done", "at": "v:錦中里", "short": "錦中活動中心", "title": "錦中市民活動中心血壓機", "where": "錦中市民活動中心（標在錦中里）", "desc": "購置血壓機，守護長者健康。", "src": ["doc"]},
-  {"id": "d7", "kind": "done", "at": "wayao", "short": "瓦磘溝 2.7 億", "title": "瓦磘溝整治", "where": "瓦磘溝（藍線為實際河道）", "desc": "強力監督引活水，整治經費 2.7 億。2026 文宣持續推動除臭清淤。", "src": ["doc"]},
+  {"id": "d7", "kind": "done", "at": "wayao", "short": "瓦磘溝 2.7 億", "title": "瓦磘溝整治", "where": "瓦磘溝（藍線為實際河道）", "desc": "強力監督引活水，整治經費 2.7 億。持續推動除臭清淤，引活水打造親水綠帶。", "src": ["doc"]},
   {"id": "d12", "kind": "done", "at": "fuxingES", "short": "復興國小", "title": "復興國小與哈克會館", "where": "復興國小（復興路 301 巷）· 哈克會館位置未查得", "desc": "爭取 32 萬攀岩設施、20 萬修繕大門及欄杆；逾 30 萬更新復興哈克會館設備。", "src": ["doc"]},
   {"id": "d8", "kind": "done", "at": "xingnan", "short": "興南夜市", "title": "興南夜市活化", "where": "興南夜市", "desc": "舉辦每週特色活動活化商機；輔導夜市法制化、保留牌樓。", "src": ["doc", "card"]},
-  {"id": "d32", "kind": "done", "at": "xingnanES", "short": "興南國小", "title": "興南國小設備", "where": "興南國小（興南路一段 135 巷）", "desc": "爭取 60 萬校園廣播系統；成績單另列 90 萬隔音與周邊鋪面。", "src": ["doc", "card"]},
+  {"id": "d32", "kind": "done", "at": "xingnanES", "short": "興南國小", "title": "興南國小設備", "where": "興南國小（興南路一段 135 巷）", "desc": "爭取 60 萬校園廣播系統；另補助 90 萬改善隔音與周邊鋪面。", "src": ["doc", "card"]},
   {"id": "d15", "kind": "done", "at": "huaxin", "short": "牆面彩繪", "title": "華新街、忠孝街牆面彩繪", "where": "華新街 · 忠孝街", "desc": "美化社區牆面彩繪工程。", "src": ["doc"]},
   {"id": "d13", "kind": "done", "at": "jingxinES", "short": "景新國小", "title": "景新國小就學環境", "where": "景新國小", "desc": "爭取 85 萬提升就學環境品質。", "src": ["doc"]},
   {"id": "d14", "kind": "done", "at": "v:景本里", "short": "景本里集會所", "title": "景本里集會所設備", "where": "景本里集會所（標在景本里）", "desc": "爭取 6.8 萬購置設備，提升里民活動環境。", "src": ["doc"]},
   {"id": "d9", "kind": "done", "at": "hongludi", "short": "烘爐地步道", "title": "烘爐地步道與內南生態公園", "where": "烘爐地 · 內南里", "desc": "烘爐地登山步道翻新並納入市府森心之旅路線；爭取 816 萬興闢內南生態公園步道。", "src": ["card"]},
   {"id": "d10", "kind": "done", "at": "xiu", "short": "十秀活動中心", "title": "十秀活動中心", "where": "秀字輩十里（標在秀字里中心）", "desc": "爭取 1,000 萬設置十秀活動中心。", "src": ["doc"]},
-  {"id": "o1", "kind": "done", "old": true, "at": "minan", "short": "民安街", "title": "改善民安街交通壅塞", "where": "民安街", "desc": "舊版把它綁在國管院都計檢討裡；2026 版只留「縫合內外員山」。", "src": ["flyer"]},
-  {"id": "o2", "kind": "done", "old": true, "at": "huaxin", "short": "華新街特色街區", "title": "華新街南向經貿特色街區", "where": "華新街（緬甸街）", "desc": "打造南向經貿特色街區並引入興南夜市活化。2026 版未再列出。", "src": ["flyer"]},
-  {"id": "o3", "kind": "done", "old": true, "at": "zhongyuan", "short": "中原溝", "title": "中原溝截流清淤", "where": "中原溝（標在中原里）", "desc": "力促汙水截流及清淤除臭整治。2026 版未再列出。", "src": ["flyer"]},
+  {"id": "o1", "kind": "done", "old": true, "at": "minan", "short": "民安街", "title": "改善民安街交通壅塞", "where": "民安街", "desc": "重新檢討國管院都市計畫，改善民安街交通壅塞。", "src": ["flyer"]},
+  {"id": "o2", "kind": "done", "old": true, "at": "huaxin", "short": "華新街特色街區", "title": "華新街南向經貿特色街區", "where": "華新街（緬甸街）", "desc": "打造南向經貿特色街區，並引入興南夜市活化。", "src": ["flyer"]},
+  {"id": "o3", "kind": "done", "old": true, "at": "zhongyuan", "short": "中原溝", "title": "中原溝截流清淤", "where": "中原溝（標在中原里）", "desc": "力促汙水截流及清淤除臭整治。", "src": ["flyer"]},
 ];
 const WIDE = [
   ["長輩帶狀皰疹疫苗","全面補助，免費接種"],
@@ -65,7 +65,7 @@ const WIDE = [
   ["公共通行權","人行道大翻新，加速電箱移置、電桿電線下地"],
 ];
 const FWIDE=[["青年局單一窗口","青少年活動補助"],["婦女友善城市","女性公廁與婦幼車位比例、就業輔導、職場性平"]];
-const DONE_WIDE=[["行人通行空間", "移除 36 處變電箱；成績單另列中山路人行道電箱遷移 5,100 萬。分散全區，無單一地點。"], ["溝蓋與水溝", "爭取逾 10 萬溝蓋修繕及水溝清理。分散全區。"], ["步道改善、行人空間拓寬", "2026 站台者提及，未列路段。"], ["任內數字", "最新成績單：提案 319 件、會勘 659 件以上、選民服務 3,127 件以上、法律諮詢 2,536 人以上、骨質義診 1,516 人以上。較早的「力拚連任」文宣另列提案逾 250、會勘逾 700、服務 3,500 多件。"]];
+const DONE_WIDE=[["行人通行空間", "移除 36 處變電箱；爭取 5,100 萬遷移中山路人行道電箱。"], ["溝蓋與水溝", "爭取逾 10 萬溝蓋修繕及水溝清理。"], ["步道改善、行人空間拓寬", "改善步道、拓寬行人空間。"], ["任內數字", "提案 319 件、會勘 659 件以上、選民服務 3,127 件以上、法律諮詢 2,536 人以上、骨質義診 1,516 人以上。"]];
 
 // ---------- island scene ----------
 const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -268,8 +268,6 @@ function select(id){
   card.hidden=false;card.dataset.kind=it.old?"old":it.kind;
   $("c-t").textContent=(it.old?"舊政見":it.kind==="plan"?"2026 政見 "+num(it):"過往政績");
   $("c-h").textContent=it.title;$("c-p").textContent=it.desc;$("c-w").textContent=it.where;
-  const s=$("c-s");s.textContent="來源：";
-  it.src.forEach((k,i)=>{if(i)s.append("、");const [t,u]=SRC[k];if(!u){s.append(t);return}const a=document.createElement("a");a.href=u;a.target="_blank";a.rel="noopener";a.textContent=t;s.append(a)});
   rows[it.id]?.scrollIntoView({block:"nearest",behavior:reduceMotion?"auto":"smooth"});
   const b=markers[it.id].position;
   flyTo(new THREE.Vector3(b.x+120,b.y+260,b.z+290),new THREE.Vector3(b.x,b.y,b.z));
