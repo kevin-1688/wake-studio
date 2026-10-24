@@ -96,9 +96,9 @@
   function show(p){
     $("#pet-c-k").textContent="陳情 · "+p.category;
     $("#pet-c-body").textContent=p.body;
-    $("#pet-c-meta").textContent=(p.nickname||"中和鄉親")+" · "+fmt(p.created_at);
+    $("#pet-c-meta").textContent=(p.nickname||"中和鄉親")+" · "+fmt(p.created_at)+(p.place?" · "+p.place:"");
     const rp=$("#pet-c-reply");rp.hidden=!p.reply;if(p.reply)rp.querySelector("span").textContent=p.reply;
-    $("#pet-card").hidden=false;host.focus&&host.focus(p);
+    $("#pet-card").hidden=false;if(p.x!=null&&host.focus)host.focus(p);
   }
   $("#pet-card-x").addEventListener("click",()=>$("#pet-card").hidden=true);
   function renderList(){
@@ -108,17 +108,17 @@
       list.forEach(p=>{const b=document.createElement("button");b.type="button";b.className="pet-row";
         b.innerHTML=`<span class="pet-cat"></span><span class="pet-t"><b></b><small></small></span>`;
         b.querySelector(".pet-cat").textContent=p.category;b.querySelector("b").textContent=p.body;
-        b.querySelector("small").textContent=(p.nickname||"中和鄉親")+" · "+fmt(p.created_at)+(p.reply?" · 已回覆":"");
+        b.querySelector("small").textContent=(p.nickname||"中和鄉親")+" · "+fmt(p.created_at)+(p.reply?" · 已回覆":"")+(p.x==null?" · 未標地點":"");
         b.addEventListener("click",()=>show(p));box.appendChild(b)});
     });
     document.querySelectorAll("[data-pet-count]").forEach(el=>el.textContent=list.length);
   }
   async function load(){
     try{
-      const r=await fetch(API+"?select=id,created_at,x,y,category,body,nickname,reply&order=created_at.desc&limit=300",{headers:{apikey:KEY}});
+      const r=await fetch(API+"?select=id,created_at,x,y,category,body,nickname,reply,place&order=created_at.desc&limit=300",{headers:{apikey:KEY}});
       if(!r.ok)throw 0;list=await r.json();
     }catch(e){list=[]}
-    renderList();host.render(list,show);
+    renderList();host.render(list.filter(p=>p.x!=null&&p.y!=null),show);
   }
   window.Petition={reload:load,show};
   load();
