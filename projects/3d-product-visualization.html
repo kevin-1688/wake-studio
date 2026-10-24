@@ -107,15 +107,26 @@
    },
    "image": "https://wake.com.tw/assets/caster/assembly.jpg",
    "mainEntityOfPage": "https://wake.com.tw/projects/3d-product-visualization.html",
-   "video": {
-    "@type": "VideoObject",
-    "name": "萬向輪總成：組裝與爆炸動畫",
-    "description": "Blender 渲染的萬向輪總成，21 個零件依序拆開再裝回。",
-    "thumbnailUrl": "https://wake.com.tw/assets/caster/assembly.jpg",
-    "contentUrl": "https://wake.com.tw/assets/caster/assembly.mp4",
-    "uploadDate": "2026-10-16",
-    "duration": "PT6S"
-   }
+   "video": [
+    {
+     "@type": "VideoObject",
+     "name": "萬向輪總成：組裝與爆炸動畫",
+     "description": "Blender 渲染的萬向輪總成，21 個零件依序拆開再裝回。",
+     "thumbnailUrl": "https://wake.com.tw/assets/caster/assembly.jpg",
+     "contentUrl": "https://wake.com.tw/assets/caster/assembly.mp4",
+     "uploadDate": "2026-10-16",
+     "duration": "PT6S"
+    },
+    {
+     "@type": "VideoObject",
+     "name": "行星減速機：半透明外殼下的齒輪運作",
+     "description": "WAKE 自主示範作品。Blender 渲染的單段行星減速機，太陽齒輪 12 齒、三顆 18 齒行星齒輪、48 齒內齒環，減速比 5:1，十秒循環。",
+     "thumbnailUrl": "https://wake.com.tw/assets/reducer/reducer.jpg",
+     "contentUrl": "https://wake.com.tw/assets/reducer/reducer.mp4",
+     "uploadDate": "2026-10-24",
+     "duration": "PT10S"
+    }
+   ]
   }
  ]
 }
@@ -198,6 +209,25 @@
   <div><dt>材質</dt><dd>5</dd></div>
 </dl>
 
+<h2>實際看看：行星減速機的內部</h2>
+<p>這是 WAKE 自己做的示範作品，不是委託案。工業用行星減速機的型錄多半只有外殼照片，但買家真正在意的是裡面那組齒輪。這裡把外殼和內齒環做成半透明，齒輪怎麼咬合、轉速怎麼降下來，直接看得到。</p>
+<p>結構是單段行星：中心的太陽齒輪 12 齒，帶動三顆 18 齒的行星齒輪在 48 齒的內齒環裡公轉，減速比 1 + 48 ÷ 12 = 5:1。動畫十秒一輪，輸入軸轉五圈，輸出軸剛好轉一圈，所以可以無縫循環。</p>
+<p>模型用 Blender 的 Python 腳本參數化產生：模數和各齒輪齒數都是參數，腳本會先檢查齒數能不能組成同心結構、三顆行星能不能等距擺放，條件不成立就不產生。換一組齒數，就是另一個減速比的模型和動畫。</p>
+
+<figure class="cs-media">
+  <video class="loop" autoplay muted loop playsinline preload="metadata" poster="../assets/reducer/reducer.jpg" width="960" height="540">
+    <source src="../assets/reducer/reducer.mp4" type="video/mp4">
+  </video>
+  <figcaption>外殼半透明，看得到太陽齒輪帶動三顆行星齒輪・十秒一輪・Blender Cycles 渲染</figcaption>
+</figure>
+
+<dl class="specs">
+  <div><dt>減速比</dt><dd>5:1</dd></div>
+  <div><dt>零件</dt><dd>16</dd></div>
+  <div><dt>三角面</dt><dd>36,824</dd></div>
+  <div><dt>材質</dt><dd>7</dd></div>
+</dl>
+
 <h2>交付與可複用性</h2>
 <ul>
   <li>機構運作動畫（社群廣告、募資頁面用）</li>
@@ -208,7 +238,7 @@
 <p>3D 資產跟攝影最大的差別在複用：模型建好之後，換色、換背景、出新尺寸、做新動畫的邊際成本極低。一次建模，整個產品生命週期的視覺素材都從同一個源頭出。</p>
 
 <h2>適合誰</h2>
-<p>機構複雜、賣點在內部的硬體產品：行李箱、家電、工具、健身器材、智慧裝置。特別是準備上群眾募資、需要在短時間內讓陌生消費者「看懂為什麼厲害」的團隊。</p>
+<p>機構複雜、賣點在內部的硬體產品：行李箱、家電、工具、健身器材、智慧裝置，以及減速機、傳動元件這類型錄只拍得到外殼的精密機械零組件。特別是準備上群眾募資、需要在短時間內讓陌生消費者「看懂為什麼厲害」的團隊。</p>
 
 <div class="cta-box">
   <h2>有產品需要被看懂？</h2>
